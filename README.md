@@ -10,8 +10,8 @@
   nixpkgs.overlays = [
     (import
       (fetchTarball {
-        url = "https://github.com/TawasalMessenger/azul-zing-flake/archive/a55021c429fc36f5816ea539eb57f147330db63a.tar.gz";
-        sha256 = "0xf1wf7y8k54dxxc5rlv0d4w9vrjwdnmsgpw0lxpd2kcy8v82sx3";
+        url = "https://github.com/TawasalMessenger/azul-zing-flake/archive/fp.dev-3354-jdk15.0.1.tar.gz";
+        sha256 = "1vqfj0diz8zvp9vscbgckgni91wc4w90m2ba7v6a5183n272vh8x";
       })).overlay
   ];
 # ...
