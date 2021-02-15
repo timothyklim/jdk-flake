@@ -1,7 +1,7 @@
 { pkgs, src }:
 
 with pkgs;
-with stdenv.lib;
+with pkgs.lib;
 let
   self = stdenv.mkDerivation rec {
     inherit src;
@@ -39,14 +39,12 @@ let
       EOF
     '';
 
-    rpath = stdenv.lib.strings.makeLibraryPath [
+    rpath = strings.makeLibraryPath [
       stdenv.cc.libc
       stdenv.cc.cc.lib
       glib
       linux-pam
       libxml2
-      libav_0_8
-      ffmpeg_3
       libxslt
       libGL
       xorg.libXxf86vm

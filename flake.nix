@@ -2,13 +2,13 @@
   description = "Azul Zing 15 Feature Preview flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
     };
     src = {
-      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3370-jdk15.0.1.tar.gz";
+      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3382-jdk15.0.1.tar.gz";
       flake = false;
     };
   };
