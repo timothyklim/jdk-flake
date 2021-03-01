@@ -8,7 +8,7 @@
       flake = false;
     };
     src = {
-      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3392-jdk15.0.1.tar.gz";
+      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3400-jdk15.0.1.tar.gz";
       flake = false;
     };
   };
