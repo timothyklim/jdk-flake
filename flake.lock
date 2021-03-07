@@ -42,13 +42,13 @@
     "src": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-pfbL6P24W3ddUw7AjJNyQcffSlcgH63cJn56+IOUuxk=",
+        "narHash": "sha256-vVdbJWa7ZYr5HncL9tqSK5I0geRqAgGNgeyv4w+hNNs=",
         "type": "tarball",
-        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3400-jdk15.0.1.tar.gz"
+        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3406-jdk15.0.1.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3400-jdk15.0.1.tar.gz"
+        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3406-jdk15.0.1.tar.gz"
       }
     }
   },
