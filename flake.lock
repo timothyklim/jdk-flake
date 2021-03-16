@@ -18,11 +18,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1614321075,
-        "narHash": "sha256-9HeGjJlQoGpV5ppDzDSB9JB6uy8MyvMcqFe7q/mWr3k=",
+        "lastModified": 1615793345,
+        "narHash": "sha256-e9h/ORWKhh9+OMeNgvkyiz8epEMrBD7gkVwgaNAkTqI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "870dbb751f4d851a3dfb554835a0c2f528386982",
+        "rev": "3f74138ce2e97615bb8d50164214ad65c1093867",
         "type": "github"
       },
       "original": {
@@ -42,13 +42,13 @@
     "src": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-vVdbJWa7ZYr5HncL9tqSK5I0geRqAgGNgeyv4w+hNNs=",
+        "narHash": "sha256-pk6oUj7H3EqZ4OFKBZZu9cht1OeIUUvt9T66pJ9v5xs=",
         "type": "tarball",
-        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3406-jdk15.0.1.tar.gz"
+        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3418-jdk15.0.1.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3406-jdk15.0.1.tar.gz"
+        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3418-jdk15.0.1.tar.gz"
       }
     }
   },
