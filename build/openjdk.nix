@@ -1,10 +1,10 @@
-{ pkgs, src, version, patch ? false }:
+{ pkgs, src, version, patchInstall ? false }:
 
 with pkgs;
 
 let
-  x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   image = "linux-x86_64-server-release";
+  x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   self = gcc10Stdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
@@ -12,7 +12,7 @@ let
     nativeBuildInputs = [ autoconf bash file gnumake jdk15 pkgconfig unzip zip ];
     buildInputs = [ alsaLib cups fontconfig freetype zlib ] ++ x11Libs;
 
-    prePatch = lib.optional patch ''
+    prePatch = lib.optional patchInstall ''
       sed -e "s,install:,INSTALL_PREFIX=$out\ninstall:,g" -i make/Install.gmk
     '';
 
@@ -34,12 +34,12 @@ let
     '';
 
     installPhase = ''
-      mkdir $out
-
       make install
     '';
 
     passthru.home = self;
+
+    preferLocalBuild = true;
   };
 in
 self

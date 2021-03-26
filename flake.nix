@@ -48,17 +48,17 @@
         inherit pkgs;
         src = jdk16;
         version = "16-ga";
-        patch = true;
+        patchInstall = true;
       };
       openjdk_17 = import ./build/openjdk.nix {
         inherit pkgs;
         src = jdk17;
         version = "17-15";
       };
-      openjdk_17-fibers = import ./build/openjdk.nix {
+      openjdk_17-loom = import ./build/openjdk.nix {
         inherit pkgs;
         src = jdk17-loom;
-        version = "17-fibers";
+        version = "17-loom";
       };
       openjdk_17-valhalla = import ./build/openjdk.nix {
         inherit pkgs;
@@ -72,7 +72,7 @@
       };
 
       derivation = {
-        inherit zing openjdk_16 openjdk_17 openjdk_17-fibers openjdk_17-valhalla;
+        inherit zing openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-valhalla;
       };
     in
     rec {
@@ -83,7 +83,7 @@
 
         openjdk_16 = mkApp { drv = openjdk_16; };
         openjdk_17 = mkApp { drv = openjdk_17; };
-        openjdk_17-fibers = mkApp { drv = openjdk_17-fibers; };
+        openjdk_17-loom = mkApp { drv = openjdk_17-loom; };
         openjdk_17-valhalla = mkApp { drv = openjdk_17-valhalla; };
       };
       defaultApp.${system} = apps.zing;
