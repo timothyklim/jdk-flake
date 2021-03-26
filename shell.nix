@@ -1,13 +1,16 @@
-{ mkShell, zing }:
+{ mkShell, zing, openjdk_16, openjdk_17, openjdk_17-fibers, openjdk_17-valhalla }:
 
+let
+  jdk = zing;
+in
 mkShell {
-  name = "azul-zing-env";
+  name = "jdk-env";
 
-  buildInputs = [ zing ];
+  buildInputs = [ jdk ];
 
   shellHook = ''
-    export JAVA_HOME=${zing.home}
-    export JAVA_INCLUDE_PATH=${zing.home}/include
-    export JNI_INCLUDE_DIRS=${zing.home}/include
+    export JAVA_HOME=${jdk.home}
+    export JAVA_INCLUDE_PATH=${jdk.home}/include
+    export JNI_INCLUDE_DIRS=${jdk.home}/include
   '';
 }
