@@ -8,17 +8,22 @@
       flake = false;
     };
 
-    # Azul Zing
     zing-pkg = {
       url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3418-jdk15.0.1.tar.gz";
       flake = false;
     };
 
     # OpenJDK variants
+
+    jdk15 = {
+      url = "github:openjdk/jdk/jdk-15-ga";
+      flake = false;
+    };
     jdk16 = {
       url = "github:openjdk/jdk/jdk-16-ga";
       flake = false;
     };
+
     jdk17 = {
       url = "github:openjdk/jdk/623f0b6b"; # jdk-17+15
       flake = false;
@@ -33,7 +38,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-compat, zing-pkg, jdk16, jdk17, jdk17-loom, jdk17-valhalla }:
+  outputs = { self, nixpkgs, flake-compat, zing-pkg, jdk15, jdk16, jdk17, jdk17-loom, jdk17-valhalla }:
     let
       sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
       system = "x86_64-linux";
@@ -44,6 +49,12 @@
         src = zing-pkg;
       };
 
+      openjdk_15 = import ./build/openjdk.nix {
+        inherit pkgs;
+        src = jdk15;
+        version = "15-ga";
+        patchInstall = true;
+      };
       openjdk_16 = import ./build/openjdk.nix {
         inherit pkgs;
         src = jdk16;
@@ -72,7 +83,7 @@
       };
 
       derivation = {
-        inherit zing openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-valhalla;
+        inherit zing openjdk_15 openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-valhalla;
       };
     in
     rec {
@@ -81,6 +92,7 @@
       apps.${system} = {
         zing = mkApp { drv = zing; };
 
+        openjdk_15 = mkApp { drv = openjdk_15; };
         openjdk_16 = mkApp { drv = openjdk_16; };
         openjdk_17 = mkApp { drv = openjdk_17; };
         openjdk_17-loom = mkApp { drv = openjdk_17-loom; };

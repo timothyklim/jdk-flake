@@ -1,7 +1,7 @@
-{ mkShell, zing, openjdk_16, openjdk_17, openjdk_17-loom, openjdk_17-valhalla }:
+{ mkShell, zing, openjdk_15, openjdk_16, openjdk_17, openjdk_17-loom, openjdk_17-valhalla }:
 
 let
-  jdk = openjdk_17-loom; # zing;
+  jdk = openjdk_15; # zing;
 in
 mkShell {
   name = "jdk-env";
