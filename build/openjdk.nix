@@ -9,16 +9,21 @@ let
     inherit src version;
     pname = "openjdk";
 
-    nativeBuildInputs = [ autoconf bash file gnumake jdk15 pkgconfig unzip zip ];
-    buildInputs = [ alsaLib cups fontconfig freetype zlib ] ++ x11Libs;
+    nativeBuildInputs = [ autoconf jdk15 pkg-config ];
+    buildInputs = [ alsaLib bash cups file gnumake fontconfig freetype which zlib unzip zip ] ++ x11Libs;
 
     prePatch = lib.optional patchInstall ''
       sed -e "s,install:,INSTALL_PREFIX=$out\ninstall:,g" -i make/Install.gmk
     '';
 
+    postPatch = ''
+      substituteInPlace ./configure --replace "/bin/bash" "${bash}/bin/bash"
+      chmod +x ./configure
+    '';
+
     # --with-jtreg --with-debug-level=fastdebug
     configurePhase = ''
-      bash ./configure \
+      ./configure \
         --prefix=$out \
         --disable-warnings-as-errors \
         --with-debug-level=release \

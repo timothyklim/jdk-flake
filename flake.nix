@@ -8,7 +8,7 @@
       flake = false;
     };
 
-    zing-pkg = {
+    zing_15-pkg = {
       url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3418-jdk15.0.1.tar.gz";
       flake = false;
     };
@@ -38,15 +38,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-compat, zing-pkg, jdk15, jdk16, jdk17, jdk17-loom, jdk17-valhalla }:
+  outputs = { self, nixpkgs, flake-compat, zing_15-pkg, jdk15, jdk16, jdk17, jdk17-loom, jdk17-valhalla }:
     let
       sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
 
-      zing = import ./build/zing.nix {
+      zing_15 = import ./build/zing.nix {
         inherit pkgs;
-        src = zing-pkg;
+        src = zing_15-pkg;
+        version = "15.0.1-fp";
       };
 
       openjdk_15 = import ./build/openjdk.nix {
@@ -83,14 +84,14 @@
       };
 
       derivation = {
-        inherit zing openjdk_15 openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-valhalla;
+        inherit zing_15 openjdk_15 openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-valhalla;
       };
     in
     rec {
       packages.${system} = derivation;
-      defaultPackage.${system} = zing;
+      defaultPackage.${system} = zing_15;
       apps.${system} = {
-        zing = mkApp { drv = zing; };
+        zing_15 = mkApp { drv = zing_15; };
 
         openjdk_15 = mkApp { drv = openjdk_15; };
         openjdk_16 = mkApp { drv = openjdk_16; };
@@ -98,7 +99,7 @@
         openjdk_17-loom = mkApp { drv = openjdk_17-loom; };
         openjdk_17-valhalla = mkApp { drv = openjdk_17-valhalla; };
       };
-      defaultApp.${system} = apps.zing;
+      defaultApp.${system} = apps.zing_15;
       legacyPackages.${system} = pkgs.extend overlay;
       devShell.${system} = pkgs.callPackage ./shell.nix derivation;
       nixosModule.nixpkgs.overlays = [ overlay ];

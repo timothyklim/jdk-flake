@@ -1,13 +1,12 @@
-{ pkgs, src }:
+{ pkgs, src, version }:
 
 with pkgs;
 with pkgs.lib;
 let
   self = stdenv.mkDerivation rec {
-    inherit src;
+    inherit src version;
 
     pname = "zing";
-    version = "15.0.1-fp";
 
     buildInputs = [ makeWrapper ];
 
