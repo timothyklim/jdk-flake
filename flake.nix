@@ -9,7 +9,7 @@
     };
 
     zing_15-pkg = {
-      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3418-jdk15.0.1.tar.gz";
+      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3433-jdk15.0.1.tar.gz";
       flake = false;
     };
 
