@@ -70,11 +70,11 @@
     "jdk17-loom": {
       "flake": false,
       "locked": {
-        "lastModified": 1617054810,
-        "narHash": "sha256-x0wKDZBndPI28trIMuK3JTkFXam7f2uikgRY2Vw0M24=",
+        "lastModified": 1617115840,
+        "narHash": "sha256-u8T1jNebXFfKl+KkPLqxUTa6DQVyGZ8j6ZXihe0papY=",
         "owner": "openjdk",
         "repo": "loom",
-        "rev": "1fa9e0a03dc7ffdd6cc1b0ee78db30f5e2bdf10d",
+        "rev": "f9db7ee905f111962fc0419e5e3387ffcd3d9c1c",
         "type": "github"
       },
       "original": {
@@ -87,11 +87,11 @@
     "jdk17-valhalla": {
       "flake": false,
       "locked": {
-        "lastModified": 1617082975,
-        "narHash": "sha256-qTi3EkaC67fg4s5UrrnV2vexzkqVKfIvRaFwFXIA2RU=",
+        "lastModified": 1617113678,
+        "narHash": "sha256-VUN2Gng7Om3MIDlfTJvGcwJCrU0rnTd3Lp/mAzeVM4U=",
         "owner": "openjdk",
         "repo": "valhalla",
-        "rev": "226abe294c81312fff267caa3091ac788893fef4",
+        "rev": "83d849f4e18715d39d74cc003cbb756b57293b8d",
         "type": "github"
       },
       "original": {

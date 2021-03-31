@@ -78,11 +78,6 @@
         version = "17-valhalla";
       };
 
-      mkApp = drv: {
-        type = "app";
-        program = "${drv.pname or drv.name}${drv.passthru.exePath}";
-      };
-
       derivation = {
         inherit zing_15 openjdk_15 openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-valhalla;
       };
@@ -90,16 +85,6 @@
     rec {
       packages.${system} = derivation;
       defaultPackage.${system} = zing_15;
-      apps.${system} = {
-        zing_15 = mkApp { drv = zing_15; };
-
-        openjdk_15 = mkApp { drv = openjdk_15; };
-        openjdk_16 = mkApp { drv = openjdk_16; };
-        openjdk_17 = mkApp { drv = openjdk_17; };
-        openjdk_17-loom = mkApp { drv = openjdk_17-loom; };
-        openjdk_17-valhalla = mkApp { drv = openjdk_17-valhalla; };
-      };
-      defaultApp.${system} = apps.zing_15;
       legacyPackages.${system} = pkgs.extend overlay;
       devShell.${system} = pkgs.callPackage ./shell.nix derivation;
       nixosModule.nixpkgs.overlays = [ overlay ];
