@@ -1,4 +1,4 @@
-{ pkgs, src, version, patchInstall ? false }:
+{ pkgs, src, version, nativeDeps ? [ ], patchInstall ? false }:
 
 with pkgs;
 
@@ -9,7 +9,7 @@ let
     inherit src version;
     pname = "openjdk";
 
-    nativeBuildInputs = [ autoconf jdk15 pkg-config ];
+    nativeBuildInputs = [ autoconf jdk15 pkg-config ] ++ nativeDeps;
     buildInputs = [ alsaLib bash cups file gnumake fontconfig freetype which zlib unzip zip ] ++ x11Libs;
 
     prePatch = lib.optional patchInstall ''

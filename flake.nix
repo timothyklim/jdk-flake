@@ -1,5 +1,5 @@
 {
-  description = "Azul Zing 15 Feature Preview flake";
+  description = "JDK's flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -9,7 +9,7 @@
     };
 
     zing_15-pkg = {
-      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3433-jdk15.0.1.tar.gz";
+      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3441-jdk15.0.1.tar.gz";
       flake = false;
     };
 
@@ -32,13 +32,17 @@
       url = "github:openjdk/loom/fibers";
       flake = false;
     };
+    jdk17-panama = {
+      url = "github:openjdk/panama-foreign/foreign-jextract";
+      flake = false;
+    };
     jdk17-valhalla = {
       url = "github:openjdk/valhalla/lworld";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, flake-compat, zing_15-pkg, jdk15, jdk16, jdk17, jdk17-loom, jdk17-valhalla }:
+  outputs = { self, nixpkgs, flake-compat, zing_15-pkg, jdk15, jdk16, jdk17, jdk17-loom, jdk17-panama, jdk17-valhalla }:
     let
       sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
       system = "x86_64-linux";
@@ -72,6 +76,12 @@
         src = jdk17-loom;
         version = "17-loom";
       };
+      # openjdk_17-panama = import ./build/openjdk.nix {
+      #   inherit pkgs;
+      #   src = jdk17-panama;
+      #   version = "17-panama";
+      #   nativeDeps = [ pkgs.llvmPackages.libclang ];
+      # };
       openjdk_17-valhalla = import ./build/openjdk.nix {
         inherit pkgs;
         src = jdk17-valhalla;
