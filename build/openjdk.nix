@@ -1,24 +1,41 @@
-{ pkgs, src, version, nativeDeps ? [ ], patchInstall ? false }:
+{ pkgs, nixpkgs, src, version, nativeDeps ? [ ], patchInstall ? false }:
 
 with pkgs;
 
 let
   image = "linux-x86_64-server-release";
+  clags = "-O3 -march=native -mtune=native -funroll-loops -fomit-frame-pointer";
+  jdk = openjdk_headless;
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
-  self = gcc10Stdenv.mkDerivation rec {
+  self = gcc11Stdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
 
-    nativeBuildInputs = [ autoconf jdk15 pkg-config ] ++ nativeDeps;
-    buildInputs = [ alsaLib bash cups file gnumake fontconfig freetype which zlib unzip zip ] ++ x11Libs;
+    nativeBuildInputs = [ autoconf jdk pkg-config ] ++ nativeDeps;
+    buildInputs = [ alsaLib bash cups file gnumake fontconfig freetype libjpeg giflib libpng which zlib unzip zip lcms2 ] ++ x11Libs;
+
+    patches = [
+      "${nixpkgs}/pkgs/development/compilers/openjdk/fix-java-home-jdk10.patch"
+      "${nixpkgs}/pkgs/development/compilers/openjdk/read-truststore-from-env-jdk10.patch"
+      "${nixpkgs}/pkgs/development/compilers/openjdk/currency-date-range-jdk10.patch"
+      "${nixpkgs}/pkgs/development/compilers/openjdk/increase-javadoc-heap-jdk13.patch"
+      # -Wformat etc. are stricter in newer gccs, per
+      # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=79677
+      # so grab the work-around from
+      # https://src.fedoraproject.org/rpms/java-openjdk/pull-request/24
+      (fetchurl {
+        url = "https://src.fedoraproject.org/rpms/java-openjdk/raw/06c001c7d87f2e9fe4fedeef2d993bcd5d7afa2a/f/rh1673833-remove_removal_of_wformat_during_test_compilation.patch";
+        sha256 = "082lmc30x64x583vqq00c8y0wqih3y4r0mp1c4bqq36l22qv6b6r";
+      })
+    ];
 
     prePatch = lib.optional patchInstall ''
       sed -e "s,install:,INSTALL_PREFIX=$out\ninstall:,g" -i make/Install.gmk
     '';
 
     postPatch = ''
-      substituteInPlace ./configure --replace "/bin/bash" "${bash}/bin/bash"
-      chmod +x ./configure
+      chmod +x configure
+      patchShebangs --build configure
     '';
 
     # --with-jtreg --with-debug-level=fastdebug
@@ -26,13 +43,26 @@ let
       ./configure \
         --prefix=$out \
         --disable-warnings-as-errors \
+        --enable-headless-only \
+        --enable-unlimited-crypto \
+        --with-boot-jdk=${jdk.home} \
         --with-debug-level=release \
-        --with-toolchain-type=gcc \
+        --with-extra-cflags='${clags}' \
+        --with-extra-cxxflags='${clags}' \
+        --with-giflib=system \
+        --with-jvm-features=link-time-opt,zgc \
         --with-jvm-variants=server \
-        --with-jvm-features=link-time-opt \
-        --with-extra-cflags='-O3 -march=native -mtune=native -funroll-loops -fomit-frame-pointer' \
-        --with-extra-cxxflags='-O3 -march=native -mtune=native -funroll-loops -fomit-frame-pointer'
+        --with-lcms=system \
+        --with-libjpeg=system \
+        --with-libpng=system \
+        --with-native-debug-symbols=internal \
+        --with-stdc++lib=dynamic \
+        --with-toolchain-type=gcc \
+        --with-version-opt=nixos \
+        --with-zlib=system \
     '';
+
+    NIX_CFLAGS_COMPILE = "-Wno-error";
 
     buildPhase = ''
       CONF=${image} make images
@@ -41,6 +71,41 @@ let
     installPhase = ''
       make install
     '';
+
+    preFixup = ''
+      # Propagate the setJavaClassPath setup hook so that any package
+      # that depends on the JDK has $CLASSPATH set up properly.
+      mkdir -p $out/nix-support
+      #TODO or printWords?  cf https://github.com/NixOS/nixpkgs/pull/27427#issuecomment-317293040
+      echo -n "${setJavaClassPath}" > $out/nix-support/propagated-build-inputs
+
+      # Set JAVA_HOME automatically.
+      mkdir -p $out/nix-support
+      cat <<EOF > $out/nix-support/setup-hook
+      if [ -z "\''${JAVA_HOME-}" ]; then export JAVA_HOME=$out/lib/openjdk; fi
+      EOF
+    '';
+
+    postFixup = ''
+      # Build the set of output library directories to rpath against
+      LIBDIRS=""
+      for output in $outputs; do
+        if [ "$output" = debug ]; then continue; fi
+        LIBDIRS="$(find $(eval echo \$$output) -name \*.so\* -exec dirname {} \+ | sort | uniq | tr '\n' ':'):$LIBDIRS"
+      done
+      # Add the local library paths to remove dependencies on the bootstrap
+      for output in $outputs; do
+        if [ "$output" = debug ]; then continue; fi
+        OUTPUTDIR=$(eval echo \$$output)
+        BINLIBS=$(find $OUTPUTDIR/bin/ -type f; find $OUTPUTDIR -name \*.so\*)
+        echo "$BINLIBS" | while read i; do
+          patchelf --set-rpath "$LIBDIRS:$(patchelf --print-rpath "$i")" "$i" || true
+          patchelf --shrink-rpath "$i" || true
+        done
+      done
+    '';
+
+    disallowedReferences = [ jdk ];
 
     passthru.home = self;
 
