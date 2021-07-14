@@ -1,7 +1,7 @@
 { mkShell, zing_15, openjdk_16, openjdk_17, openjdk_17-loom, /*openjdk_17-panama,*/ openjdk_17-valhalla }:
 
 let
-  jdk = zing_15;
+  jdk = openjdk_17;
 in
 mkShell {
   name = "jdk-env";
@@ -9,7 +9,7 @@ mkShell {
   nativeBuildInputs = [ jdk ];
   buildInputs = [
     zing_15
-    # openjdk_16
+    openjdk_16
     openjdk_17
     # openjdk_17-loom
     # openjdk_17-panama

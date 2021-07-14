@@ -22,14 +22,13 @@
         "lastModified": 1612451485,
         "narHash": "sha256-hMRGR0CoV3OKqu3F9qajmVhKZySvpF+o/p053ErItpg=",
         "owner": "openjdk",
-        "repo": "jdk",
+        "repo": "jdk16",
         "rev": "4de3a6be9e60b9676f2199cd18eadb54a9d6e3fe",
         "type": "github"
       },
       "original": {
         "owner": "openjdk",
-        "ref": "jdk-16-ga",
-        "repo": "jdk",
+        "repo": "jdk16",
         "type": "github"
       }
     },
@@ -53,11 +52,11 @@
     "jdk17-loom": {
       "flake": false,
       "locked": {
-        "lastModified": 1625266050,
-        "narHash": "sha256-V51JvYdsD8kOKluNxD+f4LGtH9x9rPMQ+mfAWiwkAaQ=",
+        "lastModified": 1625861863,
+        "narHash": "sha256-6peRFm+2vs4uXRtdr7LynzXKewmO2mLmZeyXqMECFNQ=",
         "owner": "openjdk",
         "repo": "loom",
-        "rev": "8877948dd188c151ff2c80d33728c408ecd1326c",
+        "rev": "ead390754414e342739f7fcf470f0baac189db41",
         "type": "github"
       },
       "original": {
@@ -70,11 +69,11 @@
     "jdk17-panama": {
       "flake": false,
       "locked": {
-        "lastModified": 1625223711,
-        "narHash": "sha256-5n82RzMIbu07kBEHZ22SA6x/XhlX/Tj1i5cqP9T0338=",
+        "lastModified": 1626190252,
+        "narHash": "sha256-nkS6OEE7vIIAy/jKrznAjY3cLm14nkO18WTXYfU4CVo=",
         "owner": "openjdk",
         "repo": "panama-foreign",
-        "rev": "6f8f9e28c54042b96fde953c43b09810b3e69dcd",
+        "rev": "8e31e1b6784cdc6d4ea7f52162d02612f1c352ab",
         "type": "github"
       },
       "original": {
@@ -87,11 +86,11 @@
     "jdk17-valhalla": {
       "flake": false,
       "locked": {
-        "lastModified": 1625203986,
-        "narHash": "sha256-YO/Rq4giKg5EZAErLGAnp8IIw8OmlpYkUG/e2RbBrf8=",
+        "lastModified": 1626112749,
+        "narHash": "sha256-/C40gGzAgOrwqRsHXFn1uE4QKEJc6zW1nOwvLYjyi3A=",
         "owner": "openjdk",
         "repo": "valhalla",
-        "rev": "b3b7fb2bf96b40fd4636a699e150b8ab5c2d8610",
+        "rev": "c207165b8606d1b4505f52be6362681d61a9fc7e",
         "type": "github"
       },
       "original": {
@@ -103,11 +102,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1625366435,
-        "narHash": "sha256-29ZJQBmJ9p2IienoYXCT/qq8sf+rfOvXWfeqVLZOh0E=",
+        "lastModified": 1626046891,
+        "narHash": "sha256-Zt8saH+hAehXskW0iFAzk+iMillYoFBxvLReYNqGT9E=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "20887e4bbfdae3aed6bfa1f53ddf138ee325515e",
+        "rev": "d8f8f31af9d77a48220e4e8a301d1e79774cb7d2",
         "type": "github"
       },
       "original": {
@@ -132,13 +131,13 @@
     "zing_15-pkg": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-CkJ2HSpgCnrZWTYYe6JWUPF5fAY/dD04VuLZs90mnN4=",
+        "narHash": "sha256-DlDB2Qe7P9V9corOiBov5BPk7UpZskoCxmRHpY8pbfQ=",
         "type": "tarball",
-        "url": "https://cdn.azul.com/zing-zvm/ZVM21.04.0.0/zing21.04.0.0-7-ca-jdk15.0.3-linux_x64.tar.gz"
+        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3441-jdk15.0.1.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://cdn.azul.com/zing-zvm/ZVM21.04.0.0/zing21.04.0.0-7-ca-jdk15.0.3-linux_x64.tar.gz"
+        "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3441-jdk15.0.1.tar.gz"
       }
     }
   },

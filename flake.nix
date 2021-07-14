@@ -9,14 +9,14 @@
     };
 
     zing_15-pkg = {
-      url = "https://cdn.azul.com/zing-zvm/ZVM21.04.0.0/zing21.04.0.0-7-ca-jdk15.0.3-linux_x64.tar.gz";
+      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3441-jdk15.0.1.tar.gz";
       flake = false;
     };
 
     # OpenJDK variants
 
     jdk16 = {
-      url = "github:openjdk/jdk/jdk-16-ga";
+      url = "github:openjdk/jdk16";
       flake = false;
     };
 
