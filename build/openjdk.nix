@@ -58,7 +58,9 @@ let
         --with-native-debug-symbols=internal \
         --with-stdc++lib=dynamic \
         --with-toolchain-type=gcc \
+        --with-version-build=0 \
         --with-version-opt=nixos \
+        --with-version-pre= \
         --with-zlib=system \
     '';
 

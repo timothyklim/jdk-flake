@@ -53,7 +53,7 @@
       openjdk_16 = import ./build/openjdk.nix {
         inherit pkgs nixpkgs;
         src = jdk16;
-        version = "16-ga";
+        version = "16";
         patchInstall = true;
       };
       openjdk_17 = import ./build/openjdk.nix {
