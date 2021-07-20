@@ -21,7 +21,7 @@
     };
 
     jdk17 = {
-      url = "github:openjdk/jdk17/2daf39a59b2d51f25b03bb78edd677a1bab4433c";
+      url = "github:openjdk/jdk17";
       flake = false;
     };
     jdk17-loom = {
@@ -59,7 +59,7 @@
       openjdk_17 = import ./build/openjdk.nix {
         inherit pkgs nixpkgs;
         src = jdk17;
-        version = sources.jdk17.original.rev;
+        version = "17";
       };
       openjdk_17-loom = import ./build/openjdk.nix {
         inherit pkgs nixpkgs;
