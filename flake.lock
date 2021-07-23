@@ -35,16 +35,17 @@
     "jdk17": {
       "flake": false,
       "locked": {
-        "lastModified": 1626761458,
-        "narHash": "sha256-LQcHPrNWdf42jlmTDwMW5/BOciNCjLjWRU5SBgPFglE=",
+        "lastModified": 1626884996,
+        "narHash": "sha256-V0r7U6ZgHUPC+SEJ8Yvg/TFKBm89EQiNMagPEzyxdPg=",
         "owner": "openjdk",
-        "repo": "jdk17",
-        "rev": "0cec11d3eb7393b76dbe1fbfe55a5f363824c1c4",
+        "repo": "jdk",
+        "rev": "6ce52e62770c5e1933cbe26bb18b47d6099e4a70",
         "type": "github"
       },
       "original": {
         "owner": "openjdk",
-        "repo": "jdk17",
+        "repo": "jdk",
+        "rev": "6ce52e62770c5e1933cbe26bb18b47d6099e4a70",
         "type": "github"
       }
     },
