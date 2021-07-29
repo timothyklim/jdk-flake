@@ -21,7 +21,7 @@
     };
 
     jdk17 = {
-      url = "github:openjdk/jdk17";
+      url = "github:openjdk/jdk17/6e1da6440b898d8a10b3db56707a75f32a489149";
       flake = false;
     };
     jdk17-loom = {
