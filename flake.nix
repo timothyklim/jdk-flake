@@ -2,7 +2,7 @@
   description = "JDK's flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/staging-21.05";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -21,7 +21,7 @@
     };
 
     jdk17 = {
-      url = "github:openjdk/jdk17/6e1da6440b898d8a10b3db56707a75f32a489149";
+      url = "github:openjdk/jdk17/181483b90bcc7d4e44109a14213d4ee2804f7f32";
       flake = false;
     };
     jdk17-loom = {
