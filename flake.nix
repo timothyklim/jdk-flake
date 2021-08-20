@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/staging-21.05";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
 
     zing_15-pkg = {
       url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3441-jdk15.0.1.tar.gz";
@@ -21,7 +17,7 @@
     };
 
     jdk17 = {
-      url = "github:openjdk/jdk17/dfacda488bfbe2e11e8d607a6d08527710286982";
+      url = "github:openjdk/jdk17";
       flake = false;
     };
     jdk17-loom = {
@@ -36,9 +32,14 @@
       url = "github:openjdk/valhalla/lworld";
       flake = false;
     };
+
+    jdk18 = {
+      url = "github:openjdk/jdk";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-compat, zing_15-pkg, jdk16, jdk17, jdk17-loom, jdk17-panama, jdk17-valhalla }:
+  outputs = { self, nixpkgs, zing_15-pkg, jdk16, jdk17, jdk17-loom, jdk17-panama, jdk17-valhalla, jdk18 }:
     let
       sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
       system = "x86_64-linux";
@@ -77,9 +78,14 @@
         src = jdk17-valhalla;
         version = "17-valhalla";
       };
+      openjdk_18 = import ./build/openjdk.nix {
+        inherit pkgs nixpkgs;
+        src = jdk18;
+        version = "18";
+      };
 
       derivation = {
-        inherit zing_15 openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-valhalla;
+        inherit zing_15 openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-valhalla openjdk_18;
       };
     in
     rec {

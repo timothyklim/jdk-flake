@@ -1,11 +1,10 @@
-{ mkShell, zing_15, openjdk_16, openjdk_17, openjdk_17-loom, /*openjdk_17-panama,*/ openjdk_17-valhalla }:
+{ mkShell, zing_15, openjdk_16, openjdk_17, openjdk_17-loom, /*openjdk_17-panama,*/ openjdk_17-valhalla, openjdk_18 }:
 
 let
   jdk = openjdk_17;
 in
 mkShell {
   name = "jdk-env";
-
   nativeBuildInputs = [ jdk ];
   buildInputs = [
     zing_15
@@ -14,11 +13,6 @@ mkShell {
     # openjdk_17-loom
     # openjdk_17-panama
     # openjdk_17-valhalla
+    openjdk_18
   ];
-
-  shellHook = ''
-    export JAVA_HOME=${jdk.home}
-    export JAVA_INCLUDE_PATH=${jdk.home}/include
-    export JNI_INCLUDE_DIRS=${jdk.home}/include
-  '';
 }
