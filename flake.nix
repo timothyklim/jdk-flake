@@ -12,12 +12,12 @@
     # OpenJDK variants
 
     jdk16 = {
-      url = "github:openjdk/jdk16";
+      url = "github:openjdk/jdk16u";
       flake = false;
     };
 
     jdk17 = {
-      url = "github:openjdk/jdk17";
+      url = "github:openjdk/jdk17u";
       flake = false;
     };
     jdk17-loom = {
