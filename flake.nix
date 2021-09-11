@@ -2,7 +2,7 @@
   description = "JDK's flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/staging-21.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     zing_15-pkg = {
       url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3441-jdk15.0.1.tar.gz";
