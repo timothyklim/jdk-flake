@@ -1,11 +1,10 @@
-{ pkgs, nixpkgs, src, version, nativeDeps ? [ ], patchInstall ? false, lto ? false }:
+{ pkgs, nixpkgs, src, version, jdk ? pkgs.openjdk_headless, nativeDeps ? [ ], patchInstall ? false, lto ? false }:
 
 with pkgs;
 
 let
   image = "linux-x86_64-server-release";
   clags = "-O3 -march=westmere -mtune=haswell -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
-  jdk = openjdk_headless;
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   self = gcc11Stdenv.mkDerivation rec {
     inherit src version;

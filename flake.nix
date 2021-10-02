@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
 
     # OpenJDK variants
     jdk16 = {
@@ -48,69 +49,67 @@
     };
   };
 
-  outputs = { self, nixpkgs, jdk16, jdk17, jdk17-loom, jdk17-panama, jdk17-valhalla, jdk18, zulu17_linux_tgz, zulu17_macos_tgz, zing15_linux_tgz }:
-    let
-      sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+  outputs = { self, nixpkgs, flake-utils, jdk16, jdk17, jdk17-loom, jdk17-panama, jdk17-valhalla, jdk18, zulu17_linux_tgz, zulu17_macos_tgz, zing15_linux_tgz }:
+    flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
+      let
+        sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
+        pkgs = nixpkgs.legacyPackages.${system};
 
-      zulu_17 = import ./build/zulu.nix {
-        inherit pkgs;
-        src = if pkgs.stdenv.isLinux then zulu17_linux_tgz else zulu17_macos_tgz;
-        version = "17.0.0";
-      };
+        zulu_17 = import ./build/zulu.nix {
+          inherit pkgs;
+          src = if pkgs.stdenv.isLinux then zulu17_linux_tgz else zulu17_macos_tgz;
+          version = "17.0.0";
+        };
 
-      zing_15 = import ./build/zing.nix {
-        inherit pkgs;
-        src = zing15_linux_tgz;
-        version = "15.0.3";
-      };
+        zing_15 = import ./build/zing.nix {
+          inherit pkgs;
+          src = zing15_linux_tgz;
+          version = "15.0.3";
+        };
 
-      openjdk_16 = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk16;
-        version = "16";
-        patchInstall = true;
-      };
-      openjdk_17 = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk17;
-        version = "17";
-      };
-      openjdk_17-loom = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk17-loom;
-        version = "17-loom";
-      };
-      openjdk_17-panama = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk17-panama;
-        version = "17-panama";
-        nativeDeps = [ pkgs.llvmPackages.libclang ];
-      };
-      openjdk_17-valhalla = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk17-valhalla;
-        version = "17-valhalla";
-      };
-      openjdk_18 = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk18;
-        version = "18";
-      };
+        openjdk_16 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk16;
+          version = "16";
+          patchInstall = true;
+        };
+        openjdk_17 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk17;
+          version = "17";
+        };
+        openjdk_17-loom = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk17-loom;
+          version = "17-loom";
+        };
+        openjdk_17-panama = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk17-panama;
+          version = "17-panama";
+          nativeDeps = [ pkgs.llvmPackages.libclang ];
+        };
+        openjdk_17-valhalla = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk17-valhalla;
+          version = "17-valhalla";
+        };
+        openjdk_18 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk18;
+          version = "18";
+          jdk = openjdk_17;
+        };
 
-      jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
+        jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
 
-      derivation = {
-        inherit openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-panama openjdk_17-valhalla openjdk_18 zulu_17 zing_15 jdk_17;
-      };
-    in
-    rec {
-      packages.${system} = derivation;
-      defaultPackage.${system} = jdk_17;
-      legacyPackages.${system} = pkgs.extend overlay;
-      devShell.${system} = pkgs.callPackage ./shell.nix derivation;
-      nixosModule.nixpkgs.overlays = [ overlay ];
-      overlay = final: prev: derivation;
-    };
+        derivation = {
+          inherit openjdk_16 openjdk_17 openjdk_17-loom openjdk_17-panama openjdk_17-valhalla openjdk_18 zulu_17 zing_15 jdk_17;
+        };
+      in
+      rec {
+        packages = derivation;
+        defaultPackage = jdk_17;
+        devShell = pkgs.callPackage ./shell.nix derivation;
+      });
 }
