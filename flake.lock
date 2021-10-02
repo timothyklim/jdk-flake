@@ -124,10 +124,12 @@
         "jdk17-valhalla": "jdk17-valhalla",
         "jdk18": "jdk18",
         "nixpkgs": "nixpkgs",
-        "zing_15-pkg": "zing_15-pkg"
+        "zing15_linux_tgz": "zing15_linux_tgz",
+        "zulu17_linux_tgz": "zulu17_linux_tgz",
+        "zulu17_macos_tgz": "zulu17_macos_tgz"
       }
     },
-    "zing_15-pkg": {
+    "zing15_linux_tgz": {
       "flake": false,
       "locked": {
         "narHash": "sha256-DlDB2Qe7P9V9corOiBov5BPk7UpZskoCxmRHpY8pbfQ=",
@@ -137,6 +139,30 @@
       "original": {
         "type": "tarball",
         "url": "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3441-jdk15.0.1.tar.gz"
+      }
+    },
+    "zulu17_linux_tgz": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-qaQSw5gK/IHBdgfV1O1CpwK/NuMem45L4G3zEoEUNEg=",
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu17.28.13-ca-jdk17.0.0-linux_x64.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu17.28.13-ca-jdk17.0.0-linux_x64.tar.gz"
+      }
+    },
+    "zulu17_macos_tgz": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-XsE8fC2CXlT90uPFmc4mhFO1A/IIt0jmOM0pB4Mc11A=",
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu17.28.13-ca-jdk17.0.0-macosx_x64.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu17.28.13-ca-jdk17.0.0-macosx_x64.tar.gz"
       }
     }
   },
