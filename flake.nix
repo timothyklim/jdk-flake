@@ -11,7 +11,7 @@
       flake = false;
     };
     jdk17 = {
-      url = "github:openjdk/jdk17u";
+      url = "github:openjdk/jdk/jdk-17-ga";
       flake = false;
     };
 
