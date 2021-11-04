@@ -34,17 +34,17 @@
 
     # Zulu    
     zulu17_linux_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu17.28.13-ca-jdk17.0.0-linux_x64.tar.gz";
+      url = "https://cdn.azul.com/zulu/bin/zulu17.30.15-ca-jdk17.0.1-linux_x64.tar.gz";
       flake = false;
     };
     zulu17_macos_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu17.28.13-ca-jdk17.0.0-macosx_x64.tar.gz";
+      url = "https://cdn.azul.com/zulu/bin/zulu17.30.15-ca-jdk17.0.1-macosx_x64.tar.gz";
       flake = false;
     };
 
     # Zing
     zing15_linux_tgz = {
-      url = "https://cdn.azul.com/zing-zvm/feature-preview/zing99.99.99.99-fp.dev-3441-jdk15.0.1.tar.gz";
+      url = "https://cdn.azul.com/zing-zvm/ZVM21.10.0.0/zing21.10.0.0-3-jdk15.0.5-linux_x64.tar.gz";
       flake = false;
     };
   };
