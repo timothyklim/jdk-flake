@@ -58,9 +58,7 @@ let
       zlib
     ];
 
-    passthru = {
-      home = self;
-    };
+    passthru.home = self;
 
     dontStrip = true;
     dontPatchELF = true;
