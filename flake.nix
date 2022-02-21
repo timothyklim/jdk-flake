@@ -44,7 +44,7 @@
 
     # Zing
     zing17_linux_tgz = {
-      url = "https://cdn.azul.com/zing-zvm/ZVM21.12.0.0/zing21.12.0.0-3-jdk17.0.0-linux_x64.tar.gz";
+      url = "https://cdn.azul.com/zing-zvm/ZVM22.01.1.0/zing22.01.1.0-1-jdk17.0.2-linux_x64.tar.gz";
       flake = false;
     };
   };
