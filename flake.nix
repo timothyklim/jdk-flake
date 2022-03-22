@@ -2,7 +2,7 @@
   description = "JDK's flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
+    nixpkgs.url = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
 
     # OpenJDK variants
