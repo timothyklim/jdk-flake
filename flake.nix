@@ -42,6 +42,15 @@
       flake = false;
     };
 
+    zulu18_linux_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu18.28.13-ca-jdk18.0.0-linux_x64.tar.gz";
+      flake = false;
+    };
+    zulu18_macos_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu18.28.13-ca-jdk18.0.0-macosx_x64.tar.gz";
+      flake = false;
+    };
+
     # Zing
     zing17_linux_tgz = {
       url = "https://cdn.azul.com/zing-zvm/ZVM22.01.1.0/zing22.01.1.0-1-jdk17.0.2-linux_x64.tar.gz";
@@ -49,7 +58,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, jdk16, jdk17, jdk18, jdk-loom, jdk-panama, jdk-valhalla, zulu17_linux_tgz, zulu17_macos_tgz, zing17_linux_tgz }:
+  outputs = { self, nixpkgs, flake-utils, jdk16, jdk17, jdk18, jdk-loom, jdk-panama, jdk-valhalla, zulu17_linux_tgz, zulu17_macos_tgz, zulu18_linux_tgz, zulu18_macos_tgz, zing17_linux_tgz }:
     flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
       let
         sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
@@ -65,6 +74,12 @@
           inherit pkgs;
           src = if pkgs.stdenv.isLinux then zulu17_linux_tgz else zulu17_macos_tgz;
           version = "17.0.0";
+        };
+
+        zulu_18 = import ./build/zulu.nix {
+          inherit pkgs;
+          src = if pkgs.stdenv.isLinux then zulu18_linux_tgz else zulu18_macos_tgz;
+          version = "18.0.0";
         };
 
         openjdk_16 = import ./build/openjdk.nix {
@@ -86,35 +101,37 @@
           version = "18";
           jdk = openjdk_17;
         };
-        openjdk_18-loom = import ./build/openjdk.nix {
+
+        openjdk_19-loom = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-loom;
-          version = "18-loom";
-          jdk = openjdk_17;
+          version = "19-loom";
+          jdk = openjdk_18;
         };
-        openjdk_18-panama = import ./build/openjdk.nix {
+        openjdk_19-panama = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-panama;
-          version = "18-panama";
+          version = "19-panama";
           nativeDeps = [ pkgs.llvmPackages.libclang ];
-          jdk = openjdk_17;
+          jdk = openjdk_18;
         };
-        openjdk_18-valhalla = import ./build/openjdk.nix {
+        openjdk_19-valhalla = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-valhalla;
-          version = "18-valhalla";
-          jdk = openjdk_17;
+          version = "19-valhalla";
+          jdk = openjdk_18;
         };
 
         jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
+        jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
 
         derivation = {
-          inherit openjdk_17 openjdk_18 openjdk_18-loom openjdk_18-panama openjdk_18-valhalla zulu_17 zing_17 jdk_17;
+          inherit openjdk_17 openjdk_18 openjdk_19-loom openjdk_19-panama openjdk_19-valhalla zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
         };
       in
       rec {
         packages = derivation;
-        defaultPackage = jdk_17;
+        defaultPackage = jdk_18;
         devShell = pkgs.callPackage ./shell.nix derivation;
       });
 }
