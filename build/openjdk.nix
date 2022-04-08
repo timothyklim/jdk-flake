@@ -26,6 +26,8 @@ let
         url = "https://src.fedoraproject.org/rpms/java-openjdk/raw/06c001c7d87f2e9fe4fedeef2d993bcd5d7afa2a/f/rh1673833-remove_removal_of_wformat_during_test_compilation.patch";
         sha256 = "082lmc30x64x583vqq00c8y0wqih3y4r0mp1c4bqq36l22qv6b6r";
       })
+
+      ./patches/disable_incubating_warn.patch
     ];
 
     prePatch = lib.optional patchInstall ''

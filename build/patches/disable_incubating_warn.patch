@@ -1,0 +1,13 @@
+diff --git a/make/CreateJmods.gmk b/make/CreateJmods.gmk
+index d9e5f415fe7..82cc27502d9 100644
+--- a/make/CreateJmods.gmk
++++ b/make/CreateJmods.gmk
+@@ -148,7 +148,7 @@ endif
+ 
+ ifeq ($(filter-out jdk.incubator.%, $(MODULE)), )
+   JMOD_FLAGS += --do-not-resolve-by-default
+-  JMOD_FLAGS += --warn-if-resolved=incubating
++  # JMOD_FLAGS += --warn-if-resolved=incubating
+ endif
+ 
+ # Add dependencies on other jmod files. Only java.base needs access to other
