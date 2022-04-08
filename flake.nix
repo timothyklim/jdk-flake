@@ -121,8 +121,8 @@
         };
       in
       rec {
-        packages = derivation;
-        defaultPackage = jdk_18;
-        devShell = pkgs.callPackage ./shell.nix derivation;
+        packages.${system} = derivation;
+        defaultPackage.${system} = jdk_18;
+        devShell.${system} = pkgs.callPackage ./shell.nix derivation;
       };
 }
