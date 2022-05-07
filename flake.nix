@@ -18,6 +18,10 @@
       flake = false;
     };
 
+    jdk = {
+      url = "github:openjdk/jdk";
+      flake = false;
+    };
     jdk-loom = {
       url = "github:openjdk/loom/fibers";
       flake = false;
@@ -49,7 +53,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, jdk16, jdk17, jdk18, jdk-loom, jdk-panama, jdk-valhalla, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
+  outputs = { self, nixpkgs, jdk16, jdk17, jdk18, jdk, jdk-loom, jdk-panama, jdk-valhalla, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
       let
         system = "x86_64-linux";
         sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
@@ -93,20 +97,26 @@
           jdk = openjdk_17;
         };
 
-        openjdk_19-loom = import ./build/openjdk.nix {
+        openjdk = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk;
+          version = "19";
+          jdk = openjdk_18;
+        };
+        openjdk-loom = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-loom;
           version = "19-loom";
           jdk = openjdk_18;
         };
-        openjdk_19-panama = import ./build/openjdk.nix {
+        openjdk-panama = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-panama;
           version = "19-panama";
           nativeDeps = [ pkgs.llvmPackages.libclang ];
           jdk = openjdk_18;
         };
-        openjdk_19-valhalla = import ./build/openjdk.nix {
+        openjdk-valhalla = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-valhalla;
           version = "19-valhalla";
@@ -117,7 +127,7 @@
         jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
 
         derivation = {
-          inherit openjdk_17 openjdk_18 openjdk_19-loom openjdk_19-panama openjdk_19-valhalla zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
+          inherit openjdk_17 openjdk_18 openjdk openjdk-loom openjdk-panama openjdk-valhalla zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
         };
       in
       rec {
