@@ -13,6 +13,8 @@ let
     nativeBuildInputs = [ autoconf jdk pkg-config ] ++ nativeDeps;
     buildInputs = [ alsaLib bash cups file gnumake fontconfig freetype libjpeg giflib libpng which zlib unzip zip lcms2 ] ++ x11Libs;
 
+    SOURCE_DATE_EPOCH = 315532802;
+
     patches = [
       "${nixpkgs}/pkgs/development/compilers/openjdk/fix-java-home-jdk10.patch"
       "${nixpkgs}/pkgs/development/compilers/openjdk/read-truststore-from-env-jdk10.patch"
@@ -68,7 +70,7 @@ let
     NIX_CFLAGS_COMPILE = "-Wno-error";
 
     buildPhase = ''
-      CONF=${image} make images
+      CONF=${image} make -j images
     '';
 
     installPhase = ''
