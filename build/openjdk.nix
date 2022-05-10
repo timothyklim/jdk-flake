@@ -4,9 +4,9 @@ with pkgs;
 
 let
   image = "linux-x86_64-server-release";
-  clags = "-O3 -march=westmere -mtune=haswell -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
+  cflags = "-O3 -march=westmere -mtune=haswell -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
-  self = gcc11Stdenv.mkDerivation rec {
+  self = gcc12Stdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
 
@@ -50,8 +50,8 @@ let
         --enable-unlimited-crypto \
         --with-boot-jdk=${jdk.home} \
         --with-debug-level=release \
-        --with-extra-cflags='${clags}' \
-        --with-extra-cxxflags='${clags}' \
+        --with-extra-cflags='${cflags}' \
+        --with-extra-cxxflags='${cflags}' \
         --with-giflib=system \
         --with-jvm-features=link-time-opt,zgc \
         --with-jvm-variants=server \
