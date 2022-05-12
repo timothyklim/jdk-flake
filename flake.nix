@@ -2,7 +2,7 @@
   description = "JDK's flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/148df9e42e2d0222a025654e4bd5535f986178d1";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     # OpenJDK variants
     jdk16 = {
