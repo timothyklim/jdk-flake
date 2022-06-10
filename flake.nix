@@ -17,6 +17,10 @@
       url = "github:openjdk/jdk18u";
       flake = false;
     };
+    jdk19 = {
+      url = "github:openjdk/jdk19";
+      flake = false;
+    };
 
     jdk = {
       url = "github:openjdk/jdk";
@@ -53,7 +57,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, jdk16, jdk17, jdk18, jdk, jdk-loom, jdk-panama, jdk-valhalla, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
+  outputs = { self, nixpkgs, jdk16, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
       let
         system = "x86_64-linux";
         sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
@@ -97,6 +101,13 @@
           jdk = openjdk_17;
         };
 
+        openjdk_19 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk19;
+          version = "19";
+          jdk = openjdk_18;
+        };
+
         openjdk = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk;
@@ -127,7 +138,7 @@
         jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
 
         derivation = {
-          inherit openjdk_17 openjdk_18 openjdk openjdk-loom openjdk-panama openjdk-valhalla zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
+          inherit openjdk_17 openjdk_18 openjdk_19 openjdk openjdk-loom openjdk-panama openjdk-valhalla zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
         };
       in
       rec {
