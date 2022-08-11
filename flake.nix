@@ -5,10 +5,6 @@
     nixpkgs.url = "nixpkgs/nixos-22.05";
 
     # OpenJDK variants
-    jdk16 = {
-      url = "github:openjdk/jdk16u";
-      flake = false;
-    };
     jdk17 = {
       url = "github:openjdk/jdk17u";
       flake = false;
@@ -57,7 +53,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, jdk16, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
+  outputs = { self, nixpkgs, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
       let
         system = "x86_64-linux";
         sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
@@ -81,13 +77,6 @@
           version = "18.0.0";
         };
 
-        openjdk_16 = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk16;
-          version = "16";
-          patchInstall = true;
-        };
-
         openjdk_17 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk17;
@@ -98,40 +87,40 @@
           inherit pkgs nixpkgs;
           src = jdk18;
           version = "18";
-          jdk = openjdk_17;
+          jdk = zulu_17;
         };
 
         openjdk_19 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk19;
           version = "19";
-          jdk = openjdk_18;
+          jdk = zulu_18;
         };
 
         openjdk = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk;
-          version = "19";
-          jdk = openjdk_18;
+          version = "20";
+          jdk = openjdk_19;
         };
         openjdk-loom = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-loom;
-          version = "19-loom";
-          jdk = openjdk_18;
+          version = "20-loom";
+          jdk = openjdk_19;
         };
         openjdk-panama = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-panama;
-          version = "19-panama";
+          version = "20-panama";
           nativeDeps = [ pkgs.llvmPackages.libclang ];
-          jdk = openjdk_18;
+          jdk = openjdk_19;
         };
         openjdk-valhalla = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-valhalla;
-          version = "19-valhalla";
-          jdk = openjdk_18;
+          version = "20-valhalla";
+          jdk = openjdk_19;
         };
 
         jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
@@ -143,7 +132,8 @@
       in
       rec {
         packages.${system} = derivation;
-        defaultPackage.${system} = jdk_18;
+        defaultPackage.${system} = openjdk_19;
         devShell.${system} = pkgs.callPackage ./shell.nix derivation;
+        formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
       };
 }
