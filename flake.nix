@@ -14,7 +14,7 @@
       flake = false;
     };
     jdk19 = {
-      url = "github:openjdk/jdk19";
+      url = "github:openjdk/jdk19u";
       flake = false;
     };
 
