@@ -51,7 +51,6 @@ makePackage {
   '';
 
   installPhase = ''
-    mkdir -p $out
-    cp -r build/jextract $out/
+    cp -r build/jextract $out
   '';
 }
