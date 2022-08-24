@@ -1,0 +1,19 @@
+diff --git a/make/build.sh b/make/build.sh
+index 84059dc..bff90b2 100644
+--- a/make/build.sh
++++ b/make/build.sh
+@@ -760,6 +760,14 @@ check_files  ${JUNIT_NOTICES}
+ check_files  ${TESTNG_JARS}
+ check_files  ${TESTNG_NOTICES}
+ 
++DIST_DIR="$(abspath "${ROOT}/dist")"
++mkdir -p ${DIST_DIR} ${DIST_DIR}/junit ${DIST_DIR}/testng
++
++cp ${ASMTOOLS_JAR} ${DIST_DIR}/asmtools.jar
++cp ${JTHARNESS_JAVATEST_JAR} ${DIST_DIR}/javatest.jar
++for f in ${JUNIT_JARS} ; do cp $f ${DIST_DIR}/junit/ ; done
++for f in ${TESTNG_JARS} ; do cp $f ${DIST_DIR}/testng/ ; done
++
+ if [ -n "${SKIP_MAKE:-}" ]; then
+     exit
+ fi
