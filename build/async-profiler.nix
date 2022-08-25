@@ -14,11 +14,15 @@ let
     '';
 
     installPhase = ''
-      cp -r build $out
+      mkdir -p $out/bin
+      cp profiler.sh $out/
+      cp -r build $out/
+      ln -s $out/profiler.sh $out/bin/async-profiler
     '';
 
     passthru.libasyncProfiler = "${self}/libasyncProfiler.so";
 
+    enableParallelBuilding = true;
     dontStrip = true;
   };
 in
