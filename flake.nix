@@ -152,17 +152,25 @@
       jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
       jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
 
+      jdk = openjdk_19;
+
       derivation = {
         inherit openjdk_17 openjdk_18 openjdk_19 openjdk
           openjdk-loom openjdk-panama openjdk-valhalla
           jtreg jextract jmc
           zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
+        default = jdk;
       };
     in
     rec {
       packages.${system} = derivation;
-      defaultPackage.${system} = openjdk_19;
-      devShell.${system} = pkgs.callPackage ./shell.nix derivation;
+      devShells.${system}.default = pkgs.callPackage ./shell.nix { inherit jdk; };
+      nixosModules.default = {
+        environment.systemPackages = [ jdk ];
+        programs.java.package = jdk;
+        nixpkgs.overlays = [ overlays.default ];
+      };
+      overlays.default = final: prev: derivation;
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
     };
 }

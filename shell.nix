@@ -1,8 +1,5 @@
-{ mkShell, openjdk_17, openjdk_18, openjdk_19, openjdk, openjdk-loom, openjdk-panama, openjdk-valhalla, zulu_17, zulu_18, zing_17, jdk_17, jdk_18 }:
+{ mkShell, jdk }:
 
-let
-  jdk = openjdk_19;
-in
 mkShell {
   name = "jdk-env";
   nativeBuildInputs = [ jdk ];
