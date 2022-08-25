@@ -48,6 +48,11 @@
       flake = false;
     };
 
+    async-profiler-src = {
+      url = "github:jvm-profiling-tools/async-profiler/v2.8.3";
+      flake = false;
+    };
+
     # Zulu    
     zulu17_linux_tgz = {
       url = "https://cdn.azul.com/zulu/bin/zulu17.30.15-ca-jdk17.0.1-linux_x64.tar.gz";
@@ -66,7 +71,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, jtreg-src, jextract-src, jmc_linux_tgz, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
+  outputs = { self, nixpkgs, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, jtreg-src, jextract-src, jmc_linux_tgz, async-profiler-src, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
     let
       system = "x86_64-linux";
       sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
@@ -132,6 +137,13 @@
         version = "8.2.1";
       };
 
+      async-profiler = import ./build/async-profiler.nix {
+        inherit pkgs;
+        jdk = openjdk_19;
+        src = async-profiler-src;
+        version = sources.async-profiler-src.original.ref;
+      };
+
       zulu_17 = import ./build/zulu.nix {
         inherit pkgs;
         src = zulu17_linux_tgz;
@@ -158,12 +170,12 @@
         inherit openjdk_17 openjdk_18 openjdk_19 openjdk
           openjdk-loom openjdk-panama openjdk-valhalla
           jtreg jextract jmc
+          async-profiler
           zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
-        default = jdk;
       };
     in
     rec {
-      packages.${system} = derivation;
+      packages.${system} = derivation // { default = jdk; };
       devShells.${system}.default = pkgs.callPackage ./shell.nix { inherit jdk; };
       nixosModules.default = {
         environment.systemPackages = [ jdk ];

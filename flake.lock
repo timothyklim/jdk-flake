@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "async-profiler-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1658001475,
+        "narHash": "sha256-25C3V3BVQ4YnuccW9o4LeS51V9542Jk3QYfoWNIbiBQ=",
+        "owner": "jvm-profiling-tools",
+        "repo": "async-profiler",
+        "rev": "733cf7c668b5a4a6bba6fe653a3fcc5bca7a1c7e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jvm-profiling-tools",
+        "ref": "v2.8.3",
+        "repo": "async-profiler",
+        "type": "github"
+      }
+    },
     "jdk": {
       "flake": false,
       "locked": {
@@ -176,6 +193,7 @@
     },
     "root": {
       "inputs": {
+        "async-profiler-src": "async-profiler-src",
         "jdk": "jdk",
         "jdk-loom": "jdk-loom",
         "jdk-panama": "jdk-panama",
