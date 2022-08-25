@@ -205,9 +205,22 @@
         "jmc_linux_tgz": "jmc_linux_tgz",
         "jtreg-src": "jtreg-src",
         "nixpkgs": "nixpkgs",
+        "visualvm_zip": "visualvm_zip",
         "zing17_linux_tgz": "zing17_linux_tgz",
         "zulu17_linux_tgz": "zulu17_linux_tgz",
         "zulu18_linux_tgz": "zulu18_linux_tgz"
+      }
+    },
+    "visualvm_zip": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-o7gcKJy3gDUV3WPo5vO+5Zyyz1UVC2wGRTxZL69RxNE=",
+        "type": "tarball",
+        "url": "https://github.com/oracle/visualvm/releases/download/2.1.4/visualvm_214.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/oracle/visualvm/releases/download/2.1.4/visualvm_214.zip"
       }
     },
     "zing17_linux_tgz": {

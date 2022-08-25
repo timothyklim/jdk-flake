@@ -47,6 +47,10 @@
       url = "https://download.java.net/java/GA/jmc8/03/binaries/jmc-8.2.1_linux-x64.tar.gz";
       flake = false;
     };
+    visualvm_zip = {
+      url = "https://github.com/oracle/visualvm/releases/download/2.1.4/visualvm_214.zip";
+      flake = false;
+    };
 
     async-profiler-src = {
       url = "github:jvm-profiling-tools/async-profiler/v2.8.3";
@@ -71,7 +75,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, jtreg-src, jextract-src, jmc_linux_tgz, async-profiler-src, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
+  outputs = { self, nixpkgs, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, jtreg-src, jextract-src, jmc_linux_tgz, visualvm_zip, async-profiler-src, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
     let
       system = "x86_64-linux";
       sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
@@ -136,6 +140,11 @@
         src = jmc_linux_tgz;
         version = "8.2.1";
       };
+      visualvm = import ./build/visualvm.nix {
+        inherit pkgs;
+        src = visualvm_zip;
+        version = "2.1.4";
+      };
 
       async-profiler = import ./build/async-profiler.nix {
         inherit pkgs;
@@ -169,7 +178,7 @@
       derivation = {
         inherit openjdk_17 openjdk_18 openjdk_19 openjdk
           openjdk-loom openjdk-panama openjdk-valhalla
-          jtreg jextract jmc
+          jtreg jextract jmc visualvm
           async-profiler
           zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
       };
