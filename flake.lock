@@ -131,6 +131,18 @@
         "type": "github"
       }
     },
+    "jmc_linux_tgz": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-waamauw38oBTOmitl8lKnq07JqGN5DgXmd8HplhaNh4=",
+        "type": "tarball",
+        "url": "https://download.java.net/java/GA/jmc8/03/binaries/jmc-8.2.1_linux-x64.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://download.java.net/java/GA/jmc8/03/binaries/jmc-8.2.1_linux-x64.tar.gz"
+      }
+    },
     "jtreg-src": {
       "flake": false,
       "locked": {
@@ -172,6 +184,7 @@
         "jdk18": "jdk18",
         "jdk19": "jdk19",
         "jextract-src": "jextract-src",
+        "jmc_linux_tgz": "jmc_linux_tgz",
         "jtreg-src": "jtreg-src",
         "nixpkgs": "nixpkgs",
         "zing17_linux_tgz": "zing17_linux_tgz",

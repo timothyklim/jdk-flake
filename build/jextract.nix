@@ -1,4 +1,4 @@
-{ pkgs, openjdk_19, jtreg, src, doInstallCheck ? false }:
+{ pkgs, openjdk_19, jtreg, src, check ? false }:
 
 with pkgs;
 
@@ -38,13 +38,12 @@ let
   };
 in
 makePackage {
-  inherit doInstallCheck;
-
   name = "jextract";
 
   buildPhase = buildGradleCmd "verify";
 
-  installCheckPhase = lib.optionalString doInstallCheck ''
+  doInstallCheck = check;
+  installCheckPhase = lib.optionalString check ''
     substituteInPlace build.gradle --replace 'mavenCentral()' 'mavenLocal(); maven { url uri("${deps}") }'
 
     ${buildGradleCmd "-Pjtreg_home=${jtreg} --offline jtreg"}

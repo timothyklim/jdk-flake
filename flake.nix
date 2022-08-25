@@ -43,6 +43,10 @@
       url = "github:openjdk/jextract";
       flake = false;
     };
+    jmc_linux_tgz = {
+      url = "https://download.java.net/java/GA/jmc8/03/binaries/jmc-8.2.1_linux-x64.tar.gz";
+      flake = false;
+    };
 
     # Zulu    
     zulu17_linux_tgz = {
@@ -62,29 +66,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, jtreg-src, jextract-src, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
+  outputs = { self, nixpkgs, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, jtreg-src, jextract-src, jmc_linux_tgz, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
     let
       system = "x86_64-linux";
       sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
       pkgs = nixpkgs.legacyPackages.${system};
-
-      zing_17 = import ./build/zing.nix {
-        inherit pkgs;
-        src = zing17_linux_tgz;
-        version = "17.0.0";
-      };
-
-      zulu_17 = import ./build/zulu.nix {
-        inherit pkgs;
-        src = zulu17_linux_tgz;
-        version = "17.0.0";
-      };
-
-      zulu_18 = import ./build/zulu.nix {
-        inherit pkgs;
-        src = zulu18_linux_tgz;
-        version = "18.0.0";
-      };
 
       openjdk_17 = import ./build/openjdk.nix {
         inherit pkgs nixpkgs;
@@ -140,6 +126,28 @@
         inherit pkgs openjdk_19 jtreg;
         src = jextract-src;
       };
+      jmc = import ./build/jmc.nix {
+        inherit pkgs;
+        src = jmc_linux_tgz;
+        version = "8.2.1";
+      };
+
+      zulu_17 = import ./build/zulu.nix {
+        inherit pkgs;
+        src = zulu17_linux_tgz;
+        version = "17.0.0";
+      };
+      zulu_18 = import ./build/zulu.nix {
+        inherit pkgs;
+        src = zulu18_linux_tgz;
+        version = "18.0.0";
+      };
+
+      zing_17 = import ./build/zing.nix {
+        inherit pkgs;
+        src = zing17_linux_tgz;
+        version = "17.0.0";
+      };
 
       jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
       jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
@@ -147,7 +155,7 @@
       derivation = {
         inherit openjdk_17 openjdk_18 openjdk_19 openjdk
           openjdk-loom openjdk-panama openjdk-valhalla
-          jtreg jextract
+          jtreg jextract jmc
           zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
       };
     in
