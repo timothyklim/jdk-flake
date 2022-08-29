@@ -20,11 +20,11 @@
     "jdk": {
       "flake": false,
       "locked": {
-        "lastModified": 1661344810,
-        "narHash": "sha256-FVZXmcYKtl+E7ZJK8//roToT9eZZKnT8v88q889W7Uw=",
+        "lastModified": 1661739937,
+        "narHash": "sha256-OnKhMDZX9ChEnQfqkZlbMqn4gillATQM6pxI+YQ2d1I=",
         "owner": "openjdk",
         "repo": "jdk",
-        "rev": "d3fed128671312ae138a7ad5677c3c140de9a8f3",
+        "rev": "99cab6a68e16b6e39f82a7a4aa98a551d1df292b",
         "type": "github"
       },
       "original": {
@@ -70,11 +70,11 @@
     "jdk-valhalla": {
       "flake": false,
       "locked": {
-        "lastModified": 1661343204,
-        "narHash": "sha256-sNjMUqfe8kShT56fd/YSs568lrxz1ok8bSB9E5nt//c=",
+        "lastModified": 1661498594,
+        "narHash": "sha256-PSu+rPO6/tmGrumyOm7xftKXenb3XO9fthIqNLyHUMU=",
         "owner": "openjdk",
         "repo": "valhalla",
-        "rev": "c9216717ea5700640bf8df26752be3a146f9b354",
+        "rev": "2b23a957910bf30e96e2ce8fb00fa76fc61fd5e5",
         "type": "github"
       },
       "original": {
@@ -87,11 +87,11 @@
     "jdk17": {
       "flake": false,
       "locked": {
-        "lastModified": 1660728619,
-        "narHash": "sha256-nOFxdsxJloKzCLnBeynqTIRb1ZW5jxlFrcu7w+exAjw=",
+        "lastModified": 1661259495,
+        "narHash": "sha256-ZC+GHmfh7DW9wL6pWv7qAGHofaIwq2zyrpOdiTy+2RM=",
         "owner": "openjdk",
         "repo": "jdk17u",
-        "rev": "38fdbd43564f7a8de74fa701c856e923bdb3fca7",
+        "rev": "6d2cddf54b9e74fa15bc3579a4c4f9e841c94d12",
         "type": "github"
       },
       "original": {
@@ -119,11 +119,11 @@
     "jdk19": {
       "flake": false,
       "locked": {
-        "lastModified": 1660924196,
-        "narHash": "sha256-RYqwqUhdCWuouSj1nSBC79Weon8flxSDxdPOUiBGTVg=",
+        "lastModified": 1661501197,
+        "narHash": "sha256-wGBcyh7R1Q0Ow9qrfzdy6PmKe5YA5nfU6fWMbGZUwAc=",
         "owner": "openjdk",
         "repo": "jdk19u",
-        "rev": "030ff3ad576776c008b7c962e3b1fd2c37735026",
+        "rev": "d10e902ad899a2908acc0f196b720768160644ff",
         "type": "github"
       },
       "original": {
@@ -163,11 +163,11 @@
     "jtreg-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1661304149,
-        "narHash": "sha256-A4rbMyH0AL2L8tz06Zu26ndO0EHohvSdifyC1z31iuw=",
+        "lastModified": 1661561119,
+        "narHash": "sha256-imL/HdypsVs17CNj+4WZOxL9AIZqa3wH8bV5y1puyDU=",
         "owner": "openjdk",
         "repo": "jtreg",
-        "rev": "ccb05af578e522f2c331e4a20d7537e9a91a898d",
+        "rev": "5e988da8622d1f244d449c25905badfdb80715c9",
         "type": "github"
       },
       "original": {
@@ -178,11 +178,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1661187878,
-        "narHash": "sha256-/wCqoQB1BsaVi4nb8Iz0PreeBNMTim0p78NLtyWejFE=",
+        "lastModified": 1661617163,
+        "narHash": "sha256-NN9Ky47j8ohgPhA9JZyfkYIbbAo6RJkGz+7h8/exVpE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "52527082ea267fe486f0648582d57c85486b2031",
+        "rev": "0ba2543f8c855d7be8e90ef6c8dc89c1617e8a08",
         "type": "github"
       },
       "original": {

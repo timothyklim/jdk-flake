@@ -7,13 +7,17 @@ with pkgs; stdenv.mkDerivation rec {
   nativeBuildInputs = [ makeWrapper ];
 
   installPhase = ''
-    find . -type f -name "*.dll" -o -name "*.exe"  -delete;
+    find . -type f -name "*.dll" -o -name "*.exe" -delete;
 
     substituteInPlace etc/visualvm.conf \
       --replace "#visualvm_jdkhome=" "visualvm_jdkhome=" \
       --replace "/path/to/jdk" "${jre.home}" \
 
     cp -r . $out
+
+    # Create desktop item.
+    mkdir -p $out/share/applications
+    cp ${desktopItem}/share/applications/* $out/share/applications
   '';
 
   desktopItem = makeDesktopItem {

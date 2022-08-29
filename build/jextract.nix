@@ -51,5 +51,11 @@ makePackage {
 
   installPhase = ''
     cp -r build/jextract $out
+    runHook postInstall
+  '';
+
+  postInstall = ''
+    sed -e 's;DIR=`dirname $0`;DIR=`dirname $(readlink -f -- $0)`;g' \
+      -i $out/bin/jextract
   '';
 }
