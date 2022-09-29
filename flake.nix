@@ -140,6 +140,7 @@
         src = jmc_linux_tgz;
         version = "8.2.1";
       };
+      jitwatch = import ./build/jitwatch.nix { inherit pkgs; };
       visualvm = import ./build/visualvm.nix {
         inherit pkgs;
         src = visualvm_zip;
@@ -178,7 +179,7 @@
       derivation = {
         inherit openjdk_17 openjdk_18 openjdk_19 openjdk
           openjdk-loom openjdk-panama openjdk-valhalla
-          jtreg jextract jmc visualvm
+          jtreg jextract jmc jitwatch visualvm
           async-profiler
           zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
       };
