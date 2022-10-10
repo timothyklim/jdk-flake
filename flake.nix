@@ -57,6 +57,11 @@
       flake = false;
     };
 
+    yourkit_zip = {
+      url = "https://download.yourkit.com/yjp/2022.9/YourKit-JavaProfiler-2022.9-b166.zip";
+      flake = false;
+    };
+
     # Zulu    
     zulu17_linux_tgz = {
       url = "https://cdn.azul.com/zulu/bin/zulu17.30.15-ca-jdk17.0.1-linux_x64.tar.gz";
@@ -75,7 +80,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, jtreg-src, jextract-src, jmc_linux_tgz, visualvm_zip, async-profiler-src, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
+  outputs = { self, nixpkgs, jdk17, jdk18, jdk19, jdk, jdk-loom, jdk-panama, jdk-valhalla, jtreg-src, jextract-src, jmc_linux_tgz, visualvm_zip, async-profiler-src, yourkit_zip, zulu17_linux_tgz, zulu18_linux_tgz, zing17_linux_tgz }:
     let
       system = "x86_64-linux";
       sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
@@ -154,6 +159,11 @@
         version = sources.async-profiler-src.original.ref;
       };
 
+      yourkit = import ./build/yourkit.nix {
+        inherit pkgs;
+        src = yourkit_zip;
+      };
+
       zulu_17 = import ./build/zulu.nix {
         inherit pkgs;
         src = zulu17_linux_tgz;
@@ -181,6 +191,7 @@
           openjdk-loom openjdk-panama openjdk-valhalla
           jtreg jextract jmc jitwatch visualvm
           async-profiler
+          yourkit
           zulu_17 zulu_18 zing_17 jdk_17 jdk_18;
       };
     in
