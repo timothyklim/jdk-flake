@@ -160,6 +160,18 @@
         "url": "https://download.java.net/java/GA/jmc8/03/binaries/jmc-8.2.1_linux-x64.tar.gz"
       }
     },
+    "jprofiler_tgz": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-l+Nx4YZ8BtKSWOcjx0yQz7Pszndrc/uY5AXx+n72v6k=",
+        "type": "tarball",
+        "url": "https://download.ej-technologies.com/jprofiler/jprofiler_linux_13_0_3.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://download.ej-technologies.com/jprofiler/jprofiler_linux_13_0_3.tar.gz"
+      }
+    },
     "jtreg-src": {
       "flake": false,
       "locked": {
@@ -203,6 +215,7 @@
         "jdk19": "jdk19",
         "jextract-src": "jextract-src",
         "jmc_linux_tgz": "jmc_linux_tgz",
+        "jprofiler_tgz": "jprofiler_tgz",
         "jtreg-src": "jtreg-src",
         "nixpkgs": "nixpkgs",
         "visualvm_zip": "visualvm_zip",
