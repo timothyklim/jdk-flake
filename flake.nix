@@ -62,7 +62,7 @@
       flake = false;
     };
     yourkit_zip = {
-      url = "https://download.yourkit.com/yjp/2022.9/YourKit-JavaProfiler-2022.9-b167.zip";
+      url = "https://download.yourkit.com/yjp/2022.9/YourKit-JavaProfiler-2022.9-b171.zip";
       flake = false;
     };
 
