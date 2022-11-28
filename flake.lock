@@ -20,11 +20,11 @@
     "jdk": {
       "flake": false,
       "locked": {
-        "lastModified": 1669240141,
-        "narHash": "sha256-MWATEDrzaxT1PPE9p9BqZTxTz/LMz+ILkA6WHlmKy78=",
+        "lastModified": 1669556486,
+        "narHash": "sha256-M5jq1FP/09AG4U0isbRZIsZOxyK3lo3DXYeTnl6+yJo=",
         "owner": "openjdk",
         "repo": "jdk",
-        "rev": "09ac9eb5638400c840c3c31f022d4737b41761b1",
+        "rev": "2f83b5c487f112c175d081ca5882f5032518937a",
         "type": "github"
       },
       "original": {
@@ -36,11 +36,11 @@
     "jdk-loom": {
       "flake": false,
       "locked": {
-        "lastModified": 1669190862,
-        "narHash": "sha256-+BKzDGIP4d4bqt4vISw/mOj9cpX7Fxotcjvme+Lqn/k=",
+        "lastModified": 1669358286,
+        "narHash": "sha256-G5kMSJ49udGYI6D0croq721ZuO8J++7Y2nFsNWhhs9Q=",
         "owner": "openjdk",
         "repo": "loom",
-        "rev": "24b2f727f8fffcd6e480a5daffc465c8a91e67f0",
+        "rev": "b487e2037dca97922b9259d6e906b5765b91747f",
         "type": "github"
       },
       "original": {
@@ -119,11 +119,11 @@
     "jdk19": {
       "flake": false,
       "locked": {
-        "lastModified": 1669255805,
-        "narHash": "sha256-u1cwXThwMX9QUu7e8eJ+pww/VcoJb1y4v/OiYcqCPa4=",
+        "lastModified": 1669449931,
+        "narHash": "sha256-XzMKUVepjFTygJguZHzRs6Z0pTtZ53Az+JkTE1HIDww=",
         "owner": "openjdk",
         "repo": "jdk19u",
-        "rev": "6615c05467e99168f4ce02b6eeb7325ab98f5602",
+        "rev": "94de334f8ce3bf2ab55ccddde0983eee69288102",
         "type": "github"
       },
       "original": {
@@ -190,16 +190,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1669238390,
-        "narHash": "sha256-iXgYAIWIYXRFwXF27FlOHFcXepKrQu2I6UJhWlGBda0=",
+        "lastModified": 1669465383,
+        "narHash": "sha256-fVbG427suESAEb8/P47O/zD/G9BSeFxLh94IUzgOchs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a8f8b7db23ec6450e384da183d270b18c58493d4",
+        "rev": "899e7caf59d1954882a8e2dff45ccc0387c186f6",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "release-22.11",
+        "ref": "nixos-22.11",
         "type": "indirect"
       }
     },
