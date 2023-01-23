@@ -1,16 +1,11 @@
-{ pkgs, openjdk_19, jtreg, src, check ? false }:
+{ pkgs, openjdk_19 ? null, openjdk_20 ? null, jtreg, src, check ? false }:
 
 with pkgs;
 
 let
-  jdk_home = openjdk_19.home;
   llvm_home = llvmPackages_14.libclang.lib;
-  buildGradleCmd = cmd: ''
-    gradle --no-daemon \
-      -Pjdk19_home=${jdk_home} \
-      -Pllvm_home=${llvm_home} \
-      ${cmd}
-  '';
+  jdkPrefix = if openjdk_19 != null then "-Pjdk19_home=${openjdk_19.home}" else "-Pjdk20_home=${openjdk_20.home}";
+  buildGradleCmd = cmd: "gradle --no-daemon ${jdkPrefix} -Pllvm_home=${llvm_home} ${cmd}";
   makePackage = args: stdenv.mkDerivation ({
     inherit src;
     buildInputs = [ cmake gradle ];
