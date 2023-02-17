@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-22.11";
+    flake-utils.url = "github:numtide/flake-utils";
 
     # OpenJDK variants
     jdk17 = {
@@ -98,6 +99,7 @@
   outputs =
     { self
     , nixpkgs
+    , flake-utils
     , jdk17
     , jdk18
     , jdk19
@@ -119,8 +121,8 @@
     , zulu19_linux_tgz
     , zing17_linux_tgz
     }:
+    with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux ] (system: 
     let
-      system = "x86_64-linux";
       sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
       pkgs = nixpkgs.legacyPackages.${system};
 
@@ -252,14 +254,14 @@
       };
     in
     rec {
-      packages.${system} = derivation // { default = jdk; };
-      devShells.${system}.default = pkgs.callPackage ./shell.nix { inherit jdk; };
+      packages = derivation // { default = jdk; };
+      devShell = pkgs.callPackage ./shell.nix { inherit jdk; };
       nixosModules.default = {
         environment.systemPackages = [ jdk ];
         programs.java.package = jdk;
         nixpkgs.overlays = [ overlays.default ];
       };
       overlays.default = final: prev: derivation;
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
-    };
+      formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+    });
 }
