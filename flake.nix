@@ -259,7 +259,7 @@
         nixosModule = {
           environment.systemPackages = [ jdk ];
           programs.java.package = jdk;
-          nixpkgs.overlays = [ overlay.${system} ];
+          nixpkgs.overlays = [ overlay ];
         };
         overlay = final: prev: derivation;
         formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
