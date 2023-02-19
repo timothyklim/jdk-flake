@@ -121,147 +121,147 @@
     , zulu19_linux_tgz
     , zing17_linux_tgz
     }:
-    with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux ] (system: 
-    let
-      sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
-      pkgs = nixpkgs.legacyPackages.${system};
+      with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux ] (system:
+      let
+        sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
+        pkgs = nixpkgs.legacyPackages.${system};
 
-      openjdk_17 = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk17;
-        version = "17";
-      };
-      openjdk_18 = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk18;
-        version = "18";
-        jdk = zulu_17;
-      };
-      openjdk_19 = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk19;
-        version = "19";
-        jdk = zulu_18;
-      };
-      openjdk_20 = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk20;
-        version = "20";
-        jdk = zulu_19;
-      };
+        openjdk_17 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk17;
+          version = "17";
+        };
+        openjdk_18 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk18;
+          version = "18";
+          jdk = zulu_17;
+        };
+        openjdk_19 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk19;
+          version = "19";
+          jdk = zulu_18;
+        };
+        openjdk_20 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk20;
+          version = "20";
+          jdk = zulu_19;
+        };
 
-      openjdk = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk;
-        version = "20";
+        openjdk = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk;
+          version = "20";
+          jdk = openjdk_19;
+        };
+        openjdk-loom = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk-loom;
+          version = "20-loom";
+          jdk = openjdk_19;
+        };
+        openjdk-panama = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk-panama;
+          version = "20-panama";
+          nativeDeps = [ pkgs.llvmPackages.libclang ];
+          jdk = openjdk_19;
+        };
+        openjdk-valhalla = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk-valhalla;
+          version = "20-valhalla";
+          jdk = openjdk_19;
+        };
+
+        jtreg = import ./build/jtreg.nix {
+          inherit pkgs;
+          src = jtreg-src;
+        };
+        jextract = import ./build/jextract.nix {
+          inherit pkgs openjdk_19 jtreg;
+          src = jextract-src;
+        };
+        jextract_jdk20 = import ./build/jextract.nix {
+          inherit pkgs openjdk_20 jtreg;
+          src = jextract_jdk20-src;
+        };
+        jmc = import ./build/jmc.nix {
+          inherit pkgs;
+          src = jmc_linux_tgz;
+          version = "8.2.1";
+        };
+        jitwatch = import ./build/jitwatch.nix { inherit pkgs; };
+        visualvm = import ./build/visualvm.nix {
+          inherit pkgs;
+          src = visualvm_zip;
+          version = "2.1.4";
+        };
+
+        async-profiler = import ./build/async-profiler.nix {
+          inherit pkgs;
+          jdk = openjdk_19;
+          src = async-profiler-src;
+          version = sources.async-profiler-src.original.ref;
+        };
+
+        jprofiler = import ./build/jprofiler.nix {
+          inherit pkgs;
+          src = jprofiler_tgz;
+        };
+        yourkit = import ./build/yourkit.nix {
+          inherit pkgs;
+          src = yourkit_zip;
+        };
+
+        zulu_17 = import ./build/zulu.nix {
+          inherit pkgs;
+          src = zulu17_linux_tgz;
+          version = "17.0.0";
+        };
+        zulu_18 = import ./build/zulu.nix {
+          inherit pkgs;
+          src = zulu18_linux_tgz;
+          version = "18.0.0";
+        };
+        zulu_19 = import ./build/zulu.nix {
+          inherit pkgs;
+          src = zulu19_linux_tgz;
+          version = "19.0.1";
+        };
+
+        zing_17 = import ./build/zing.nix {
+          inherit pkgs;
+          src = zing17_linux_tgz;
+          version = "17.0.0";
+        };
+
+        jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
+        jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
+        jdk_19 = if pkgs.stdenv.isLinux then openjdk_19 else zulu_19;
+
         jdk = openjdk_19;
-      };
-      openjdk-loom = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk-loom;
-        version = "20-loom";
-        jdk = openjdk_19;
-      };
-      openjdk-panama = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk-panama;
-        version = "20-panama";
-        nativeDeps = [ pkgs.llvmPackages.libclang ];
-        jdk = openjdk_19;
-      };
-      openjdk-valhalla = import ./build/openjdk.nix {
-        inherit pkgs nixpkgs;
-        src = jdk-valhalla;
-        version = "20-valhalla";
-        jdk = openjdk_19;
-      };
 
-      jtreg = import ./build/jtreg.nix {
-        inherit pkgs;
-        src = jtreg-src;
-      };
-      jextract = import ./build/jextract.nix {
-        inherit pkgs openjdk_19 jtreg;
-        src = jextract-src;
-      };
-      jextract_jdk20 = import ./build/jextract.nix {
-        inherit pkgs openjdk_20 jtreg;
-        src = jextract_jdk20-src;
-      };
-      jmc = import ./build/jmc.nix {
-        inherit pkgs;
-        src = jmc_linux_tgz;
-        version = "8.2.1";
-      };
-      jitwatch = import ./build/jitwatch.nix { inherit pkgs; };
-      visualvm = import ./build/visualvm.nix {
-        inherit pkgs;
-        src = visualvm_zip;
-        version = "2.1.4";
-      };
-
-      async-profiler = import ./build/async-profiler.nix {
-        inherit pkgs;
-        jdk = openjdk_19;
-        src = async-profiler-src;
-        version = sources.async-profiler-src.original.ref;
-      };
-
-      jprofiler = import ./build/jprofiler.nix {
-        inherit pkgs;
-        src = jprofiler_tgz;
-      };
-      yourkit = import ./build/yourkit.nix {
-        inherit pkgs;
-        src = yourkit_zip;
-      };
-
-      zulu_17 = import ./build/zulu.nix {
-        inherit pkgs;
-        src = zulu17_linux_tgz;
-        version = "17.0.0";
-      };
-      zulu_18 = import ./build/zulu.nix {
-        inherit pkgs;
-        src = zulu18_linux_tgz;
-        version = "18.0.0";
-      };
-      zulu_19 = import ./build/zulu.nix {
-        inherit pkgs;
-        src = zulu19_linux_tgz;
-        version = "19.0.1";
-      };
-
-      zing_17 = import ./build/zing.nix {
-        inherit pkgs;
-        src = zing17_linux_tgz;
-        version = "17.0.0";
-      };
-
-      jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
-      jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
-      jdk_19 = if pkgs.stdenv.isLinux then openjdk_19 else zulu_19;
-
-      jdk = openjdk_19;
-
-      derivation = {
-        inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk
-          openjdk-loom openjdk-panama openjdk-valhalla
-          jtreg jextract jextract_jdk20 jmc jitwatch visualvm
-          async-profiler
-          jprofiler yourkit
-          zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19;
-      };
-    in
-    rec {
-      packages = derivation // { default = jdk; };
-      devShell = pkgs.callPackage ./shell.nix { inherit jdk; };
-      nixosModules.default = {
-        environment.systemPackages = [ jdk ];
-        programs.java.package = jdk;
-        nixpkgs.overlays = [ overlays.default ];
-      };
-      overlays.default = final: prev: derivation;
-      formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
-    });
+        derivation = {
+          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk
+            openjdk-loom openjdk-panama openjdk-valhalla
+            jtreg jextract jextract_jdk20 jmc jitwatch visualvm
+            async-profiler
+            jprofiler yourkit
+            zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19;
+        };
+      in
+      rec {
+        packages = derivation;
+        devShell = pkgs.callPackage ./shell.nix { inherit jdk; };
+        nixosModule = {
+          environment.systemPackages = [ jdk ];
+          programs.java.package = jdk;
+          nixpkgs.overlays = [ overlay.${system} ];
+        };
+        overlay = final: prev: derivation;
+        formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      });
 }

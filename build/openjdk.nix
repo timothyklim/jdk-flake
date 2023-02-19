@@ -6,7 +6,7 @@ let
   image = "linux-x86_64-server-release";
   cflags = "-O3 -march=westmere -mtune=haswell -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
-  self = llvmPackages_15.stdenv.mkDerivation rec {
+  self = gcc12Stdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
 
