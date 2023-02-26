@@ -3,8 +3,8 @@
 with pkgs;
 
 let
-  image = "linux-x86_64-server-release";
-  cflags = "-O3 -march=westmere -mtune=haswell -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
+  image = if stdenv.hostPlatform.isAarch then "linux-aarch64-server-release" else "linux-x86_64-server-release";
+  cflags = (if stdenv.hostPlatform.isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell") + " -O3 -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   self = gcc12Stdenv.mkDerivation rec {
     inherit src version;
@@ -65,6 +65,7 @@ let
         --with-version-opt=nixos \
         --with-version-pre= \
         --with-zlib=system \
+      || cat config.log
     '';
 
     NIX_CFLAGS_COMPILE = "-Wno-error";

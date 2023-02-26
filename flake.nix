@@ -84,8 +84,12 @@
       url = "https://cdn.azul.com/zulu/bin/zulu18.28.13-ca-jdk18.0.0-linux_x64.tar.gz";
       flake = false;
     };
-    zulu19_linux_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu19.30.11-ca-jdk19.0.1-linux_x64.tar.gz";
+    zulu19_linux_x64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_x64.tar.gz";
+      flake = false;
+    };
+    zulu19_linux_aarch64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_aarch64.tar.gz";
       flake = false;
     };
 
@@ -118,7 +122,8 @@
     , yourkit_zip
     , zulu17_linux_tgz
     , zulu18_linux_tgz
-    , zulu19_linux_tgz
+    , zulu19_linux_x64_tgz
+    , zulu19_linux_aarch64_tgz
     , zing17_linux_tgz
     }:
       with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux ] (system:
@@ -228,8 +233,8 @@
         };
         zulu_19 = import ./build/zulu.nix {
           inherit pkgs;
-          src = zulu19_linux_tgz;
-          version = "19.0.1";
+          src = if pkgs.stdenv.hostPlatform.isAarch then zulu19_linux_aarch64_tgz else zulu19_linux_x64_tgz;
+          version = "19.0.2";
         };
 
         zing_17 = import ./build/zing.nix {

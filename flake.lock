@@ -274,7 +274,8 @@
         "zing17_linux_tgz": "zing17_linux_tgz",
         "zulu17_linux_tgz": "zulu17_linux_tgz",
         "zulu18_linux_tgz": "zulu18_linux_tgz",
-        "zulu19_linux_tgz": "zulu19_linux_tgz"
+        "zulu19_linux_aarch64_tgz": "zulu19_linux_aarch64_tgz",
+        "zulu19_linux_x64_tgz": "zulu19_linux_x64_tgz"
       }
     },
     "visualvm_zip": {
@@ -337,16 +338,28 @@
         "url": "https://cdn.azul.com/zulu/bin/zulu18.28.13-ca-jdk18.0.0-linux_x64.tar.gz"
       }
     },
-    "zulu19_linux_tgz": {
+    "zulu19_linux_aarch64_tgz": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-Ev4ZAXZeuK4b9DbTqf9AdIj/EJZQAdVrVhqad5MLuCw=",
+        "narHash": "sha256-6qAaJEgY4uXABiMpzEMexdqhcpHf5pB+bjJh6XoFIQg=",
         "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu19.30.11-ca-jdk19.0.1-linux_x64.tar.gz"
+        "url": "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_aarch64.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu19.30.11-ca-jdk19.0.1-linux_x64.tar.gz"
+        "url": "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_aarch64.tar.gz"
+      }
+    },
+    "zulu19_linux_x64_tgz": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-gwyIwXnZO+RzVFbfV7Lm9fcWxItFLsPZxHNwqsAwZW4=",
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_x64.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_x64.tar.gz"
       }
     }
   },
