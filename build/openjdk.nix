@@ -3,8 +3,10 @@
 with pkgs;
 
 let
-  image = if stdenv.hostPlatform.isAarch then "linux-aarch64-server-release" else "linux-x86_64-server-release";
-  cflags = (if stdenv.hostPlatform.isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell") + " -O3 -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
+  inherit (stdenv.hostPlatform) isAarch;
+  image = if isAarch then "linux-aarch64-server-release" else "linux-x86_64-server-release";
+  archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
+  cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   self = gcc12Stdenv.mkDerivation rec {
     inherit src version;

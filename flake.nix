@@ -130,6 +130,7 @@
       let
         sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
         pkgs = nixpkgs.legacyPackages.${system};
+        inherit (pkgs.stdenv.hostPlatform) isAarch;
 
         openjdk_17 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
@@ -233,7 +234,7 @@
         };
         zulu_19 = import ./build/zulu.nix {
           inherit pkgs;
-          src = if pkgs.stdenv.hostPlatform.isAarch then zulu19_linux_aarch64_tgz else zulu19_linux_x64_tgz;
+          src = if isAarch then zulu19_linux_aarch64_tgz else zulu19_linux_x64_tgz;
           version = "19.0.2";
         };
 
