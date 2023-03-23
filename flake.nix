@@ -48,10 +48,6 @@
       url = "github:openjdk/jextract";
       flake = false;
     };
-    jextract_jdk20-src = {
-      url = "github:openjdk/jextract/jdk20";
-      flake = false;
-    };
     jmc_linux_tgz = {
       url = "https://download.java.net/java/GA/jmc8/03/binaries/jmc-8.2.1_linux-x64.tar.gz";
       flake = false;
@@ -114,7 +110,6 @@
     , jdk-valhalla
     , jtreg-src
     , jextract-src
-    , jextract_jdk20-src
     , jmc_linux_tgz
     , visualvm_zip
     , async-profiler-src
@@ -187,12 +182,8 @@
           src = jtreg-src;
         };
         jextract = import ./build/jextract.nix {
-          inherit pkgs openjdk_19 jtreg;
-          src = jextract-src;
-        };
-        jextract_jdk20 = import ./build/jextract.nix {
           inherit pkgs openjdk_20 jtreg;
-          src = jextract_jdk20-src;
+          src = jextract-src;
         };
         jmc = import ./build/jmc.nix {
           inherit pkgs;
@@ -253,7 +244,7 @@
         derivation = {
           inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk
             openjdk-loom openjdk-panama openjdk-valhalla
-            jtreg jextract jextract_jdk20 jmc jitwatch visualvm
+            jtreg jextract jmc jitwatch visualvm
             async-profiler
             jprofiler yourkit
             zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19;
