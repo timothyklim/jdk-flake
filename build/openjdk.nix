@@ -8,12 +8,15 @@ let
   archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
   cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
-  self = gcc12Stdenv.mkDerivation rec {
+  linuxDeps = [ alsaLib ] ++ x11Libs;
+  stdenv = if isAarch then llvmPackages_15 else gcc12Stdenv;
+  self = stdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
 
     nativeBuildInputs = [ autoconf jdk pkg-config ] ++ nativeDeps;
-    buildInputs = [ alsaLib bash cups file gnumake fontconfig freetype libjpeg giflib libpng which zlib unzip zip lcms2 ] ++ x11Libs;
+    buildInputs = [ bash cups file gnumake fontconfig freetype libjpeg giflib libpng which zlib unzip zip lcms2 ] ++
+      lib.optionals stdenv.isLinux linuxDeps;
 
     SOURCE_DATE_EPOCH = 315532802;
 
