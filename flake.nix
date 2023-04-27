@@ -49,11 +49,11 @@
       flake = false;
     };
     jmc_linux_tgz = {
-      url = "https://download.java.net/java/GA/jmc8/03/binaries/jmc-8.2.1_linux-x64.tar.gz";
+      url = "https://download.java.net/java/GA/jmc8/05/binaries/jmc-8.3.1_linux-x64.tar.gz";
       flake = false;
     };
     visualvm_zip = {
-      url = "https://github.com/oracle/visualvm/releases/download/2.1.4/visualvm_214.zip";
+      url = "https://github.com/oracle/visualvm/releases/download/2.1.6/visualvm_216.zip";
       flake = false;
     };
 
@@ -63,11 +63,11 @@
     };
 
     jprofiler_tgz = {
-      url = "https://download.ej-technologies.com/jprofiler/jprofiler_linux_13_0_3.tar.gz";
+      url = "https://download.ej-technologies.com/jprofiler/jprofiler_linux_13_0_6.tar.gz";
       flake = false;
     };
     yourkit_zip = {
-      url = "https://download.yourkit.com/yjp/2022.9/YourKit-JavaProfiler-2022.9-b179.zip";
+      url = "https://download.yourkit.com/yjp/2022.9/YourKit-JavaProfiler-2022.9-b183.zip";
       flake = false;
     };
 
