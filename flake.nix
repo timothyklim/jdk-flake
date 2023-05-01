@@ -48,6 +48,10 @@
       url = "github:openjdk/jextract";
       flake = false;
     };
+    jextract_panama-src = {
+      url = "github:openjdk/jextract/panama";
+      flake = false;
+    };
     jmc_linux_tgz = {
       url = "https://download.java.net/java/GA/jmc8/05/binaries/jmc-8.3.1_linux-x64.tar.gz";
       flake = false;
@@ -110,6 +114,7 @@
     , jdk-valhalla
     , jtreg-src
     , jextract-src
+    , jextract_panama-src
     , jmc_linux_tgz
     , visualvm_zip
     , async-profiler-src
@@ -150,13 +155,13 @@
           version = "20";
           jdk = zulu_19;
         };
-
-        openjdk = import ./build/openjdk.nix {
+        openjdk_21 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk;
-          version = "20";
-          jdk = openjdk_19;
+          version = "21";
+          jdk = openjdk_20;
         };
+
         openjdk-loom = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-loom;
@@ -183,6 +188,10 @@
         };
         jextract = import ./build/jextract.nix {
           inherit pkgs openjdk_20 jtreg;
+          src = jextract-src;
+        };
+        jextract_panama = import ./build/jextract.nix {
+          inherit pkgs openjdk_21 jtreg;
           src = jextract-src;
         };
         jmc = import ./build/jmc.nix {
@@ -242,9 +251,9 @@
         jdk = openjdk_19;
 
         derivation = {
-          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk
+          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21
             openjdk-loom openjdk-panama openjdk-valhalla
-            jtreg jextract jmc jitwatch visualvm
+            jtreg jextract jextract_panama jmc jitwatch visualvm
             async-profiler
             jprofiler yourkit
             zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19;
