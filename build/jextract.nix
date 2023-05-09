@@ -3,7 +3,7 @@
 with pkgs;
 
 let
-  llvm_home = llvmPackages_15.libclang.lib;
+  llvm_home = llvmPackages_16.libclang.lib;
   jdkPrefix = if openjdk_21 != null then "-Pjdk19_home=${openjdk_21.home}" else "-Pjdk20_home=${openjdk_20.home}";
   buildGradleCmd = cmd: "gradle --no-daemon ${jdkPrefix} -Pllvm_home=${llvm_home} ${cmd}";
   makePackage = args: stdenv.mkDerivation ({

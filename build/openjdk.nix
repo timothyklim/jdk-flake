@@ -9,7 +9,7 @@ let
   cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   linuxDeps = [ alsaLib ] ++ x11Libs;
-  archStdenv = if isAarch then llvmPackages_15.stdenv else gcc12Stdenv;
+  archStdenv = if isAarch then llvmPackages_16.stdenv else gcc12Stdenv;
   self = archStdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
