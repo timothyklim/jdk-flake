@@ -169,16 +169,17 @@
     "jextract-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1681478879,
-        "narHash": "sha256-8qRD1Xg39vxtFAdguD8XvkQ8u7YzFU55MhyyJozVffo=",
+        "lastModified": 1679496653,
+        "narHash": "sha256-acqVlazT4TLopVITvrxHxKElPNxgqIIpVTMPvyRXl/I=",
         "owner": "openjdk",
         "repo": "jextract",
-        "rev": "cf3afe9ca71592c8ebb32f219707285dd1d5b28a",
+        "rev": "7c3d26a03fe3a2de941c8f74699e860826781702",
         "type": "github"
       },
       "original": {
         "owner": "openjdk",
         "repo": "jextract",
+        "rev": "7c3d26a03fe3a2de941c8f74699e860826781702",
         "type": "github"
       }
     },

@@ -45,7 +45,7 @@
       flake = false;
     };
     jextract-src = {
-      url = "github:openjdk/jextract";
+      url = "github:openjdk/jextract/7c3d26a03fe3a2de941c8f74699e860826781702";
       flake = false;
     };
     jextract_panama-src = {
