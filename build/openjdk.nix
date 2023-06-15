@@ -21,7 +21,6 @@ let
     SOURCE_DATE_EPOCH = 315532802;
 
     patches = [
-      "${nixpkgs}/pkgs/development/compilers/openjdk/fix-java-home-jdk10.patch"
       "${nixpkgs}/pkgs/development/compilers/openjdk/read-truststore-from-env-jdk10.patch"
       "${nixpkgs}/pkgs/development/compilers/openjdk/currency-date-range-jdk10.patch"
       "${nixpkgs}/pkgs/development/compilers/openjdk/increase-javadoc-heap-jdk13.patch"
@@ -35,6 +34,10 @@ let
       })
 
       ./patches/disable_incubating_warn.patch
+    ] ++ lib.optionals (lib.versionOlder version "21") [
+      "${nixpkgs}/pkgs/development/compilers/openjdk/fix-java-home-jdk10.patch"
+    ] ++ lib.optionals (lib.versionAtLeast version "21") [
+      ./patches/fix-java-home-jdk21.patch
     ];
 
     prePatch = lib.optional patchInstall ''

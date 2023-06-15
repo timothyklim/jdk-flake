@@ -22,6 +22,10 @@
       url = "github:openjdk/jdk20u";
       flake = false;
     };
+    jdk21 = {
+      url = "github:openjdk/jdk21";
+      flake = false;
+    };
 
     jdk = {
       url = "github:openjdk/jdk";
@@ -92,6 +96,14 @@
       url = "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_aarch64.tar.gz";
       flake = false;
     };
+    zulu20_linux_x64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_x64.tar.gz";
+      flake = false;
+    };
+    zulu20_linux_aarch64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_aarch64.tar.gz";
+      flake = false;
+    };
 
     # Zing
     zing17_linux_tgz = {
@@ -108,6 +120,7 @@
     , jdk18
     , jdk19
     , jdk20
+    , jdk21
     , jdk
     , jdk-loom
     , jdk-panama
@@ -124,6 +137,8 @@
     , zulu18_linux_tgz
     , zulu19_linux_x64_tgz
     , zulu19_linux_aarch64_tgz
+    , zulu20_linux_x64_tgz
+    , zulu20_linux_aarch64_tgz
     , zing17_linux_tgz
     }:
       with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux system.aarch64-darwin ] (system:
@@ -157,8 +172,14 @@
         };
         openjdk_21 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
-          src = jdk;
+          src = jdk21;
           version = "21";
+          jdk = openjdk_20;
+        };
+        openjdk_latest = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk;
+          version = "latest";
           jdk = openjdk_20;
         };
 
@@ -192,7 +213,7 @@
         };
         jextract_panama = import ./build/jextract.nix {
           inherit pkgs openjdk_21 jtreg;
-          src = jextract-src;
+          src = jextract_panama-src;
         };
         jmc = import ./build/jmc.nix {
           inherit pkgs;
@@ -237,6 +258,11 @@
           src = if isAarch then zulu19_linux_aarch64_tgz else zulu19_linux_x64_tgz;
           version = "19.0.2";
         };
+        zulu_20 = import ./build/zulu.nix {
+          inherit pkgs;
+          src = if isAarch then zulu20_linux_aarch64_tgz else zulu20_linux_x64_tgz;
+          version = "20.0.1";
+        };
 
         zing_17 = import ./build/zing.nix {
           inherit pkgs;
@@ -247,16 +273,17 @@
         jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
         jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
         jdk_19 = if pkgs.stdenv.isLinux then openjdk_19 else zulu_19;
+        jdk_20 = if pkgs.stdenv.isLinux then openjdk_20 else zulu_20;
 
-        jdk = openjdk_19;
+        jdk = openjdk_20;
 
         derivation = {
-          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21
+          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21 openjdk_latest
             openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jextract_panama jmc jitwatch visualvm
             async-profiler
             jprofiler yourkit
-            zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19;
+            zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19 jdk_20;
         };
       in
       rec {

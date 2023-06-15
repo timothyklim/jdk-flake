@@ -1,0 +1,16 @@
+diff --git a/src/hotspot/os/linux/os_linux.cpp b/src/hotspot/os/linux/os_linux.cpp
+index a77476e218a..3d6d01793e0 100644
+--- a/src/hotspot/os/linux/os_linux.cpp
++++ b/src/hotspot/os/linux/os_linux.cpp
+@@ -2591,10 +2591,7 @@ void os::jvm_path(char *buf, jint buflen) {
+   assert(ret, "cannot locate libjvm");
+   char *rp = nullptr;
+   if (ret && dli_fname[0] != '\0') {
+-    rp = os::Posix::realpath(dli_fname, buf, buflen);
+-  }
+-  if (rp == nullptr) {
+-    return;
++    snprintf(buf, buflen, "%s", dli_fname);
+   }
+ 
+   if (Arguments::sun_java_launcher_is_altjvm()) {
