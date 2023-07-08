@@ -52,8 +52,8 @@
       url = "github:openjdk/jextract";
       flake = false;
     };
-    jextract_panama-src = {
-      url = "github:openjdk/jextract/panama";
+    jextract_jdk21-src = {
+      url = "github:openjdk/jextract/jdk21";
       flake = false;
     };
     jmc_linux_tgz = {
@@ -127,7 +127,7 @@
     , jdk-valhalla
     , jtreg-src
     , jextract-src
-    , jextract_panama-src
+    , jextract_jdk21-src
     , jmc_linux_tgz
     , visualvm_zip
     , async-profiler-src
@@ -211,9 +211,9 @@
           inherit pkgs openjdk_20 jtreg;
           src = jextract-src;
         };
-        jextract_panama = import ./build/jextract.nix {
+        jextract_jdk21 = import ./build/jextract.nix {
           inherit pkgs openjdk_21 jtreg;
-          src = jextract_panama-src;
+          src = jextract_jdk21-src;
         };
         jmc = import ./build/jmc.nix {
           inherit pkgs;
@@ -280,7 +280,7 @@
         derivation = {
           inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21 openjdk_latest
             openjdk-loom openjdk-panama openjdk-valhalla
-            jtreg jextract jextract_panama jmc jitwatch visualvm
+            jtreg jextract jextract_jdk21 jmc jitwatch visualvm
             async-profiler
             jprofiler yourkit
             zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19 jdk_20;

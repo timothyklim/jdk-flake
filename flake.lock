@@ -198,19 +198,19 @@
         "type": "github"
       }
     },
-    "jextract_panama-src": {
+    "jextract_jdk21-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1686875693,
-        "narHash": "sha256-QvvRPcghVLVDFdIIAFzJ2Zda8WqpMCLAGELMZDspVyw=",
+        "lastModified": 1686820666,
+        "narHash": "sha256-Ste0yUgvzmCqgcGCmtdId00QZruFY21hJZwDDjYmhFY=",
         "owner": "openjdk",
         "repo": "jextract",
-        "rev": "ca8942c38894040e76edf77a111ad7cd5f06052f",
+        "rev": "bb28eac0faed12ff6f0c675af7cfd68ce854a92a",
         "type": "github"
       },
       "original": {
         "owner": "openjdk",
-        "ref": "panama",
+        "ref": "jdk21",
         "repo": "jextract",
         "type": "github"
       }
@@ -284,7 +284,7 @@
         "jdk20": "jdk20",
         "jdk21": "jdk21",
         "jextract-src": "jextract-src",
-        "jextract_panama-src": "jextract_panama-src",
+        "jextract_jdk21-src": "jextract_jdk21-src",
         "jmc_linux_tgz": "jmc_linux_tgz",
         "jprofiler_tgz": "jprofiler_tgz",
         "jtreg-src": "jtreg-src",
