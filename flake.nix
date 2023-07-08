@@ -174,13 +174,13 @@
           inherit pkgs nixpkgs;
           src = jdk21;
           version = "21";
-          jdk = openjdk_20;
+          jdk = zulu_20;
         };
         openjdk_latest = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk;
           version = "latest";
-          jdk = openjdk_20;
+          jdk = openjdk_21;
         };
 
         openjdk-loom = import ./build/openjdk.nix {
