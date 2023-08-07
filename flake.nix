@@ -75,7 +75,7 @@
       flake = false;
     };
     yourkit_zip = {
-      url = "https://download.yourkit.com/yjp/2023.5/YourKit-JavaProfiler-2023.5-b225.zip";
+      url = "https://download.yourkit.com/yjp/2023.5/YourKit-JavaProfiler-2023.5-b229.zip";
       flake = false;
     };
 
