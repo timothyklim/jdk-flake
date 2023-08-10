@@ -1,7 +1,10 @@
 { pkgs, jdk, src }:
 
+with pkgs;
+
 let
-  self = with pkgs; stdenv.mkDerivation rec {
+  libSuffix = if stdenv.isDarwin then "dylib" else "so";
+  self = stdenv.mkDerivation rec {
     inherit src;
     name = "async-profiler";
 
@@ -14,13 +17,11 @@ let
     '';
 
     installPhase = ''
-      mkdir -p $out/bin
-      cp profiler.sh $out/
-      cp -r build $out/
-      ln -s $out/profiler.sh $out/bin/async-profiler
+      cp -r build $out
+      ln -s $out/bin/asprof $out/bin/async-profiler
     '';
 
-    passthru.libasyncProfiler = "${self}/libasyncProfiler.so";
+    passthru.libasyncProfiler = "${self}/libasyncProfiler.${libSuffix}";
 
     enableParallelBuilding = true;
     dontStrip = true;

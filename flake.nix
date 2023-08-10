@@ -229,7 +229,7 @@
 
         async-profiler = import ./build/async-profiler.nix {
           inherit pkgs;
-          jdk = openjdk_21;
+          jdk = pkgs.jdk19_headless;
           src = async-profiler-src;
         };
 
