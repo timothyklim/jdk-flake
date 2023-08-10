@@ -1,9 +1,9 @@
-{ pkgs, jdk, src, version }:
+{ pkgs, jdk, src }:
 
 let
   self = with pkgs; stdenv.mkDerivation rec {
-    inherit src version;
-    pname = "async-profiler";
+    inherit src;
+    name = "async-profiler";
 
     buildInputs = [ jdk ];
 

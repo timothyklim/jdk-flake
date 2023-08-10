@@ -3,16 +3,15 @@
     "async-profiler-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1669502317,
-        "narHash": "sha256-ngLUg6Fq6Ay06klGa/y8lod8W6rYMqhMhXFn5OBCSpk=",
+        "lastModified": 1690990710,
+        "narHash": "sha256-4DMbLmKR93SB68vo2zUjx8hxTm2bO1OM1AIsfk9l2Hg=",
         "owner": "jvm-profiling-tools",
         "repo": "async-profiler",
-        "rev": "32601bccd9e49adda9510a2ed79d142ac6ef0ff9",
+        "rev": "a852bdd22eaf1563fd7f78d1d040428d48839b3d",
         "type": "github"
       },
       "original": {
         "owner": "jvm-profiling-tools",
-        "ref": "v2.9",
         "repo": "async-profiler",
         "type": "github"
       }

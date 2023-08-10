@@ -66,7 +66,7 @@
     };
 
     async-profiler-src = {
-      url = "github:jvm-profiling-tools/async-profiler/v2.9";
+      url = "github:jvm-profiling-tools/async-profiler";
       flake = false;
     };
 
@@ -229,9 +229,8 @@
 
         async-profiler = import ./build/async-profiler.nix {
           inherit pkgs;
-          jdk = openjdk_19;
+          jdk = openjdk_21;
           src = async-profiler-src;
-          version = sources.async-profiler-src.original.ref;
         };
 
         jprofiler = import ./build/jprofiler.nix {
