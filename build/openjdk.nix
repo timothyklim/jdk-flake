@@ -1,10 +1,11 @@
-{ pkgs, nixpkgs, src, version, jdk ? pkgs.openjdk_headless, nativeDeps ? [ ], patchInstall ? false, lto ? false }:
+{ pkgs, nixpkgs, src, version, jdk ? pkgs.openjdk_headless, nativeDeps ? [ ], debug ? false, patchInstall ? false, lto ? false }:
 
 with pkgs;
 
 let
   inherit (stdenv.hostPlatform) isAarch;
-  image = if isAarch then "linux-aarch64-server-release" else "linux-x86_64-server-release";
+  debugLevel = if debug then "fastdebug" else "release";
+  image = if isAarch then "linux-aarch64-server-${debugLevel}" else "linux-x86_64-server-${debugLevel}";
   archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
   cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
@@ -49,7 +50,7 @@ let
       patchShebangs --build configure
     '';
 
-    # --with-jtreg --with-debug-level=fastdebug
+    # --with-jtreg
     configurePhase = ''
       ./configure \
         --prefix=$out \
@@ -57,7 +58,7 @@ let
         --enable-headless-only \
         --enable-unlimited-crypto \
         --with-boot-jdk=${jdk.home} \
-        --with-debug-level=release \
+        --with-debug-level=${debugLevel} \
         --with-extra-cflags='${cflags}' \
         --with-extra-cxxflags='${cflags}' \
         --with-giflib=system \
@@ -145,6 +146,7 @@ let
       home = "${self}/lib/openjdk";
     };
 
+    dontStrip = debug;
     preferLocalBuild = true;
   };
 in

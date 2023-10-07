@@ -37,11 +37,11 @@
     "jdk": {
       "flake": false,
       "locked": {
-        "lastModified": 1696547180,
-        "narHash": "sha256-P+Ulixpaly9MRkXhMdf2zYKV70x+YWP8s/gm2pyQhLI=",
+        "lastModified": 1696628758,
+        "narHash": "sha256-t1KkNBlZLQKsGmdOT716M1Mgo21il94zgjshchcRzmA=",
         "owner": "openjdk",
         "repo": "jdk",
-        "rev": "8a30c2a9b2ef3f069e82061e6db113e259a75bcd",
+        "rev": "dc4bc4f0844b768e83406f44f2a9ee50686b1d9d",
         "type": "github"
       },
       "original": {
@@ -53,11 +53,11 @@
     "jdk-loom": {
       "flake": false,
       "locked": {
-        "lastModified": 1696143972,
-        "narHash": "sha256-1lhId8OVDIX2u34G+qYUmLhXl+RNdEzt+ooTgHaSoOo=",
+        "lastModified": 1696536224,
+        "narHash": "sha256-t4zSuQLG6+ueZUH8+NiaQSiwmA0x1jXDnaeNJXk+ags=",
         "owner": "openjdk",
         "repo": "loom",
-        "rev": "30b0486d60f5abd864a82386df928e6852e4600f",
+        "rev": "a9a4d96d29f8afa3aaa985860f7cd968b3ae9766",
         "type": "github"
       },
       "original": {
@@ -87,11 +87,11 @@
     "jdk-valhalla": {
       "flake": false,
       "locked": {
-        "lastModified": 1696401185,
-        "narHash": "sha256-N7gKc5LXlaZbRsOE4BvhXCsO5wM5oO9X4BpG1RMGuUs=",
+        "lastModified": 1696578386,
+        "narHash": "sha256-0wQJJGYKrrXz1gn9ncvEme7DkPECCSPMlwCEK1r4K4s=",
         "owner": "openjdk",
         "repo": "valhalla",
-        "rev": "39426cf6a66128c14d48ed3d9416f84fb86d4e03",
+        "rev": "9beecaef3145afc580904dede557aa7faa3debd7",
         "type": "github"
       },
       "original": {
@@ -104,11 +104,11 @@
     "jdk17": {
       "flake": false,
       "locked": {
-        "lastModified": 1694774863,
-        "narHash": "sha256-rx3UwueFqVS1+8CbGMEAMGezgsIVBrSahES7QfAXGPQ=",
+        "lastModified": 1696593813,
+        "narHash": "sha256-TFe5KXHqSJXI0+xpXYMUjSkDAIXDDCen2MGKRtNNEsU=",
         "owner": "openjdk",
         "repo": "jdk17u",
-        "rev": "a831b7aefb5968c5640ea0092ae7b63a6db9f0b8",
+        "rev": "8afd87b1f95a1426f55c259b9b43faf25d3617ec",
         "type": "github"
       },
       "original": {
@@ -212,13 +212,13 @@
     "jprofiler_tgz": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-8TPnYFBCJq1UKl0PNHhhuVXE9sIr4Ni+Vw5/Cgm6s9w=",
+        "narHash": "sha256-Im1f8mgtd9MQOeXbGYgAPpAkjL3WrQQIl90AuS+6OJU=",
         "type": "tarball",
-        "url": "https://download.ej-technologies.com/jprofiler/jprofiler_linux_13_0_6.tar.gz"
+        "url": "https://download.ej-technologies.com/jprofiler/jprofiler_linux_14_0.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://download.ej-technologies.com/jprofiler/jprofiler_linux_13_0_6.tar.gz"
+        "url": "https://download.ej-technologies.com/jprofiler/jprofiler_linux_14_0.tar.gz"
       }
     },
     "jtreg-src": {
@@ -239,11 +239,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1696524703,
-        "narHash": "sha256-KqzFNzhq0GpT09h1w2r2h7NxYvxDnzU3qOWYbfbAqyw=",
+        "lastModified": 1696636204,
+        "narHash": "sha256-ooR8etxajy1hrpFDCAKjJj2BKCMXb3QfW+9THWlBvQY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ef8e9997fcb37d5c8372dc1349185bd0d31752a6",
+        "rev": "dc5de91f2e69817d29ee22cb4fc67d104233662d",
         "type": "github"
       },
       "original": {
@@ -299,25 +299,25 @@
     "visualvm_zip": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-RqQEeYMYpBlqla+VmrxOUNyrlIGVL4YjZadg2Gq+f8k=",
+        "narHash": "sha256-k9DnbLfpCQimRueHquDSuBDhn/w8ZyUKZzZ5o35YCNA=",
         "type": "tarball",
-        "url": "https://github.com/oracle/visualvm/releases/download/2.1.6/visualvm_216.zip"
+        "url": "https://github.com/oracle/visualvm/releases/download/2.1.7/visualvm_217.zip"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/oracle/visualvm/releases/download/2.1.6/visualvm_216.zip"
+        "url": "https://github.com/oracle/visualvm/releases/download/2.1.7/visualvm_217.zip"
       }
     },
     "yourkit_zip": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-KDfu+dG5JP39l3Ske5I+4PTm4iMnghvCiVOpgxIq8aA=",
+        "narHash": "sha256-bryZBU7I76frviRuH+zUK4x1mv3wIgkpRrnxy1wVrrw=",
         "type": "tarball",
-        "url": "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b96-x64.zip"
+        "url": "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b97-x64.zip"
       },
       "original": {
         "type": "tarball",
-        "url": "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b96-x64.zip"
+        "url": "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b97-x64.zip"
       }
     },
     "zing17_linux_tgz": {

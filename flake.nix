@@ -57,7 +57,7 @@
       flake = false;
     };
     visualvm_zip = {
-      url = "https://github.com/oracle/visualvm/releases/download/2.1.6/visualvm_216.zip";
+      url = "https://github.com/oracle/visualvm/releases/download/2.1.7/visualvm_217.zip";
       flake = false;
     };
 
@@ -67,11 +67,11 @@
     };
 
     jprofiler_tgz = {
-      url = "https://download.ej-technologies.com/jprofiler/jprofiler_linux_13_0_6.tar.gz";
+      url = "https://download.ej-technologies.com/jprofiler/jprofiler_linux_14_0.tar.gz";
       flake = false;
     };
     yourkit_zip = {
-      url = "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b96-x64.zip";
+      url = "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b97-x64.zip";
       flake = false;
     };
 
@@ -171,6 +171,13 @@
           version = "21";
           jdk = zulu_20;
         };
+        openjdk_21_fastdebug = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk21;
+          version = "21";
+          jdk = zulu_20;
+          debug = true;
+        };
         openjdk_latest = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk;
@@ -268,8 +275,8 @@
         jdk = openjdk_20;
 
         derivation = {
-          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21 openjdk_latest
-            openjdk-loom openjdk-panama openjdk-valhalla
+          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21 openjdk_21_fastdebug
+            openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jmc jitwatch visualvm
             async-profiler
             jprofiler yourkit
