@@ -1,13 +1,14 @@
-{ pkgs, nixpkgs, src, version, jdk ? pkgs.openjdk_headless, nativeDeps ? [ ], debug ? false, patchInstall ? false, lto ? false }:
+{ pkgs, nixpkgs, src, version, jdk ? pkgs.openjdk_headless, nativeDeps ? [ ], debug ? false, patchInstall ? false }:
 
 with pkgs;
 
 let
   inherit (stdenv.hostPlatform) isAarch;
   debugLevel = if debug then "fastdebug" else "release";
+  jvmFeatures = [ "zgc" ] ++ lib.optionals (!debug) [ "link-time-opt" ];
   image = if isAarch then "linux-aarch64-server-${debugLevel}" else "linux-x86_64-server-${debugLevel}";
   archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
-  cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer " + lib.optionalString lto "-flto";
+  cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer ";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   linuxDeps = [ alsaLib ] ++ x11Libs;
   archStdenv = if isAarch then llvmPackages_16.stdenv else gcc13Stdenv;
@@ -62,7 +63,7 @@ let
         --with-extra-cflags='${cflags}' \
         --with-extra-cxxflags='${cflags}' \
         --with-giflib=system \
-        --with-jvm-features=link-time-opt,zgc \
+        --with-jvm-features=${lib.concatStringsSep "," jvmFeatures} \
         --with-jvm-variants=server \
         --with-lcms=system \
         --with-libjpeg=system \
@@ -80,7 +81,7 @@ let
     NIX_CFLAGS_COMPILE = "-Wno-error";
 
     buildPhase = ''
-      CONF=${image} make -j images
+      CONF=${image} make -j images || cat /build/source/build/${image}/make-support/failure-logs
     '';
 
     installPhase = ''
