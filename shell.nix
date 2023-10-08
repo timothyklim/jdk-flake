@@ -1,4 +1,4 @@
-{ mkShell, jdk }:
+{ mkShell, gdb, jdk, ... }:
 
 mkShell {
   name = "jdk-env";

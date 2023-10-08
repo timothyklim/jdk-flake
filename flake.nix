@@ -100,6 +100,14 @@
       url = "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_aarch64.tar.gz";
       flake = false;
     };
+    zulu21_linux_x64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_x64.tar.gz";
+      flake = false;
+    };
+    zulu21_linux_aarch64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_aarch64.tar.gz";
+      flake = false;
+    };
 
     # Zing
     zing17_linux_tgz = {
@@ -134,6 +142,8 @@
     , zulu19_linux_aarch64_tgz
     , zulu20_linux_x64_tgz
     , zulu20_linux_aarch64_tgz
+    , zulu21_linux_x64_tgz
+    , zulu21_linux_aarch64_tgz
     , zing17_linux_tgz
     }:
       with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux system.aarch64-darwin ] (system:
@@ -169,20 +179,27 @@
           inherit pkgs nixpkgs;
           src = jdk21;
           version = "21";
-          jdk = zulu_20;
+          jdk = zulu_21;
+        };
+        openjdk_21_debug = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk21;
+          version = "21";
+          jdk = zulu_21;
+          debugSymbols = true;
         };
         openjdk_21_fastdebug = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk21;
           version = "21";
-          jdk = zulu_20;
+          jdk = zulu_21;
           debug = true;
         };
         openjdk_latest = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk;
           version = "latest";
-          jdk = openjdk_21;
+          jdk = zulu_21;
         };
 
         openjdk-loom = import ./build/openjdk.nix {
@@ -260,6 +277,11 @@
           src = if isAarch then zulu20_linux_aarch64_tgz else zulu20_linux_x64_tgz;
           version = "20.0.1";
         };
+        zulu_21 = import ./build/zulu.nix {
+          inherit pkgs;
+          src = if isAarch then zulu21_linux_aarch64_tgz else zulu21_linux_x64_tgz;
+          version = "21.0.1";
+        };
 
         zing_17 = import ./build/zing.nix {
           inherit pkgs;
@@ -271,21 +293,22 @@
         jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
         jdk_19 = if pkgs.stdenv.isLinux then openjdk_19 else zulu_19;
         jdk_20 = if pkgs.stdenv.isLinux then openjdk_20 else zulu_20;
+        jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else zulu_21;
 
-        jdk = openjdk_20;
+        jdk = openjdk_21;
 
         derivation = {
-          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21 openjdk_21_fastdebug
+          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21 openjdk_21_debug openjdk_21_fastdebug
             openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jmc jitwatch visualvm
             async-profiler
             jprofiler yourkit
-            zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19 jdk_20;
+            zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19 jdk_20 jdk_21;
         };
       in
       rec {
         packages = derivation;
-        devShell = pkgs.callPackage ./shell.nix { inherit jdk; };
+        devShell = pkgs.callPackage ./shell.nix derivation;
         nixosModule = {
           environment.systemPackages = [ jdk ];
           programs.java.package = jdk;

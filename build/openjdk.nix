@@ -1,17 +1,19 @@
-{ pkgs, nixpkgs, src, version, jdk ? pkgs.openjdk_headless, nativeDeps ? [ ], debug ? false, patchInstall ? false }:
+{ pkgs, nixpkgs, src, version, jdk ? pkgs.openjdk_headless, nativeDeps ? [ ], debug ? false, debugSymbols ? false, patchInstall ? false }:
 
 with pkgs;
 
 let
   inherit (stdenv.hostPlatform) isAarch;
   debugLevel = if debug then "fastdebug" else "release";
+  nativeDebugSymbols = if debug then "internal" else if debugSymbols then "external" else "none";
   jvmFeatures = [ "zgc" ] ++ lib.optionals (!debug) [ "link-time-opt" ];
   image = if isAarch then "linux-aarch64-server-${debugLevel}" else "linux-x86_64-server-${debugLevel}";
   archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
-  cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer ";
+  toolchain = if isAarch then "clang" else "gcc";
+  archStdenv = if isAarch then llvmPackages_16.stdenv else gcc13Stdenv;
+  cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   linuxDeps = [ alsaLib ] ++ x11Libs;
-  archStdenv = if isAarch then llvmPackages_16.stdenv else gcc13Stdenv;
   self = archStdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
@@ -68,9 +70,9 @@ let
         --with-lcms=system \
         --with-libjpeg=system \
         --with-libpng=system \
-        --with-native-debug-symbols=internal \
+        --with-native-debug-symbols=${nativeDebugSymbols} \
         --with-stdc++lib=dynamic \
-        --with-toolchain-type=gcc \
+        --with-toolchain-type=${toolchain} \
         --with-version-build=0 \
         --with-version-opt=nixos \
         --with-version-pre= \
@@ -147,7 +149,7 @@ let
       home = "${self}/lib/openjdk";
     };
 
-    dontStrip = debug;
+    dontStrip = true;
     preferLocalBuild = true;
   };
 in

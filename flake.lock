@@ -278,7 +278,9 @@
         "zulu19_linux_aarch64_tgz": "zulu19_linux_aarch64_tgz",
         "zulu19_linux_x64_tgz": "zulu19_linux_x64_tgz",
         "zulu20_linux_aarch64_tgz": "zulu20_linux_aarch64_tgz",
-        "zulu20_linux_x64_tgz": "zulu20_linux_x64_tgz"
+        "zulu20_linux_x64_tgz": "zulu20_linux_x64_tgz",
+        "zulu21_linux_aarch64_tgz": "zulu21_linux_aarch64_tgz",
+        "zulu21_linux_x64_tgz": "zulu21_linux_x64_tgz"
       }
     },
     "systems": {
@@ -402,6 +404,30 @@
       "original": {
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_x64.tar.gz"
+      }
+    },
+    "zulu21_linux_aarch64_tgz": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-qS2Rn6fjwcFYOT9C6uCuvyRw1EGDpSUlMivjv1bLUa8=",
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_aarch64.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_aarch64.tar.gz"
+      }
+    },
+    "zulu21_linux_x64_tgz": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-1eFqoIJEZoVQVmVNGKLbIgjiYcnfxSqXVMqCBxkeWUk=",
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_x64.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_x64.tar.gz"
       }
     }
   },
