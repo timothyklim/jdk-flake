@@ -65,6 +65,10 @@
       url = "github:jvm-profiling-tools/async-profiler";
       flake = false;
     };
+    jattach-src = {
+      url = "github:jattach/jattach";
+      flake = false;
+    };
 
     jprofiler_tgz = {
       url = "https://download.ej-technologies.com/jprofiler/jprofiler_linux_14_0.tar.gz";
@@ -134,6 +138,7 @@
     , jmc_linux_tgz
     , visualvm_zip
     , async-profiler-src
+    , jattach-src
     , jprofiler_tgz
     , yourkit_zip
     , zulu17_linux_tgz
@@ -244,8 +249,12 @@
 
         async-profiler = import ./build/async-profiler.nix {
           inherit pkgs;
-          jdk = pkgs.jdk19_headless;
+          jdk = pkgs.openjdk_headless;
           src = async-profiler-src;
+        };
+        jattach = import ./build/jattach.nix {
+          inherit pkgs;
+          src = jattach-src;
         };
 
         jprofiler = import ./build/jprofiler.nix {
@@ -301,7 +310,7 @@
           inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21 openjdk_21_debug openjdk_21_fastdebug
             openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jmc jitwatch visualvm
-            async-profiler
+            async-profiler jattach
             jprofiler yourkit
             zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19 jdk_20 jdk_21;
         };

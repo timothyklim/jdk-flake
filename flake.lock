@@ -34,6 +34,22 @@
         "type": "github"
       }
     },
+    "jattach-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693359915,
+        "narHash": "sha256-z/fGLIcpMPqfNZ28Xjd4OPuNuw8m+h3WE9NkcOrNEBc=",
+        "owner": "jattach",
+        "repo": "jattach",
+        "rev": "9734661df24c8ca92c4ed2e11a5e8e273bdcfdd3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jattach",
+        "repo": "jattach",
+        "type": "github"
+      }
+    },
     "jdk": {
       "flake": false,
       "locked": {
@@ -256,6 +272,7 @@
       "inputs": {
         "async-profiler-src": "async-profiler-src",
         "flake-utils": "flake-utils",
+        "jattach-src": "jattach-src",
         "jdk": "jdk",
         "jdk-loom": "jdk-loom",
         "jdk-panama": "jdk-panama",
