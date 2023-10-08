@@ -60,6 +60,7 @@ let
         --disable-warnings-as-errors \
         --enable-headless-only \
         --enable-unlimited-crypto \
+        --enable-reproducible-build \
         --with-boot-jdk=${jdk.home} \
         --with-debug-level=${debugLevel} \
         --with-extra-cflags='${cflags}' \
@@ -83,7 +84,7 @@ let
     NIX_CFLAGS_COMPILE = "-Wno-error";
 
     buildPhase = ''
-      CONF=${image} make -j images || cat /build/source/build/${image}/make-support/failure-logs
+      CONF=${image} make images || cat /build/source/build/${image}/make-support/failure-logs
     '';
 
     installPhase = ''
