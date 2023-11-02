@@ -216,6 +216,7 @@
     "jmc_linux_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1677613233,
         "narHash": "sha256-kZZZJAWa65wx+H8EfqimJVz+B7A4x6VEdK7lZBMfRW0=",
         "type": "tarball",
         "url": "https://download.java.net/java/GA/jmc8/05/binaries/jmc-8.3.1_linux-x64.tar.gz"
@@ -228,6 +229,7 @@
     "jprofiler_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1695486867,
         "narHash": "sha256-Im1f8mgtd9MQOeXbGYgAPpAkjL3WrQQIl90AuS+6OJU=",
         "type": "tarball",
         "url": "https://download.ej-technologies.com/jprofiler/jprofiler_linux_14_0.tar.gz"
@@ -318,6 +320,7 @@
     "visualvm_zip": {
       "flake": false,
       "locked": {
+        "lastModified": 1693991124,
         "narHash": "sha256-k9DnbLfpCQimRueHquDSuBDhn/w8ZyUKZzZ5o35YCNA=",
         "type": "tarball",
         "url": "https://github.com/oracle/visualvm/releases/download/2.1.7/visualvm_217.zip"
@@ -330,6 +333,7 @@
     "yourkit_zip": {
       "flake": false,
       "locked": {
+        "lastModified": 1698396560,
         "narHash": "sha256-VP82mr57LDD84VYe9X43+423M8oPrEMta0CdBj8l0ss=",
         "type": "tarball",
         "url": "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b100-x64.zip"
@@ -342,6 +346,7 @@
     "zing17_linux_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1643818987,
         "narHash": "sha256-NxU85cyB7SU4nM49ItSeNy8nOzr4zOkpx0Ms+k1qcr4=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zing-zvm/ZVM22.01.1.0/zing22.01.1.0-1-jdk17.0.2-linux_x64.tar.gz"
@@ -354,6 +359,7 @@
     "zulu17_linux_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1634744452,
         "narHash": "sha256-ONxioLlsXyzt2P8ENMbUqjk9jM8zjnqtOfCFYwfokck=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu17.30.15-ca-jdk17.0.1-linux_x64.tar.gz"
@@ -366,6 +372,7 @@
     "zulu18_linux_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1647345804,
         "narHash": "sha256-5fzpU5XPUzhlHx15F6Osll0SzURcJSTNrKEvwnEKmIw=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu18.28.13-ca-jdk18.0.0-linux_x64.tar.gz"
@@ -378,6 +385,7 @@
     "zulu19_linux_aarch64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1672073085,
         "narHash": "sha256-6qAaJEgY4uXABiMpzEMexdqhcpHf5pB+bjJh6XoFIQg=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_aarch64.tar.gz"
@@ -390,6 +398,7 @@
     "zulu19_linux_x64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1672073382,
         "narHash": "sha256-gwyIwXnZO+RzVFbfV7Lm9fcWxItFLsPZxHNwqsAwZW4=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_x64.tar.gz"
@@ -402,6 +411,7 @@
     "zulu20_linux_aarch64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1679500186,
         "narHash": "sha256-BE63o5JZ5GKkIgjK1xSSi5gVfPib1PE3b5Upwm2dc0s=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_aarch64.tar.gz"
@@ -414,6 +424,7 @@
     "zulu20_linux_x64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1679500113,
         "narHash": "sha256-PTbFvcMGzh4dphvFoBy9KEcXdJ4f5j+qNdBRMowahH0=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_x64.tar.gz"
@@ -426,6 +437,7 @@
     "zulu21_linux_aarch64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1692968321,
         "narHash": "sha256-qS2Rn6fjwcFYOT9C6uCuvyRw1EGDpSUlMivjv1bLUa8=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_aarch64.tar.gz"
@@ -438,6 +450,7 @@
     "zulu21_linux_x64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1692968910,
         "narHash": "sha256-1eFqoIJEZoVQVmVNGKLbIgjiYcnfxSqXVMqCBxkeWUk=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_x64.tar.gz"
