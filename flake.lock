@@ -3,11 +3,11 @@
     "async-profiler-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1695249150,
-        "narHash": "sha256-4prEO5Xa23k3T1YwSJ6yQjR9rX7ju8KgsFOeUZDWDYg=",
+        "lastModified": 1698798776,
+        "narHash": "sha256-CW3d/R0qP4CrtDE7YHu4I3VxnVhlf/SctPRF48gLr4c=",
         "owner": "jvm-profiling-tools",
         "repo": "async-profiler",
-        "rev": "d29cb86bd0d663ffe65010c412ee360c67fbb274",
+        "rev": "50e63b7ad6c9ee4e2876b5cc4a75733f872608da",
         "type": "github"
       },
       "original": {
@@ -53,11 +53,11 @@
     "jdk": {
       "flake": false,
       "locked": {
-        "lastModified": 1698277666,
-        "narHash": "sha256-m5B17Mivl8PdBY6DRf5tuMxyutlGBi4vgbR/796AMPE=",
+        "lastModified": 1698877197,
+        "narHash": "sha256-u2SpIYfRDyjopl/g52A1mOFbFBvC82UXv0CI1Td4370=",
         "owner": "openjdk",
         "repo": "jdk",
-        "rev": "811b436e5de972bedd3a0fa25952b2e1beddd9c3",
+        "rev": "5207443b360cfe3ee9c53ece55da3464c13f6a9f",
         "type": "github"
       },
       "original": {
@@ -69,11 +69,11 @@
     "jdk-loom": {
       "flake": false,
       "locked": {
-        "lastModified": 1698087793,
-        "narHash": "sha256-nXv3xejNR1wEN2kJGdtfUljSfKdU3OgJ8fjH8YQE/rY=",
+        "lastModified": 1698674324,
+        "narHash": "sha256-/UrBsp7olDUJw4CfV/73DLgk7V1N39sCjtLICJdsrb0=",
         "owner": "openjdk",
         "repo": "loom",
-        "rev": "ddc7c857f7ac8e31b377be5d91a42f479885fc5f",
+        "rev": "0447ad8f22352a3c8556c2ffa5341173571aae44",
         "type": "github"
       },
       "original": {
@@ -103,11 +103,11 @@
     "jdk-valhalla": {
       "flake": false,
       "locked": {
-        "lastModified": 1697620805,
-        "narHash": "sha256-nYlPzN5gR0dfh8tdsiH7mEAFoqfjOCHxrTt4OfDsPRU=",
+        "lastModified": 1698840088,
+        "narHash": "sha256-ogXPwQZhRCDJQGqwKyI0HqXxBUyrXS6Yo9Me9C9NGdI=",
         "owner": "openjdk",
         "repo": "valhalla",
-        "rev": "985474d2e685b4037bd867c20f41ae03637aaeb6",
+        "rev": "c328c5fcd8e91084ba0da65781e935bec1df3263",
         "type": "github"
       },
       "original": {
@@ -120,11 +120,11 @@
     "jdk17": {
       "flake": false,
       "locked": {
-        "lastModified": 1697048294,
-        "narHash": "sha256-Hka/5pKYWHraKHnRgup7OWP/uW7tx4IF6zbwtbRg0gs=",
+        "lastModified": 1698707023,
+        "narHash": "sha256-xYHDeUY5MajPJHrz+E/vYT838Zw/LbJC0GBqO5jRXjI=",
         "owner": "openjdk",
         "repo": "jdk17u",
-        "rev": "9c16e89d275654cee98f5374434bea2097dda91e",
+        "rev": "57bf412983c106b2cc35ff522a7582278c4ffecf",
         "type": "github"
       },
       "original": {
@@ -184,11 +184,11 @@
     "jdk21": {
       "flake": false,
       "locked": {
-        "lastModified": 1698249122,
-        "narHash": "sha256-Qj5qNpM+e8ElYAnG50/pKMJ8qoywDBvafDwjuKRfR24=",
+        "lastModified": 1698870450,
+        "narHash": "sha256-PjFyRxqkN6i5zwX+kWSSSBZ3ObLBLcSGD9T4qOoXAQs=",
         "owner": "openjdk",
         "repo": "jdk21u",
-        "rev": "5ebc02b149fa435813565085d8d300a366b71d58",
+        "rev": "a96de29feebea9e43fdae08bdb9116f2d4faabac",
         "type": "github"
       },
       "original": {
@@ -216,6 +216,7 @@
     "jmc_linux_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1677613233,
         "narHash": "sha256-kZZZJAWa65wx+H8EfqimJVz+B7A4x6VEdK7lZBMfRW0=",
         "type": "tarball",
         "url": "https://download.java.net/java/GA/jmc8/05/binaries/jmc-8.3.1_linux-x64.tar.gz"
@@ -228,6 +229,7 @@
     "jprofiler_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1695486867,
         "narHash": "sha256-Im1f8mgtd9MQOeXbGYgAPpAkjL3WrQQIl90AuS+6OJU=",
         "type": "tarball",
         "url": "https://download.ej-technologies.com/jprofiler/jprofiler_linux_14_0.tar.gz"
@@ -255,11 +257,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1698262749,
-        "narHash": "sha256-llEEhWfodIRz4pib9EOb/ac5o/IEcgOudNrgQLRfGCk=",
+        "lastModified": 1698876495,
+        "narHash": "sha256-nsQo2/mkDUFeAjuu92p0dEqhRvHHiENhkKVIV1y0/Oo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "883a9dfd007347f32f7f9893b709d45744435376",
+        "rev": "9eb24edd6a0027fed010ccfe300a9734d029983c",
         "type": "github"
       },
       "original": {
@@ -318,6 +320,7 @@
     "visualvm_zip": {
       "flake": false,
       "locked": {
+        "lastModified": 1693991124,
         "narHash": "sha256-k9DnbLfpCQimRueHquDSuBDhn/w8ZyUKZzZ5o35YCNA=",
         "type": "tarball",
         "url": "https://github.com/oracle/visualvm/releases/download/2.1.7/visualvm_217.zip"
@@ -330,18 +333,20 @@
     "yourkit_zip": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-bryZBU7I76frviRuH+zUK4x1mv3wIgkpRrnxy1wVrrw=",
+        "lastModified": 1698396560,
+        "narHash": "sha256-VP82mr57LDD84VYe9X43+423M8oPrEMta0CdBj8l0ss=",
         "type": "tarball",
-        "url": "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b97-x64.zip"
+        "url": "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b100-x64.zip"
       },
       "original": {
         "type": "tarball",
-        "url": "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b97-x64.zip"
+        "url": "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b100-x64.zip"
       }
     },
     "zing17_linux_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1643818987,
         "narHash": "sha256-NxU85cyB7SU4nM49ItSeNy8nOzr4zOkpx0Ms+k1qcr4=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zing-zvm/ZVM22.01.1.0/zing22.01.1.0-1-jdk17.0.2-linux_x64.tar.gz"
@@ -354,6 +359,7 @@
     "zulu17_linux_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1634744452,
         "narHash": "sha256-ONxioLlsXyzt2P8ENMbUqjk9jM8zjnqtOfCFYwfokck=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu17.30.15-ca-jdk17.0.1-linux_x64.tar.gz"
@@ -366,6 +372,7 @@
     "zulu18_linux_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1647345804,
         "narHash": "sha256-5fzpU5XPUzhlHx15F6Osll0SzURcJSTNrKEvwnEKmIw=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu18.28.13-ca-jdk18.0.0-linux_x64.tar.gz"
@@ -378,6 +385,7 @@
     "zulu19_linux_aarch64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1672073085,
         "narHash": "sha256-6qAaJEgY4uXABiMpzEMexdqhcpHf5pB+bjJh6XoFIQg=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_aarch64.tar.gz"
@@ -390,6 +398,7 @@
     "zulu19_linux_x64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1672073382,
         "narHash": "sha256-gwyIwXnZO+RzVFbfV7Lm9fcWxItFLsPZxHNwqsAwZW4=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_x64.tar.gz"
@@ -402,6 +411,7 @@
     "zulu20_linux_aarch64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1679500186,
         "narHash": "sha256-BE63o5JZ5GKkIgjK1xSSi5gVfPib1PE3b5Upwm2dc0s=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_aarch64.tar.gz"
@@ -414,6 +424,7 @@
     "zulu20_linux_x64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1679500113,
         "narHash": "sha256-PTbFvcMGzh4dphvFoBy9KEcXdJ4f5j+qNdBRMowahH0=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_x64.tar.gz"
@@ -426,6 +437,7 @@
     "zulu21_linux_aarch64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1692968321,
         "narHash": "sha256-qS2Rn6fjwcFYOT9C6uCuvyRw1EGDpSUlMivjv1bLUa8=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_aarch64.tar.gz"
@@ -438,6 +450,7 @@
     "zulu21_linux_x64_tgz": {
       "flake": false,
       "locked": {
+        "lastModified": 1692968910,
         "narHash": "sha256-1eFqoIJEZoVQVmVNGKLbIgjiYcnfxSqXVMqCBxkeWUk=",
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_x64.tar.gz"
