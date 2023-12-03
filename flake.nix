@@ -2,7 +2,7 @@
   description = "JDK's flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/release-23.05";
+    nixpkgs.url = "nixpkgs/release-23.11";
     flake-utils.url = "github:numtide/flake-utils";
 
     # OpenJDK variants
@@ -24,6 +24,10 @@
     };
     jdk21 = {
       url = "github:openjdk/jdk21u";
+      flake = false;
+    };
+    jdk22 = {
+      url = "github:openjdk/jdk";
       flake = false;
     };
 
@@ -50,6 +54,10 @@
     };
     jextract-src = {
       url = "github:openjdk/jextract";
+      flake = false;
+    };
+    jextract_jdk22-src = {
+      url = "github:openjdk/jextract/jdk22";
       flake = false;
     };
     jmc_linux_tgz = {
@@ -129,12 +137,14 @@
     , jdk19
     , jdk20
     , jdk21
+    , jdk22
     , jdk
     , jdk-loom
     , jdk-panama
     , jdk-valhalla
     , jtreg-src
     , jextract-src
+    , jextract_jdk22-src
     , jmc_linux_tgz
     , visualvm_zip
     , async-profiler-src
@@ -200,6 +210,26 @@
           jdk = zulu_21;
           debug = true;
         };
+        openjdk_22 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk22;
+          version = "22";
+          jdk = zulu_21;
+        };
+        openjdk_22_debug = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk22;
+          version = "22";
+          jdk = zulu_22;
+          debugSymbols = true;
+        };
+        openjdk_22_fastdebug = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk22;
+          version = "22";
+          jdk = zulu_21;
+          debug = true;
+        };
         openjdk_latest = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk;
@@ -234,6 +264,10 @@
         jextract = import ./build/jextract.nix {
           inherit pkgs openjdk_21 jtreg;
           src = jextract-src;
+        };
+        jextract_jdk22 = import ./build/jextract.nix {
+          inherit pkgs openjdk_22 jtreg;
+          src = jextract_jdk22-src;
         };
         jmc = import ./build/jmc.nix {
           inherit pkgs;
@@ -303,16 +337,17 @@
         jdk_19 = if pkgs.stdenv.isLinux then openjdk_19 else zulu_19;
         jdk_20 = if pkgs.stdenv.isLinux then openjdk_20 else zulu_20;
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else zulu_21;
+        jdk_22 = openjdk_22; # if pkgs.stdenv.isLinux then openjdk_22 else zulu_22;
 
         jdk = openjdk_21;
 
         derivation = {
           inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21 openjdk_21_debug openjdk_21_fastdebug
             openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
-            jtreg jextract jmc jitwatch visualvm
+            jtreg jextract jextract_jdk22 jmc jitwatch visualvm
             async-profiler jattach
             jprofiler yourkit
-            zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19 jdk_20 jdk_21;
+            zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19 jdk_20 jdk_21 jdk_22;
         };
       in
       rec {
