@@ -27,7 +27,7 @@
       flake = false;
     };
     jdk22 = {
-      url = "github:openjdk/jdk";
+      url = "github:openjdk/jdk22";
       flake = false;
     };
 
@@ -342,7 +342,9 @@
         jdk = openjdk_21;
 
         derivation = {
-          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20 openjdk_21 openjdk_21_debug openjdk_21_fastdebug
+          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20
+            openjdk_21 openjdk_21_debug openjdk_21_fastdebug
+            openjdk_22 openjdk_22_debug openjdk_22_fastdebug
             openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jextract_jdk22 jmc jitwatch visualvm
             async-profiler jattach
