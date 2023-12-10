@@ -10,18 +10,6 @@
       url = "github:openjdk/jdk17u";
       flake = false;
     };
-    jdk18 = {
-      url = "github:openjdk/jdk18u";
-      flake = false;
-    };
-    jdk19 = {
-      url = "github:openjdk/jdk19u";
-      flake = false;
-    };
-    jdk20 = {
-      url = "github:openjdk/jdk20u";
-      flake = false;
-    };
     jdk21 = {
       url = "github:openjdk/jdk21u";
       flake = false;
@@ -92,26 +80,6 @@
       url = "https://cdn.azul.com/zulu/bin/zulu17.30.15-ca-jdk17.0.1-linux_x64.tar.gz";
       flake = false;
     };
-    zulu18_linux_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu18.28.13-ca-jdk18.0.0-linux_x64.tar.gz";
-      flake = false;
-    };
-    zulu19_linux_x64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_x64.tar.gz";
-      flake = false;
-    };
-    zulu19_linux_aarch64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu19.32.13-ca-jdk19.0.2-linux_aarch64.tar.gz";
-      flake = false;
-    };
-    zulu20_linux_x64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_x64.tar.gz";
-      flake = false;
-    };
-    zulu20_linux_aarch64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu20.30.11-ca-jdk20.0.1-linux_aarch64.tar.gz";
-      flake = false;
-    };
     zulu21_linux_x64_tgz = {
       url = "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_x64.tar.gz";
       flake = false;
@@ -133,9 +101,6 @@
     , nixpkgs
     , flake-utils
     , jdk17
-    , jdk18
-    , jdk19
-    , jdk20
     , jdk21
     , jdk22
     , jdk
@@ -152,11 +117,6 @@
     , jprofiler_tgz
     , yourkit_zip
     , zulu17_linux_tgz
-    , zulu18_linux_tgz
-    , zulu19_linux_x64_tgz
-    , zulu19_linux_aarch64_tgz
-    , zulu20_linux_x64_tgz
-    , zulu20_linux_aarch64_tgz
     , zulu21_linux_x64_tgz
     , zulu21_linux_aarch64_tgz
     , zing17_linux_tgz
@@ -171,24 +131,6 @@
           inherit pkgs nixpkgs;
           src = jdk17;
           version = "17";
-        };
-        openjdk_18 = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk18;
-          version = "18";
-          jdk = zulu_17;
-        };
-        openjdk_19 = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk19;
-          version = "19";
-          jdk = zulu_18;
-        };
-        openjdk_20 = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk20;
-          version = "20";
-          jdk = zulu_19;
         };
         openjdk_21 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
@@ -220,7 +162,7 @@
           inherit pkgs nixpkgs;
           src = jdk22;
           version = "22";
-          jdk = zulu_22;
+          jdk = zulu_21;
           debugSymbols = true;
         };
         openjdk_22_fastdebug = import ./build/openjdk.nix {
@@ -241,20 +183,20 @@
           inherit pkgs nixpkgs;
           src = jdk-loom;
           version = "20-loom";
-          jdk = openjdk_19;
+          jdk = openjdk_21;
         };
         openjdk-panama = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-panama;
           version = "20-panama";
           nativeDeps = [ pkgs.llvmPackages.libclang ];
-          jdk = openjdk_19;
+          jdk = openjdk_21;
         };
         openjdk-valhalla = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk-valhalla;
           version = "20-valhalla";
-          jdk = openjdk_19;
+          jdk = openjdk_21;
         };
 
         jtreg = import ./build/jtreg.nix {
@@ -305,21 +247,6 @@
           src = zulu17_linux_tgz;
           version = "17.0.0";
         };
-        zulu_18 = import ./build/zulu.nix {
-          inherit pkgs;
-          src = zulu18_linux_tgz;
-          version = "18.0.0";
-        };
-        zulu_19 = import ./build/zulu.nix {
-          inherit pkgs;
-          src = if isAarch then zulu19_linux_aarch64_tgz else zulu19_linux_x64_tgz;
-          version = "19.0.2";
-        };
-        zulu_20 = import ./build/zulu.nix {
-          inherit pkgs;
-          src = if isAarch then zulu20_linux_aarch64_tgz else zulu20_linux_x64_tgz;
-          version = "20.0.1";
-        };
         zulu_21 = import ./build/zulu.nix {
           inherit pkgs;
           src = if isAarch then zulu21_linux_aarch64_tgz else zulu21_linux_x64_tgz;
@@ -333,23 +260,20 @@
         };
 
         jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
-        jdk_18 = if pkgs.stdenv.isLinux then openjdk_18 else zulu_18;
-        jdk_19 = if pkgs.stdenv.isLinux then openjdk_19 else zulu_19;
-        jdk_20 = if pkgs.stdenv.isLinux then openjdk_20 else zulu_20;
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else zulu_21;
         jdk_22 = openjdk_22; # if pkgs.stdenv.isLinux then openjdk_22 else zulu_22;
 
         jdk = openjdk_21;
 
         derivation = {
-          inherit openjdk_17 openjdk_18 openjdk_19 openjdk_20
+          inherit openjdk_17
             openjdk_21 openjdk_21_debug openjdk_21_fastdebug
             openjdk_22 openjdk_22_debug openjdk_22_fastdebug
             openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jextract_jdk22 jmc jitwatch visualvm
             async-profiler jattach
             jprofiler yourkit
-            zulu_17 zulu_18 zing_17 jdk_17 jdk_18 jdk_19 jdk_20 jdk_21 jdk_22;
+            zulu_17 zing_17 jdk_17 jdk_21 jdk_22;
         };
       in
       rec {

@@ -10,7 +10,7 @@ let
   image = if isAarch then "linux-aarch64-server-${debugLevel}" else "linux-x86_64-server-${debugLevel}";
   archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
   toolchain = if isAarch then "clang" else "gcc";
-  archStdenv = if isAarch then llvmPackages_16.stdenv else gcc13Stdenv;
+  archStdenv = if isAarch then llvmPackages_17.stdenv else gcc13Stdenv;
   cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   linuxDeps = [ alsaLib ] ++ x11Libs;
