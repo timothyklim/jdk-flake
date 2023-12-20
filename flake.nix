@@ -15,7 +15,7 @@
       flake = false;
     };
     jdk22 = {
-      url = "github:openjdk/jdk22";
+      url = "github:openjdk/jdk22u";
       flake = false;
     };
 
