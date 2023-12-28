@@ -1,21 +1,21 @@
-{ pkgs, openjdk_21 ? null, openjdk_22 ? null, jtreg, src, check ? false }:
+{ pkgs, jdk_21 ? null, jdk_22 ? null, jtreg, src, check ? false }:
 
 with pkgs;
 
 let
   llvm_home = llvmPackages_15.libclang.lib;
-  jdkPrefix = if openjdk_22 != null then "-Pjdk22_home=${openjdk_22.home}" else "-Pjdk21_home=${openjdk_21.home}";
+  jdkPrefix = if jdk_22 != null then "-Pjdk22_home=${jdk_22.home}" else "-Pjdk21_home=${jdk_21.home}";
   buildGradleCmd = cmd: "gradle --no-daemon ${jdkPrefix} -Pllvm_home=${llvm_home} ${cmd}";
   makePackage = args: stdenv.mkDerivation ({
     inherit src;
     buildInputs = [ cmake gradle ];
     dontUseCmakeConfigure = true;
+    GRADLE_USER_HOME = "$(mktemp -d)";
   } // args);
   deps = makePackage {
     name = "deps";
 
     buildPhase = ''
-      export GRADLE_USER_HOME=$(mktemp -d)
       ${buildGradleCmd "-Pjtreg_home=${jtreg} jtreg"} || true
     '';
 

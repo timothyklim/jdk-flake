@@ -209,11 +209,11 @@
           src = jtreg-src;
         };
         jextract = import ./build/jextract.nix {
-          inherit pkgs openjdk_21 jtreg;
+          inherit pkgs jdk_21 jtreg;
           src = jextract-src;
         };
         jextract_jdk22 = import ./build/jextract.nix {
-          inherit pkgs openjdk_22 jtreg;
+          inherit pkgs jdk_22 jtreg;
           src = jextract_jdk22-src;
         };
         jmc = import ./build/jmc.nix {
