@@ -81,11 +81,15 @@
       flake = false;
     };
     zulu21_linux_x64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_x64.tar.gz";
+      url = "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-linux_x64.tar.gz";
       flake = false;
     };
     zulu21_linux_aarch64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu21.28.85-ca-jdk21.0.0-linux_aarch64.tar.gz";
+      url = "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-linux_aarch64.tar.gz";
+      flake = false;
+    };
+    zulu21_macos_aarch64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-macosx_aarch64.tar.gz";
       flake = false;
     };
 
@@ -119,6 +123,7 @@
     , zulu17_linux_tgz
     , zulu21_linux_x64_tgz
     , zulu21_linux_aarch64_tgz
+    , zulu21_macos_aarch64_tgz
     , zing17_linux_tgz
     }:
       with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux system.aarch64-darwin ] (system:
@@ -136,47 +141,47 @@
           inherit pkgs nixpkgs;
           src = jdk21;
           version = "21";
-          jdk = zulu_21;
+          jdk = zulu_21_linux;
         };
         openjdk_21_debug = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk21;
           version = "21";
-          jdk = zulu_21;
+          jdk = zulu_21_linux;
           debugSymbols = true;
         };
         openjdk_21_fastdebug = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk21;
           version = "21";
-          jdk = zulu_21;
+          jdk = zulu_21_linux;
           debug = true;
         };
         openjdk_22 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk22;
           version = "22";
-          jdk = zulu_21;
+          jdk = zulu_21_linux;
         };
         openjdk_22_debug = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk22;
           version = "22";
-          jdk = zulu_21;
+          jdk = zulu_21_linux;
           debugSymbols = true;
         };
         openjdk_22_fastdebug = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk22;
           version = "22";
-          jdk = zulu_21;
+          jdk = zulu_21_linux;
           debug = true;
         };
         openjdk_latest = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk;
           version = "latest";
-          jdk = zulu_21;
+          jdk = zulu_21_linux;
         };
 
         openjdk-loom = import ./build/openjdk.nix {
@@ -247,9 +252,14 @@
           src = zulu17_linux_tgz;
           version = "17.0.0";
         };
-        zulu_21 = import ./build/zulu.nix {
+        zulu_21_linux = import ./build/zulu.nix {
           inherit pkgs;
           src = if isAarch then zulu21_linux_aarch64_tgz else zulu21_linux_x64_tgz;
+          version = "21.0.1";
+        };
+        zulu_21_macos = import ./build/zulu.nix {
+          inherit pkgs;
+          src = zulu21_macos_aarch64_tgz;
           version = "21.0.1";
         };
 
@@ -260,7 +270,7 @@
         };
 
         jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
-        jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else zulu_21;
+        jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else zulu_21_macos;
         jdk_22 = openjdk_22; # if pkgs.stdenv.isLinux then openjdk_22 else zulu_22;
 
         jdk = openjdk_21;
