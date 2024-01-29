@@ -9,17 +9,15 @@ let
   jvmFeatures = [ "zgc" ] ++ lib.optionals (!debug) [ "link-time-opt" ];
   image = if isAarch then "linux-aarch64-server-${debugLevel}" else "linux-x86_64-server-${debugLevel}";
   archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
-  toolchain = if isAarch then "clang" else "gcc";
-  archStdenv = if isAarch then llvmPackages_17.stdenv else gcc13Stdenv;
   cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   linuxDeps = [ alsaLib ] ++ x11Libs;
-  self = archStdenv.mkDerivation rec {
+  self = with llvmPackages_17; libcxxStdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
 
     nativeBuildInputs = [ autoconf jdk pkg-config ] ++ nativeDeps;
-    buildInputs = [ bash cups file gnumake fontconfig freetype libjpeg giflib libpng which zlib unzip zip lcms2 ] ++
+    buildInputs = [ libcxx bash cups file gnumake fontconfig freetype libjpeg giflib libpng which zlib unzip zip lcms2 ] ++
       lib.optionals stdenv.isLinux linuxDeps;
 
     SOURCE_DATE_EPOCH = 315532802;
@@ -55,6 +53,8 @@ let
 
     # --with-jtreg
     configurePhase = ''
+      export NIX_CFLAGS_COMPILE="-isystem ${lib.getDev libcxx}/include/c++/v1 $NIX_CFLAGS_COMPILE"
+
       ./configure \
         --prefix=$out \
         --disable-warnings-as-errors \
@@ -72,8 +72,8 @@ let
         --with-libjpeg=system \
         --with-libpng=system \
         --with-native-debug-symbols=${nativeDebugSymbols} \
-        --with-stdc++lib=dynamic \
-        --with-toolchain-type=${toolchain} \
+        --with-stdc++lib=static \
+        --with-toolchain-type=clang \
         --with-version-build=0 \
         --with-version-opt=nixos \
         --with-version-pre= \
