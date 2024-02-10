@@ -71,7 +71,7 @@
       flake = false;
     };
     yourkit_zip = {
-      url = "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b102-arm64.zip";
+      url = "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b107-arm64.zip";
       flake = false;
     };
 
