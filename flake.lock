@@ -279,7 +279,8 @@
         "zulu17_linux_tgz": "zulu17_linux_tgz",
         "zulu21_linux_aarch64_tgz": "zulu21_linux_aarch64_tgz",
         "zulu21_linux_x64_tgz": "zulu21_linux_x64_tgz",
-        "zulu21_macos_aarch64_tgz": "zulu21_macos_aarch64_tgz"
+        "zulu21_macos_aarch64_tgz": "zulu21_macos_aarch64_tgz",
+        "zulu22_macos_aarch64_tgz": "zulu22_macos_aarch64_tgz"
       }
     },
     "systems": {
@@ -386,6 +387,19 @@
       "original": {
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-macosx_aarch64.tar.gz"
+      }
+    },
+    "zulu22_macos_aarch64_tgz": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1702579369,
+        "narHash": "sha256-xOd6I83i4XgYtilWITeCp9bMrv19jBNyBqUoEE3cuoU=",
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu22.0.67-beta-jdk22.0.0-beta.28-macosx_aarch64.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://cdn.azul.com/zulu/bin/zulu22.0.67-beta-jdk22.0.0-beta.28-macosx_aarch64.zip"
       }
     }
   },
