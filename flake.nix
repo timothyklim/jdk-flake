@@ -93,7 +93,7 @@
       flake = false;
     };
     zulu22_macos_aarch64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu22.0.67-beta-jdk22.0.0-beta.28-macosx_aarch64.zip";
+      url = "https://cdn.azul.com/zulu/bin/zulu22.0.85-beta-jdk22.0.0-beta.34-macosx_aarch64.zip";
       flake = false;
     };
 
