@@ -41,7 +41,7 @@
       flake = false;
     };
     jextract-src = {
-      url = "github:openjdk/jextract";
+      url = "github:openjdk/jextract/jdk21";
       flake = false;
     };
     jextract_jdk22-src = {
