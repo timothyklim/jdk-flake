@@ -75,11 +75,7 @@
       flake = false;
     };
 
-    # Zulu    
-    zulu17_linux_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu17.30.15-ca-jdk17.0.1-linux_x64.tar.gz";
-      flake = false;
-    };
+    # Zulu
     zulu21_linux_x64_tgz = {
       url = "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-linux_x64.tar.gz";
       flake = false;
@@ -98,8 +94,8 @@
     };
 
     # Zing
-    zing17_linux_tgz = {
-      url = "https://cdn.azul.com/zing-zvm/ZVM22.01.1.0/zing22.01.1.0-1-jdk17.0.2-linux_x64.tar.gz";
+    zing21_linux_tgz = {
+      url = "https://ftp.azul.com/releases/Zing/ZVM24.02.0.0/zing24.02.0.0-6-jdk21.0.2-linux_x64.tar.gz";
       flake = false;
     };
   };
@@ -108,7 +104,6 @@
     { self
     , nixpkgs
     , flake-utils
-    , jdk17
     , jdk21
     , jdk22
     , jdk
@@ -124,12 +119,11 @@
     , jattach-src
     , jprofiler_tgz
     , yourkit_zip
-    , zulu17_linux_tgz
     , zulu21_linux_x64_tgz
     , zulu21_linux_aarch64_tgz
     , zulu21_macos_aarch64_tgz
     , zulu22_macos_aarch64_tgz
-    , zing17_linux_tgz
+    , zing21_linux_tgz
     }:
       with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux system.aarch64-darwin ] (system:
       let
@@ -137,11 +131,6 @@
         pkgs = nixpkgs.legacyPackages.${system};
         inherit (pkgs.stdenv.hostPlatform) isAarch;
 
-        openjdk_17 = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk17;
-          version = "17";
-        };
         openjdk_21 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk21;
@@ -252,11 +241,6 @@
           src = yourkit_zip;
         };
 
-        zulu_17 = import ./build/zulu.nix {
-          inherit pkgs;
-          src = zulu17_linux_tgz;
-          version = "17.0.0";
-        };
         zulu_21_linux = import ./build/zulu.nix {
           inherit pkgs;
           src = if isAarch then zulu21_linux_aarch64_tgz else zulu21_linux_x64_tgz;
@@ -273,27 +257,25 @@
           version = "22.0.0";
         };
 
-        zing_17 = import ./build/zing.nix {
+        zing_21 = import ./build/zing.nix {
           inherit pkgs;
           src = zing17_linux_tgz;
           version = "17.0.0";
         };
 
-        jdk_17 = if pkgs.stdenv.isLinux then openjdk_17 else zulu_17;
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else zulu_21_macos;
         jdk_22 = if pkgs.stdenv.isLinux then openjdk_22 else zulu_22_macos;
 
         jdk = openjdk_21;
 
         derivation = {
-          inherit openjdk_17
-            openjdk_21 openjdk_21_debug openjdk_21_fastdebug
+          inherit openjdk_21 openjdk_21_debug openjdk_21_fastdebug
             openjdk_22 openjdk_22_debug openjdk_22_fastdebug
             openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jextract_jdk22 jmc jitwatch visualvm
             async-profiler jattach
             jprofiler yourkit
-            zulu_17 zing_17 jdk_17 jdk_21 jdk_22;
+            zing_21 jdk_21 jdk_22;
         };
       in
       rec {
