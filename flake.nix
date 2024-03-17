@@ -66,14 +66,14 @@
       flake = false;
     };
 
-    jprofiler_tgz = {
-      url = "https://download.ej-technologies.com/jprofiler/jprofiler_linux_14_0.tar.gz";
-      flake = false;
-    };
-    yourkit_zip = {
-      url = "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b107-arm64.zip";
-      flake = false;
-    };
+    # jprofiler_tgz = {
+    #   url = "https://download.ej-technologies.com/jprofiler/jprofiler_linux_14_0.tar.gz";
+    #   flake = false;
+    # };
+    # yourkit_zip = {
+    #   url = "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b107-arm64.zip";
+    #   flake = false;
+    # };
 
     # Zulu
     zulu21_linux_x64_tgz = {
@@ -94,10 +94,10 @@
     };
 
     # Zing
-    zing21_linux_tgz = {
-      url = "https://ftp.azul.com/releases/Zing/ZVM24.02.0.0/zing24.02.0.0-6-jdk21.0.2-linux_x64.tar.gz";
-      flake = false;
-    };
+    # zing21_linux_tgz = {
+    #   url = "https://ftp.azul.com/releases/Zing/ZVM24.02.0.0/zing24.02.0.0-6-jdk21.0.2-linux_x64.tar.gz";
+    #   flake = false;
+    # };
   };
 
   outputs =
@@ -117,13 +117,13 @@
     , visualvm_zip
     , async-profiler-src
     , jattach-src
-    , jprofiler_tgz
-    , yourkit_zip
+    # , jprofiler_tgz
+    # , yourkit_zip
     , zulu21_linux_x64_tgz
     , zulu21_linux_aarch64_tgz
     , zulu21_macos_aarch64_tgz
     , zulu22_macos_aarch64_tgz
-    , zing21_linux_tgz
+    # , zing21_linux_tgz
     }:
       with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux system.aarch64-darwin ] (system:
       let
@@ -232,14 +232,14 @@
           src = jattach-src;
         };
 
-        jprofiler = import ./build/jprofiler.nix {
-          inherit pkgs;
-          src = jprofiler_tgz;
-        };
-        yourkit = import ./build/yourkit.nix {
-          inherit pkgs;
-          src = yourkit_zip;
-        };
+        # jprofiler = import ./build/jprofiler.nix {
+        #   inherit pkgs;
+        #   src = jprofiler_tgz;
+        # };
+        # yourkit = import ./build/yourkit.nix {
+        #   inherit pkgs;
+        #   src = yourkit_zip;
+        # };
 
         zulu_21_linux = import ./build/zulu.nix {
           inherit pkgs;
@@ -257,11 +257,11 @@
           version = "22.0.0";
         };
 
-        zing_21 = import ./build/zing.nix {
-          inherit pkgs;
-          src = zing17_linux_tgz;
-          version = "17.0.0";
-        };
+        # zing_21 = import ./build/zing.nix {
+        #   inherit pkgs;
+        #   src = zing17_linux_tgz;
+        #   version = "17.0.0";
+        # };
 
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else zulu_21_macos;
         jdk_22 = if pkgs.stdenv.isLinux then openjdk_22 else zulu_22_macos;
@@ -274,8 +274,10 @@
             openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jextract_jdk22 jmc jitwatch visualvm
             async-profiler jattach
-            jprofiler yourkit
-            zing_21 jdk_21 jdk_22;
+            # jprofiler yourkit
+            jdk_21 jdk_22
+            # zing_21
+            ;
         };
       in
       rec {
