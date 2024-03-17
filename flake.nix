@@ -6,10 +6,6 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # OpenJDK variants
-    jdk17 = {
-      url = "github:openjdk/jdk17u";
-      flake = false;
-    };
     jdk21 = {
       url = "github:openjdk/jdk21u";
       flake = false;

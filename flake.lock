@@ -117,22 +117,6 @@
         "type": "github"
       }
     },
-    "jdk17": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1710493091,
-        "narHash": "sha256-ExWhRlSYgEP9uKQJlkYXIo0jdqFJX+T50idC6ngWbW4=",
-        "owner": "openjdk",
-        "repo": "jdk17u",
-        "rev": "5fb5ba651db3f6428916ad9e49cf5ff3faaed509",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "repo": "jdk17u",
-        "type": "github"
-      }
-    },
     "jdk21": {
       "flake": false,
       "locked": {
@@ -252,7 +236,6 @@
         "jdk-loom": "jdk-loom",
         "jdk-panama": "jdk-panama",
         "jdk-valhalla": "jdk-valhalla",
-        "jdk17": "jdk17",
         "jdk21": "jdk21",
         "jdk22": "jdk22",
         "jextract-src": "jextract-src",
