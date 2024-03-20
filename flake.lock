@@ -66,57 +66,6 @@
         "type": "github"
       }
     },
-    "jdk-loom": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1710542741,
-        "narHash": "sha256-LfInqM6h7UnhBdskfGC3/GpozJOzhC22vXZAeI4/ySg=",
-        "owner": "openjdk",
-        "repo": "loom",
-        "rev": "74e3ab4189df950d73ffe0f1f9524949b289ab88",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "ref": "fibers",
-        "repo": "loom",
-        "type": "github"
-      }
-    },
-    "jdk-panama": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653305191,
-        "narHash": "sha256-5fDsWv4YQMcupozT9LH+e9LKMWHFBTnFZ5coQsW2hPc=",
-        "owner": "openjdk",
-        "repo": "panama-foreign",
-        "rev": "bc13b1c19f3c2f1c8a237cc74ef34ab6c57c92a4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "ref": "foreign-jextract",
-        "repo": "panama-foreign",
-        "type": "github"
-      }
-    },
-    "jdk-valhalla": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1710826279,
-        "narHash": "sha256-PDHLkKvMF4CqvZNfQl0uwg/iLHVV2awj0igx/tnzhAg=",
-        "owner": "openjdk",
-        "repo": "valhalla",
-        "rev": "04c6e0395756389707dafb375968bed7a41fb77d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "ref": "lworld",
-        "repo": "valhalla",
-        "type": "github"
-      }
-    },
     "jdk21": {
       "flake": false,
       "locked": {
@@ -152,15 +101,16 @@
     "jextract-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1710345832,
-        "narHash": "sha256-+4AM8pzXPIO/CS3+Rd/jJf2xDvAo7K7FRyNE8rXvk5U=",
+        "lastModified": 1707845525,
+        "narHash": "sha256-y1b8SpTbIPGWe1J2rWfJgjUItOeALiCw1dEJTRuOKeQ=",
         "owner": "openjdk",
         "repo": "jextract",
-        "rev": "b9ec8879cff052b463237fdd76382b3a5cd8ff2b",
+        "rev": "bd45c8b5449cc2df7e59b729bc1cf8402030ce50",
         "type": "github"
       },
       "original": {
         "owner": "openjdk",
+        "ref": "jdk22",
         "repo": "jextract",
         "type": "github"
       }
@@ -215,9 +165,6 @@
         "flake-utils": "flake-utils",
         "jattach-src": "jattach-src",
         "jdk": "jdk",
-        "jdk-loom": "jdk-loom",
-        "jdk-panama": "jdk-panama",
-        "jdk-valhalla": "jdk-valhalla",
         "jdk21": "jdk21",
         "jdk22": "jdk22",
         "jextract-src": "jextract-src",

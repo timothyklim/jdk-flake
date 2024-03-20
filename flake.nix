@@ -19,25 +19,25 @@
       url = "github:openjdk/jdk";
       flake = false;
     };
-    jdk-loom = {
-      url = "github:openjdk/loom/fibers";
-      flake = false;
-    };
-    jdk-panama = {
-      url = "github:openjdk/panama-foreign/foreign-jextract";
-      flake = false;
-    };
-    jdk-valhalla = {
-      url = "github:openjdk/valhalla/lworld";
-      flake = false;
-    };
+    # jdk-loom = {
+    #   url = "github:openjdk/loom/fibers";
+    #   flake = false;
+    # };
+    # jdk-panama = {
+    #   url = "github:openjdk/panama-foreign/foreign-jextract";
+    #   flake = false;
+    # };
+    # jdk-valhalla = {
+    #   url = "github:openjdk/valhalla/lworld";
+    #   flake = false;
+    # };
 
     jtreg-src = {
       url = "github:openjdk/jtreg";
       flake = false;
     };
     jextract-src = {
-      url = "github:openjdk/jextract";
+      url = "github:openjdk/jextract/jdk22";
       flake = false;
     };
     jmc_linux_tgz = {
@@ -99,9 +99,9 @@
     , jdk21
     , jdk22
     , jdk
-    , jdk-loom
-    , jdk-panama
-    , jdk-valhalla
+    # , jdk-loom
+    # , jdk-panama
+    # , jdk-valhalla
     , jtreg-src
     , jextract-src
     , jmc_linux_tgz
@@ -169,25 +169,25 @@
           jdk = zulu_21_linux;
         };
 
-        openjdk-loom = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk-loom;
-          version = "20-loom";
-          jdk = openjdk_21;
-        };
-        openjdk-panama = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk-panama;
-          version = "20-panama";
-          nativeDeps = [ pkgs.llvmPackages.libclang ];
-          jdk = openjdk_21;
-        };
-        openjdk-valhalla = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk-valhalla;
-          version = "20-valhalla";
-          jdk = openjdk_21;
-        };
+        # openjdk-loom = import ./build/openjdk.nix {
+        #   inherit pkgs nixpkgs;
+        #   src = jdk-loom;
+        #   version = "20-loom";
+        #   jdk = openjdk_21;
+        # };
+        # openjdk-panama = import ./build/openjdk.nix {
+        #   inherit pkgs nixpkgs;
+        #   src = jdk-panama;
+        #   version = "20-panama";
+        #   nativeDeps = [ pkgs.llvmPackages.libclang ];
+        #   jdk = openjdk_21;
+        # };
+        # openjdk-valhalla = import ./build/openjdk.nix {
+        #   inherit pkgs nixpkgs;
+        #   src = jdk-valhalla;
+        #   version = "20-valhalla";
+        #   jdk = openjdk_21;
+        # };
 
         jtreg = import ./build/jtreg.nix {
           inherit pkgs;
@@ -258,7 +258,8 @@
         derivation = {
           inherit openjdk_21 openjdk_21_debug openjdk_21_fastdebug
             openjdk_22 openjdk_22_debug openjdk_22_fastdebug
-            openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
+            openjdk_latest
+            # openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jmc jitwatch visualvm
             async-profiler jattach
             # jprofiler yourkit
