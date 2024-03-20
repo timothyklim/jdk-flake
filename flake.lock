@@ -3,11 +3,11 @@
     "async-profiler-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1710557401,
-        "narHash": "sha256-3LtgYo5X0S7SYr45vGIkN6GNOphixFXE05ZyS5TIv4Y=",
+        "lastModified": 1710885689,
+        "narHash": "sha256-fjM+Zf9FHhpAVEw6vt+1z61Kfg8ZUDKh0VbP7trwvag=",
         "owner": "jvm-profiling-tools",
         "repo": "async-profiler",
-        "rev": "a75ebc778679e0491e006affbf18c504271756dd",
+        "rev": "241f5e3965207508541015e9df8b535844fb0410",
         "type": "github"
       },
       "original": {
@@ -53,11 +53,11 @@
     "jdk": {
       "flake": false,
       "locked": {
-        "lastModified": 1710863725,
-        "narHash": "sha256-QndGNoZjdaz9hbMglzb76fXHZHQ3Iph7rylt32+n8uw=",
+        "lastModified": 1710874096,
+        "narHash": "sha256-QrT3xKTWvrS3CiH+qnqXQh2FrO6vDBSxg54PEpKRhM0=",
         "owner": "openjdk",
         "repo": "jdk",
-        "rev": "132921683bc9860ce2ba89729dcd989b10b89aa2",
+        "rev": "7231fd78aada80946b680e10227a356714d5c34b",
         "type": "github"
       },
       "original": {
@@ -152,23 +152,6 @@
     "jextract-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1707844153,
-        "narHash": "sha256-Bji7I6LNMs70drGo5+75OClCrxhOsoLV2V7Wdct6494=",
-        "owner": "openjdk",
-        "repo": "jextract",
-        "rev": "0f87c6cdd5d63a7148deb38e16ed4de1306a4573",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "ref": "jdk21",
-        "repo": "jextract",
-        "type": "github"
-      }
-    },
-    "jextract_jdk22-src": {
-      "flake": false,
-      "locked": {
         "lastModified": 1710345832,
         "narHash": "sha256-+4AM8pzXPIO/CS3+Rd/jJf2xDvAo7K7FRyNE8rXvk5U=",
         "owner": "openjdk",
@@ -238,7 +221,6 @@
         "jdk21": "jdk21",
         "jdk22": "jdk22",
         "jextract-src": "jextract-src",
-        "jextract_jdk22-src": "jextract_jdk22-src",
         "jmc_linux_tgz": "jmc_linux_tgz",
         "jtreg-src": "jtreg-src",
         "nixpkgs": "nixpkgs",

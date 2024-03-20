@@ -37,10 +37,6 @@
       flake = false;
     };
     jextract-src = {
-      url = "github:openjdk/jextract/jdk21";
-      flake = false;
-    };
-    jextract_jdk22-src = {
       url = "github:openjdk/jextract";
       flake = false;
     };
@@ -108,7 +104,6 @@
     , jdk-valhalla
     , jtreg-src
     , jextract-src
-    , jextract_jdk22-src
     , jmc_linux_tgz
     , visualvm_zip
     , async-profiler-src
@@ -199,12 +194,8 @@
           src = jtreg-src;
         };
         jextract = import ./build/jextract.nix {
-          inherit pkgs jdk_21 jtreg;
-          src = jextract-src;
-        };
-        jextract_jdk22 = import ./build/jextract.nix {
           inherit pkgs jdk_22 jtreg;
-          src = jextract_jdk22-src;
+          src = jextract-src;
         };
         jmc = import ./build/jmc.nix {
           inherit pkgs;
@@ -262,13 +253,13 @@
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else zulu_21_macos;
         jdk_22 = if pkgs.stdenv.isLinux then openjdk_22 else zulu_22_macos;
 
-        jdk = openjdk_21;
+        jdk = openjdk_22;
 
         derivation = {
           inherit openjdk_21 openjdk_21_debug openjdk_21_fastdebug
             openjdk_22 openjdk_22_debug openjdk_22_fastdebug
             openjdk_latest openjdk-loom openjdk-panama openjdk-valhalla
-            jtreg jextract jextract_jdk22 jmc jitwatch visualvm
+            jtreg jextract jmc jitwatch visualvm
             async-profiler jattach
             # jprofiler yourkit
             jdk_21 jdk_22
