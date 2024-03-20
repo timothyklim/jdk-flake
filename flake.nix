@@ -41,7 +41,7 @@
       flake = false;
     };
     jextract_jdk22-src = {
-      url = "github:openjdk/jextract/jdk22";
+      url = "github:openjdk/jextract";
       flake = false;
     };
     jmc_linux_tgz = {
