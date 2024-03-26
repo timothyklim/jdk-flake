@@ -80,8 +80,20 @@
       url = "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-macosx_aarch64.tar.gz";
       flake = false;
     };
+    zulu22_linux_x64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-linux_x64.tar.gz";
+      flake = false;
+    };
+    zulu22_linux_aarch64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-linux_aarch64.tar.gz";
+      flake = false;
+    };
+    zulu22_macos_x64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_x64.tar.gz";
+      flake = false;
+    };
     zulu22_macos_aarch64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu22.0.85-beta-jdk22.0.0-beta.34-macosx_aarch64.zip";
+      url = "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_aarch64.tar.gz";
       flake = false;
     };
 
@@ -110,13 +122,16 @@
     , jattach-src
     # , jprofiler_tgz
     # , yourkit_zip
-    , zulu21_linux_x64_tgz
     , zulu21_linux_aarch64_tgz
+    , zulu21_linux_x64_tgz
     , zulu21_macos_aarch64_tgz
+    , zulu22_linux_aarch64_tgz
+    , zulu22_linux_x64_tgz
     , zulu22_macos_aarch64_tgz
+    , zulu22_macos_x64_tgz
     # , zing21_linux_tgz
     }:
-      with flake-utils.lib; eachSystem [ system.x86_64-linux system.aarch64-linux system.aarch64-darwin ] (system:
+      with flake-utils.lib; with system; eachSystem [ x86_64-linux aarch64-linux x86_64-darwin aarch64-darwin ] (system:
       let
         sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
         pkgs = nixpkgs.legacyPackages.${system};
@@ -238,9 +253,15 @@
           src = zulu21_macos_aarch64_tgz;
           version = "21.0.1";
         };
+
+        zulu_22_linux = import ./build/zulu.nix {
+          inherit pkgs;
+          src = if isAarch then zulu22_linux_aarch64_tgz else zulu22_linux_x64_tgz;
+          version = "22.0.0";
+        };
         zulu_22_macos = import ./build/zulu.nix {
           inherit pkgs;
-          src = zulu22_macos_aarch64_tgz;
+          src = if isAarch then zulu22_macos_aarch64_tgz else zulu22_macos_x64_tgz;
           version = "22.0.0";
         };
 
