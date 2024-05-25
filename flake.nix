@@ -2,7 +2,7 @@
   description = "JDK's flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/release-23.11";
+    nixpkgs.url = "nixpkgs/release-24.05";
     flake-utils.url = "github:numtide/flake-utils";
 
     # OpenJDK variants
@@ -88,10 +88,6 @@
       url = "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-linux_aarch64.tar.gz";
       flake = false;
     };
-    zulu22_macos_x64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_x64.tar.gz";
-      flake = false;
-    };
     zulu22_macos_aarch64_tgz = {
       url = "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_aarch64.tar.gz";
       flake = false;
@@ -128,10 +124,9 @@
     , zulu22_linux_aarch64_tgz
     , zulu22_linux_x64_tgz
     , zulu22_macos_aarch64_tgz
-    , zulu22_macos_x64_tgz
     # , zing21_linux_tgz
     }:
-      with flake-utils.lib; with system; eachSystem [ x86_64-linux aarch64-linux x86_64-darwin aarch64-darwin ] (system:
+      with flake-utils.lib; with system; eachSystem [ x86_64-linux aarch64-linux aarch64-darwin ] (system:
       let
         sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
         pkgs = nixpkgs.legacyPackages.${system};
@@ -261,7 +256,7 @@
         };
         zulu_22_macos = import ./build/zulu.nix {
           inherit pkgs;
-          src = if isAarch then zulu22_macos_aarch64_tgz else zulu22_macos_x64_tgz;
+          src = zulu22_macos_aarch64_tgz;
           version = "22.0.0";
         };
 

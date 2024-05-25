@@ -12,7 +12,7 @@ let
   cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   linuxDeps = [ alsaLib ] ++ x11Libs;
-  self = with llvmPackages_17; libcxxStdenv.mkDerivation rec {
+  self = with llvmPackages_18; libcxxStdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
 

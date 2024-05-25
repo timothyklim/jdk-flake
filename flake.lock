@@ -53,11 +53,11 @@
     "jdk": {
       "flake": false,
       "locked": {
-        "lastModified": 1716603005,
-        "narHash": "sha256-IltJQOxvthyvnGJUBmCn7RU/hy73fHgpLSXMUHw/XJs=",
+        "lastModified": 1716949100,
+        "narHash": "sha256-vFVRgcWgCMKOFvfLMJVHXAp3vNA1EbFONC1HTbDKnmo=",
         "owner": "openjdk",
         "repo": "jdk",
-        "rev": "985b9ce79a2d620a8b8675d1ae6c9730d72a757f",
+        "rev": "01060ad4ab18581aa46bc16e64c7f12a591a682b",
         "type": "github"
       },
       "original": {
@@ -85,11 +85,11 @@
     "jdk22": {
       "flake": false,
       "locked": {
-        "lastModified": 1716453568,
-        "narHash": "sha256-6dbi9I+i8gRyqZTQTqX4E7EsAyS/FxLDd/FcwSUApdU=",
+        "lastModified": 1716938154,
+        "narHash": "sha256-dVzPd9Bn9ezPAkuhQMxQfazgBUDBcAT7EpEi6jELCnI=",
         "owner": "openjdk",
         "repo": "jdk22u",
-        "rev": "e32e05bc63723d13be4766c82c96c6f38818b780",
+        "rev": "66cdc14c70d337390aa4e3e303d7baaf13c132fb",
         "type": "github"
       },
       "original": {
@@ -131,11 +131,11 @@
     "jtreg-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1714646468,
-        "narHash": "sha256-4eq32JmPPoszyBwmJu3iLsvmkf8nzvfv9gJ2olM4qpQ=",
+        "lastModified": 1716928114,
+        "narHash": "sha256-ktAthWeMrw+Z6zVaDm0H2Aodvz1R86RU3ENRDF+G5MI=",
         "owner": "openjdk",
         "repo": "jtreg",
-        "rev": "a66a5269e3c5eb6d8c612be811f9b0bad8bc73d5",
+        "rev": "779d1b223cfea1d79f93aa3db05161d444606c23",
         "type": "github"
       },
       "original": {
@@ -146,16 +146,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1716613608,
-        "narHash": "sha256-qhwiOIs/3UbneWxn51WZb2caEeF9epsEy378Y7WSdk8=",
+        "lastModified": 1716941067,
+        "narHash": "sha256-LpHP82S/4xE/mCUPoOulyS1xC/JJ5Wy/dOzn1VG5DkA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f9a41b180fabdad4c0a7ac40a76538d2311fa1b6",
+        "rev": "0ff3d75bf8c57034fac143e01b9607364c508f71",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "release-23.11",
+        "ref": "release-24.05",
         "type": "indirect"
       }
     },
@@ -177,8 +177,7 @@
         "zulu21_macos_aarch64_tgz": "zulu21_macos_aarch64_tgz",
         "zulu22_linux_aarch64_tgz": "zulu22_linux_aarch64_tgz",
         "zulu22_linux_x64_tgz": "zulu22_linux_x64_tgz",
-        "zulu22_macos_aarch64_tgz": "zulu22_macos_aarch64_tgz",
-        "zulu22_macos_x64_tgz": "zulu22_macos_x64_tgz"
+        "zulu22_macos_aarch64_tgz": "zulu22_macos_aarch64_tgz"
       }
     },
     "systems": {
@@ -285,19 +284,6 @@
       "original": {
         "type": "tarball",
         "url": "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_aarch64.tar.gz"
-      }
-    },
-    "zulu22_macos_x64_tgz": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1709124148,
-        "narHash": "sha256-LWXWGnMSH9gDotGRu67S+1I2Dm9aRugTuxScczo5Z+U=",
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_x64.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_x64.tar.gz"
       }
     }
   },
