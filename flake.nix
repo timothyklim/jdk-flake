@@ -14,6 +14,10 @@
       url = "github:openjdk/jdk22u";
       flake = false;
     };
+    jdk23 = {
+      url = "github:openjdk/jdk23u";
+      flake = false;
+    };
 
     jdk = {
       url = "github:openjdk/jdk";
@@ -106,6 +110,7 @@
     , flake-utils
     , jdk21
     , jdk22
+    , jdk23
     , jdk
     # , jdk-loom
     # , jdk-panama
@@ -152,6 +157,7 @@
           jdk = zulu_21_linux;
           debug = true;
         };
+
         openjdk_22 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk22;
@@ -172,11 +178,33 @@
           jdk = zulu_21_linux;
           debug = true;
         };
+
+        openjdk_23 = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk23;
+          version = "23";
+          jdk = zulu_22_linux;
+        };
+        openjdk_23_debug = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk23;
+          version = "23";
+          jdk = zulu_22_linux;
+          debugSymbols = true;
+        };
+        openjdk_23_fastdebug = import ./build/openjdk.nix {
+          inherit pkgs nixpkgs;
+          src = jdk23;
+          version = "23";
+          jdk = zulu_22_linux;
+          debug = true;
+        };
+
         openjdk_latest = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk;
           version = "latest";
-          jdk = zulu_21_linux;
+          jdk = zulu_22_linux;
         };
 
         # openjdk-loom = import ./build/openjdk.nix {
@@ -274,6 +302,7 @@
         derivation = {
           inherit openjdk_21 openjdk_21_debug openjdk_21_fastdebug
             openjdk_22 openjdk_22_debug openjdk_22_fastdebug
+            openjdk_23 openjdk_23_debug openjdk_23_fastdebug
             openjdk_latest
             # openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jmc jitwatch visualvm
