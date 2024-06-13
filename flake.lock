@@ -53,11 +53,11 @@
     "jdk": {
       "flake": false,
       "locked": {
-        "lastModified": 1718143792,
-        "narHash": "sha256-CejYAeo4ji4mYvUQ9RCkzHq1Ugnp54kKFAewU8DdF0o=",
+        "lastModified": 1718260526,
+        "narHash": "sha256-KQHMR4AJA5MIT1Sq29gV78gJO/sHp5mi/H3HI1Sc0nA=",
         "owner": "openjdk",
         "repo": "jdk",
-        "rev": "a7205cc6512796466fefe17d171082995e0966de",
+        "rev": "5d2a19def154b81c8ebada5594e080fe76c5ffee",
         "type": "github"
       },
       "original": {
@@ -85,11 +85,11 @@
     "jdk22": {
       "flake": false,
       "locked": {
-        "lastModified": 1717574603,
-        "narHash": "sha256-6eMDxAquqS0Xm18isvx49FhLdRi+X2oCsYBxhydmHwo=",
+        "lastModified": 1718211188,
+        "narHash": "sha256-P9SxM+kwxh616AdkpYgQv1ja/Vijumy4PkShkL4IklE=",
         "owner": "openjdk",
         "repo": "jdk22u",
-        "rev": "5602dc7973f7d3241ceb9ae80c8912be2afcb49a",
+        "rev": "c68a285abfa4360ae2251edaf6a9463aeb4896f6",
         "type": "github"
       },
       "original": {
@@ -134,7 +134,7 @@
     "jmc_linux_tgz": {
       "flake": false,
       "locked": {
-        "lastModified": 1677614324,
+        "lastModified": 1677613233,
         "narHash": "sha256-kZZZJAWa65wx+H8EfqimJVz+B7A4x6VEdK7lZBMfRW0=",
         "type": "tarball",
         "url": "https://download.java.net/java/GA/jmc8/05/binaries/jmc-8.3.1_linux-x64.tar.gz"
@@ -189,9 +189,6 @@
         "jtreg-src": "jtreg-src",
         "nixpkgs": "nixpkgs",
         "visualvm_zip": "visualvm_zip",
-        "zulu21_linux_aarch64_tgz": "zulu21_linux_aarch64_tgz",
-        "zulu21_linux_x64_tgz": "zulu21_linux_x64_tgz",
-        "zulu21_macos_aarch64_tgz": "zulu21_macos_aarch64_tgz",
         "zulu22_linux_aarch64_tgz": "zulu22_linux_aarch64_tgz",
         "zulu22_linux_x64_tgz": "zulu22_linux_x64_tgz",
         "zulu22_macos_aarch64_tgz": "zulu22_macos_aarch64_tgz"
@@ -215,92 +212,53 @@
     "visualvm_zip": {
       "flake": false,
       "locked": {
-        "lastModified": 1693992964,
-        "narHash": "sha256-GANg02I/cqxxmwXALHvOllhyiGFhDIP5Ye60O0DQ208=",
+        "lastModified": 1710753680,
+        "narHash": "sha256-yWSB8mqcOG7xd4/8YjPXzGvl7BgyOLdIoyAs69+/kv4=",
         "type": "tarball",
-        "url": "https://github.com/oracle/visualvm/releases/download/2.1.7/visualvm_217.zip"
+        "url": "https://github.com/oracle/visualvm/releases/download/2.1.8/visualvm_218.zip"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/oracle/visualvm/releases/download/2.1.7/visualvm_217.zip"
-      }
-    },
-    "zulu21_linux_aarch64_tgz": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1697289787,
-        "narHash": "sha256-Clh3cc/dVgacVT+HE/FUGdX6exxnpFAwKPQujyh9QbA=",
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-linux_aarch64.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-linux_aarch64.tar.gz"
-      }
-    },
-    "zulu21_linux_x64_tgz": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1697284870,
-        "narHash": "sha256-tpdXSptE26DfiM65hL3ii1bbBikdqgbI+dqR4QqZ0LI=",
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-linux_x64.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-linux_x64.tar.gz"
-      }
-    },
-    "zulu21_macos_aarch64_tgz": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1697404370,
-        "narHash": "sha256-8e4rZ9m7l0d91dA5ert2/5RZL0Lv2/Y7nfmefOdo7RA=",
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-macosx_aarch64.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-macosx_aarch64.tar.gz"
+        "url": "https://github.com/oracle/visualvm/releases/download/2.1.8/visualvm_218.zip"
       }
     },
     "zulu22_linux_aarch64_tgz": {
       "flake": false,
       "locked": {
-        "lastModified": 1710506122,
-        "narHash": "sha256-bDKPtcga7z0r2vkTKz19mXt+de+oDyFz2vbMHLeMdG4=",
+        "lastModified": 1712308206,
+        "narHash": "sha256-u86agDW5d5hE9SlwemYNEGod6dLuP3Q0ZzLroFexyjE=",
         "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-linux_aarch64.tar.gz"
+        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-linux_aarch64.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-linux_aarch64.tar.gz"
+        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-linux_aarch64.tar.gz"
       }
     },
     "zulu22_linux_x64_tgz": {
       "flake": false,
       "locked": {
-        "lastModified": 1710505811,
-        "narHash": "sha256-c/nJnxOaa4KPxZrZgwoh+Fak0KtH75mwhQs6YTzemkY=",
+        "lastModified": 1712308307,
+        "narHash": "sha256-DLco99cWGGunTOiEu3TL7xZvnc0LawVp4jnGunV1+ew=",
         "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-linux_x64.tar.gz"
+        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-linux_x64.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-linux_x64.tar.gz"
+        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-linux_x64.tar.gz"
       }
     },
     "zulu22_macos_aarch64_tgz": {
       "flake": false,
       "locked": {
-        "lastModified": 1709743118,
-        "narHash": "sha256-NybnRG32JAqBpMuozAgNY5zhpuNMwt3b8xBL9IiDCHw=",
+        "lastModified": 1712308074,
+        "narHash": "sha256-XSI0Wp2J99GuZDsOiLn65WnH0LionP8WJ9e0ykqrqs0=",
         "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_aarch64.tar.gz"
+        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-macosx_aarch64.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.28.91-ca-jdk22.0.0-macosx_aarch64.tar.gz"
+        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-macosx_aarch64.tar.gz"
       }
     }
   },
