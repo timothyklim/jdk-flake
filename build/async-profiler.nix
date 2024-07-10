@@ -13,7 +13,9 @@ let
     patchPhase = ''
       patchShebangs .
       substituteInPlace Makefile \
-        --replace '/bin/ls' "${coreutils}/bin/ls"
+        --replace '/bin/ls' "${coreutils}/bin/ls" \
+        --replace 'gcc' 'cc' \
+        --replace 'g++' 'c++'
     '';
 
     installPhase = ''
