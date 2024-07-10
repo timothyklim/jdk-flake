@@ -44,6 +44,10 @@
       url = "github:openjdk/jextract/jdk22";
       flake = false;
     };
+    jextract_jdk23-src = {
+      url = "github:openjdk/jextract";
+      flake = false;
+    };
     jmc_linux_tgz = {
       url = "https://download.java.net/java/GA/jmc8/05/binaries/jmc-8.3.1_linux-x64.tar.gz";
       flake = false;
@@ -105,6 +109,7 @@
     # , jdk-valhalla
     , jtreg-src
     , jextract-src
+    , jextract_jdk23-src
     , jmc_linux_tgz
     , visualvm_zip
     , async-profiler-src
@@ -168,20 +173,20 @@
           inherit pkgs nixpkgs;
           src = jdk23;
           version = "23";
-          jdk = pkgs.zulu21;
+          jdk = zulu_22_linux;
         };
         openjdk_23_debug = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk23;
           version = "23";
-          jdk = pkgs.zulu21;
+          jdk = zulu_22_linux;
           debugSymbols = true;
         };
         openjdk_23_fastdebug = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk23;
           version = "23";
-          jdk = pkgs.zulu21;
+          jdk = zulu_22_linux;
           debug = true;
         };
 
@@ -189,7 +194,7 @@
           inherit pkgs nixpkgs;
           src = jdk;
           version = "latest";
-          jdk = pkgs.zulu21;
+          jdk = zulu_22_linux;
         };
 
         # openjdk-loom = import ./build/openjdk.nix {
@@ -219,6 +224,10 @@
         jextract = import ./build/jextract.nix {
           inherit pkgs jdk_22 jtreg;
           src = jextract-src;
+        };
+        jextract_jdk23 = import ./build/jextract.nix {
+          inherit pkgs jdk_23 jtreg;
+          src = jextract_jdk23-src;
         };
         jmc = import ./build/jmc.nix {
           inherit pkgs;
@@ -270,6 +279,7 @@
 
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else pkgs.zulu21;
         jdk_22 = if pkgs.stdenv.isLinux then openjdk_22 else zulu_22_macos;
+        jdk_23 = openjdk_23;
 
         jdk = openjdk_22;
 
@@ -279,7 +289,7 @@
             openjdk_23 openjdk_23_debug openjdk_23_fastdebug
             openjdk_latest
             # openjdk-loom openjdk-panama openjdk-valhalla
-            jtreg jextract jmc jitwatch visualvm
+            jtreg jextract jextract_jdk23 jmc jitwatch visualvm
             async-profiler jattach
             # jprofiler yourkit
             jdk_21 jdk_22

@@ -9,9 +9,9 @@ let
 
     name = "deps";
 
+    nativeBuildInputs = [ stripJavaArchivesHook ];
     buildInputs = [
       bash
-      canonicalize-jar
       curl
       wget
       which
@@ -32,11 +32,6 @@ let
       mkdir -p $out
 
       cp -r dist/* $out/
-
-      for f in asmtools.jar javatest.jar
-      do
-        canonicalizeJar $out/$f
-      done
     '';
 
     outputHashMode = "recursive";

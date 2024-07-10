@@ -3,11 +3,11 @@
     "async-profiler-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1718143730,
-        "narHash": "sha256-7w2TOGzrBd0eeeVA9Ff55yX6r9RVdmf5iEsblvkOA1U=",
+        "lastModified": 1720537166,
+        "narHash": "sha256-SZ5EZOw8ef2LY44xsyD2Ffq3gunTioBvbXxSZhERZlU=",
         "owner": "jvm-profiling-tools",
         "repo": "async-profiler",
-        "rev": "dbcaa4d81ac4e3be1ea866be83bb816d6daf636a",
+        "rev": "76c2024e83a03ddcc94bdb5b2665ec88aec47cf8",
         "type": "github"
       },
       "original": {
@@ -53,11 +53,11 @@
     "jdk": {
       "flake": false,
       "locked": {
-        "lastModified": 1718260526,
-        "narHash": "sha256-KQHMR4AJA5MIT1Sq29gV78gJO/sHp5mi/H3HI1Sc0nA=",
+        "lastModified": 1720557489,
+        "narHash": "sha256-T0EnwAvA14HvKFD4QoYOAUq1toOcfOmHNbnd2J9s1LA=",
         "owner": "openjdk",
         "repo": "jdk",
-        "rev": "5d2a19def154b81c8ebada5594e080fe76c5ffee",
+        "rev": "1472124489c841642996ae984e21c533ffec8091",
         "type": "github"
       },
       "original": {
@@ -69,11 +69,11 @@
     "jdk21": {
       "flake": false,
       "locked": {
-        "lastModified": 1716965793,
-        "narHash": "sha256-MoRZoHPsXsKoxOC7qLHFrcPkFpnQ5fV8+b/b+Tb75xY=",
+        "lastModified": 1719287751,
+        "narHash": "sha256-mm7YUqsGQNjYLzMzLwXaxupX4a0ZBwe2lm00ILJN8AM=",
         "owner": "openjdk",
         "repo": "jdk21u",
-        "rev": "2971cb5769121b47ac8c8db1078d67680a19341f",
+        "rev": "a0b3c6cd86861a038a7b7967428266c882bd5d7a",
         "type": "github"
       },
       "original": {
@@ -101,11 +101,11 @@
     "jdk23": {
       "flake": false,
       "locked": {
-        "lastModified": 1718137983,
-        "narHash": "sha256-t31ntC0Sjv5/00BIMoQvEQq9/1IFjKn+GjQXGl2WaOk=",
+        "lastModified": 1720509829,
+        "narHash": "sha256-6unzxqGaBxl24i2nQn14dxjIvW+nlIjhmX68DrjTpYo=",
         "owner": "openjdk",
         "repo": "jdk23u",
-        "rev": "90bf3a809aa1f39b2c45977b1c3ecf839981148a",
+        "rev": "e0dad6d5aeddc754beed847680f4e0c90a726aba",
         "type": "github"
       },
       "original": {
@@ -131,6 +131,22 @@
         "type": "github"
       }
     },
+    "jextract_jdk23-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719329238,
+        "narHash": "sha256-3I1fGMd/tOj5o5nbFAyMibELZUolwahhg1QMqHYKAAM=",
+        "owner": "openjdk",
+        "repo": "jextract",
+        "rev": "26dee164ede28e02b398147871e410b2d854c0f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "openjdk",
+        "repo": "jextract",
+        "type": "github"
+      }
+    },
     "jmc_linux_tgz": {
       "flake": false,
       "locked": {
@@ -147,11 +163,11 @@
     "jtreg-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1717785621,
-        "narHash": "sha256-HPsaOAiNH/F4DNDZqORwVIsIFuaFR4zSYmB+dSXvdiw=",
+        "lastModified": 1720077798,
+        "narHash": "sha256-DUSoXnSYSylRNf08r5vmUcxw6m5a0W/iyiHC+nXWdP8=",
         "owner": "openjdk",
         "repo": "jtreg",
-        "rev": "2e57b470281680c15ed4f987592ce6dfd0e81739",
+        "rev": "d8a65183ed7b2cc9458506ac1c1d34ec4f11406d",
         "type": "github"
       },
       "original": {
@@ -162,11 +178,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1718086528,
-        "narHash": "sha256-hoB7B7oPgypePz16cKWawPfhVvMSXj4G/qLsfFuhFjw=",
+        "lastModified": 1720386169,
+        "narHash": "sha256-NGKVY4PjzwAa4upkGtAMz1npHGoRzWotlSnVlqI40mo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "47b604b07d1e8146d5398b42d3306fdebd343986",
+        "rev": "194846768975b7ad2c4988bdb82572c00222c0d7",
         "type": "github"
       },
       "original": {
@@ -185,6 +201,7 @@
         "jdk22": "jdk22",
         "jdk23": "jdk23",
         "jextract-src": "jextract-src",
+        "jextract_jdk23-src": "jextract_jdk23-src",
         "jmc_linux_tgz": "jmc_linux_tgz",
         "jtreg-src": "jtreg-src",
         "nixpkgs": "nixpkgs",

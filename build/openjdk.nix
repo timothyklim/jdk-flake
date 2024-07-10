@@ -17,12 +17,18 @@ let
     pname = "openjdk";
 
     nativeBuildInputs = [ autoconf jdk pkg-config ] ++ nativeDeps;
-    buildInputs = [ libcxx bash cups file gnumake fontconfig freetype libjpeg giflib libpng which zlib unzip zip lcms2 ] ++
+    buildInputs = [ libcxx bash cups file gnumake fontconfig freetype libjpeg giflib libpng which zlib unzip zip lcms2 llvmPackages_18.lld ] ++
       lib.optionals stdenv.isLinux linuxDeps;
 
     SOURCE_DATE_EPOCH = 315532802;
 
     patches = [
+      ./patches/disable_incubating_warn.patch
+    ] ++ lib.optionals (lib.versionOlder version "21") [
+      "${nixpkgs}/pkgs/development/compilers/openjdk/fix-java-home-jdk10.patch"
+    ] ++ lib.optionals (lib.versionAtLeast version "21") [
+      ./patches/fix-java-home-jdk21.patch
+    ] ++ lib.optionals (lib.versionOlder "23" version) [
       "${nixpkgs}/pkgs/development/compilers/openjdk/read-truststore-from-env-jdk10.patch"
       "${nixpkgs}/pkgs/development/compilers/openjdk/currency-date-range-jdk10.patch"
       "${nixpkgs}/pkgs/development/compilers/openjdk/increase-javadoc-heap-jdk13.patch"
@@ -34,12 +40,6 @@ let
         url = "https://src.fedoraproject.org/rpms/java-openjdk/raw/06c001c7d87f2e9fe4fedeef2d993bcd5d7afa2a/f/rh1673833-remove_removal_of_wformat_during_test_compilation.patch";
         sha256 = "082lmc30x64x583vqq00c8y0wqih3y4r0mp1c4bqq36l22qv6b6r";
       })
-
-      ./patches/disable_incubating_warn.patch
-    ] ++ lib.optionals (lib.versionOlder version "21") [
-      "${nixpkgs}/pkgs/development/compilers/openjdk/fix-java-home-jdk10.patch"
-    ] ++ lib.optionals (lib.versionAtLeast version "21") [
-      ./patches/fix-java-home-jdk21.patch
     ];
 
     prePatch = lib.optional patchInstall ''
