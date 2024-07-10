@@ -15,7 +15,8 @@ let
       substituteInPlace Makefile \
         --replace '/bin/ls' "${coreutils}/bin/ls" \
         --replace 'gcc' 'cc' \
-        --replace 'g++' 'c++'
+        --replace 'g++' 'c++' \
+        --replace '-static-libcc' '-static-libgcc'
     '';
 
     installPhase = ''
