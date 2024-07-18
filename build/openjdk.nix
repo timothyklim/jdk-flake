@@ -84,6 +84,7 @@ let
     NIX_CFLAGS_COMPILE = "-Wno-error";
 
     buildPhase = ''
+      export LD_LIBRARY_PATH="${lib.makeLibraryPath buildInputs}:$LD_LIBRARY_PATH"
       CONF=${image} make images || cat /build/source/build/${image}/make-support/failure-logs
     '';
 
