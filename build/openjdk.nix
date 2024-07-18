@@ -84,7 +84,7 @@ let
     NIX_CFLAGS_COMPILE = "-Wno-error";
 
     buildPhase = ''
-      export LD_LIBRARY_PATH="${lib.makeLibraryPath buildInputs}:$LD_LIBRARY_PATH"
+      export LD_LIBRARY_PATH="${lib.makeLibraryPath [ zlib ]}:$LD_LIBRARY_PATH"
       CONF=${image} make images || cat /build/source/build/${image}/make-support/failure-logs
     '';
 
@@ -109,6 +109,8 @@ let
       rm -rf $out/lib/openjdk/demo $out/lib/openjdk/lib/{libjsound,libfontmanager}.so
 
       ln -s $out/lib/openjdk/bin $out/bin
+
+      ln -s ${lib.getLib zlib}/lib/libz.so.1 $out/lib/openjdk/lib/
     '';
 
     preFixup = ''
