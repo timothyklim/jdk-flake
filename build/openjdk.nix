@@ -1,4 +1,4 @@
-{ pkgs, nixpkgs, src, version, jdk ? pkgs.openjdk_headless, nativeDeps ? [ ], debug ? false, debugSymbols ? false, patchInstall ? false }:
+{ pkgs, nixpkgs, src, version, jdk ? pkgs.jdk_headless, nativeDeps ? [ ], debug ? false, debugSymbols ? false, patchInstall ? false }:
 
 with pkgs;
 
