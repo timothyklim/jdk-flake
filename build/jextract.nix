@@ -1,10 +1,10 @@
-{ pkgs, jdk_22 ? null, jtreg, src, check ? false }:
+{ pkgs, jdk ? null, jtreg, src, check ? false }:
 
 with pkgs;
 
 let
   llvm_home = llvmPackages_13.libclang.lib;
-  jdkPrefix = "-Pjdk22_home=${jdk_22.home}";
+  jdkPrefix = "-Pjdk22_home=${jdk.home}";
   buildGradleCmd = cmd: "gradle --no-daemon ${jdkPrefix} -Pllvm_home=${llvm_home} ${cmd}";
   makePackage = args: stdenv.mkDerivation ({
     inherit src;
