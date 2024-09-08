@@ -10,10 +10,6 @@
       url = "github:openjdk/jdk21u";
       flake = false;
     };
-    jdk22 = {
-      url = "github:openjdk/jdk22u";
-      flake = false;
-    };
     jdk23 = {
       url = "github:openjdk/jdk23u";
       flake = false;
@@ -41,10 +37,6 @@
       flake = false;
     };
     jextract-src = {
-      url = "github:openjdk/jextract/jdk22";
-      flake = false;
-    };
-    jextract_jdk23-src = {
       url = "github:openjdk/jextract";
       flake = false;
     };
@@ -89,6 +81,11 @@
       flake = false;
     };
 
+    zulu23_macos_aarch64_zip = {
+      url = "https://cdn.azul.com/zulu/bin/zulu23.0.79-beta-jdk23.0.0-beta.36-macosx_aarch64.zip";
+      flake = false;
+    };
+
     # Zing
     # zing21_linux_tgz = {
     #   url = "https://ftp.azul.com/releases/Zing/ZVM24.02.0.0/zing24.02.0.0-6-jdk21.0.2-linux_x64.tar.gz";
@@ -101,25 +98,24 @@
     , nixpkgs
     , flake-utils
     , jdk21
-    , jdk22
     , jdk23
     , jdk
-    # , jdk-loom
-    # , jdk-panama
-    # , jdk-valhalla
+      # , jdk-loom
+      # , jdk-panama
+      # , jdk-valhalla
     , jtreg-src
     , jextract-src
-    , jextract_jdk23-src
     , jmc_linux_tgz
     , visualvm_zip
     , async-profiler-src
     , jattach-src
-    # , jprofiler_tgz
-    # , yourkit_zip
+      # , jprofiler_tgz
+      # , yourkit_zip
     , zulu22_linux_aarch64_tgz
     , zulu22_linux_x64_tgz
     , zulu22_macos_aarch64_tgz
-    # , zing21_linux_tgz
+    , zulu23_macos_aarch64_zip
+      # , zing21_linux_tgz
     }:
       with flake-utils.lib; with system; eachSystem [ x86_64-linux aarch64-linux aarch64-darwin ] (system:
       let
@@ -144,27 +140,6 @@
           inherit pkgs nixpkgs;
           src = jdk21;
           version = "21";
-          jdk = pkgs.zulu21;
-          debug = true;
-        };
-
-        openjdk_22 = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk22;
-          version = "22";
-          jdk = pkgs.zulu21;
-        };
-        openjdk_22_debug = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk22;
-          version = "22";
-          jdk = pkgs.zulu21;
-          debugSymbols = true;
-        };
-        openjdk_22_fastdebug = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk22;
-          version = "22";
           jdk = pkgs.zulu21;
           debug = true;
         };
@@ -225,10 +200,6 @@
           inherit pkgs jdk_22 jtreg;
           src = jextract-src;
         };
-        jextract_jdk23 = import ./build/jextract.nix {
-          inherit pkgs jdk_22 jtreg;
-          src = jextract_jdk23-src;
-        };
         jmc = import ./build/jmc.nix {
           inherit pkgs;
           src = jmc_linux_tgz;
@@ -271,6 +242,12 @@
           version = "22.0.0";
         };
 
+        zulu_23_macos = import ./build/zulu.nix {
+          inherit pkgs;
+          src = zulu23_macos_aarch64_zip;
+          version = "23.0.0";
+        };
+
         # zing_21 = import ./build/zing.nix {
         #   inherit pkgs;
         #   src = zing17_linux_tgz;
@@ -278,21 +255,20 @@
         # };
 
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else pkgs.zulu21;
-        jdk_22 = if pkgs.stdenv.isLinux then openjdk_22 else zulu_22_macos;
-        jdk_23 = openjdk_23;
+        jdk_22 = if pkgs.stdenv.isLinux then zulu_22_linux else zulu_22_macos;
+        jdk_23 = if pkgs.stdenv.isLinux then openjdk_23 else zulu_23_macos;
 
-        jdk = openjdk_22;
+        jdk = openjdk_23;
 
         derivation = {
           inherit openjdk_21 openjdk_21_debug openjdk_21_fastdebug
-            openjdk_22 openjdk_22_debug openjdk_22_fastdebug
             openjdk_23 openjdk_23_debug openjdk_23_fastdebug
             openjdk_latest
             # openjdk-loom openjdk-panama openjdk-valhalla
-            jtreg jextract jextract_jdk23 jmc jitwatch visualvm
+            jtreg jextract jmc jitwatch visualvm
             async-profiler jattach
             # jprofiler yourkit
-            jdk_21 jdk_22
+            jdk_21 jdk_22 jdk_23
             # zing_21
             ;
         };
