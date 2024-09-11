@@ -197,7 +197,7 @@
           src = jtreg-src;
         };
         jextract = import ./build/jextract.nix {
-          inherit pkgs jdk_22 jtreg;
+          inherit pkgs jdk_22;
           src = jextract-src;
         };
         jmc = import ./build/jmc.nix {
