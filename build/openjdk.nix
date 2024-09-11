@@ -16,8 +16,13 @@ let
     inherit src version;
     pname = "openjdk";
 
+    libs = [ libjpeg giflib libpng ];
+    libsPath = lib.makeLibraryPath libs;
+
     nativeBuildInputs = [ autoconf jdk pkg-config ] ++ nativeDeps;
-    buildInputs = [ libcxx bash cups file gnumake fontconfig freetype libjpeg giflib libpng which zlib unzip zip lcms2 llvmPackages_18.lld ] ++
+    runtimeDependencies = map lib.getLib libs;
+    buildInputs = [ libcxx bash cups file gnumake fontconfig freetype which zlib unzip zip lcms2 llvmPackages_18.lld ] ++
+      libs ++
       lib.optionals stdenv.isLinux linuxDeps;
 
     SOURCE_DATE_EPOCH = 315532802;
@@ -140,7 +145,7 @@ let
         OUTPUTDIR=$(eval echo \$$output)
         BINLIBS=$(find $OUTPUTDIR/bin/ -type f; find $OUTPUTDIR -name \*.so\*)
         echo "$BINLIBS" | while read i; do
-          patchelf --set-rpath "$LIBDIRS:$(patchelf --print-rpath "$i")" "$i" || true
+          patchelf --set-rpath "${libsPath}:$LIBDIRS:$(patchelf --print-rpath "$i")" "$i" || true
           patchelf --shrink-rpath "$i" || true
         done
       done
