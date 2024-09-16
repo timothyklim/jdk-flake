@@ -5,7 +5,9 @@ with pkgs; stdenv.mkDerivation {
 
   name = "jextract";
 
-  buildInputs = [ cmake gradle_7 ];
+  patches = [ ./patches/root-readlink.patch ];
+
+  nativeBuildInputs = [ cmake gradle_7 ];
   dontUseCmakeConfigure = true;
 
   buildPhase = ''
@@ -16,9 +18,6 @@ with pkgs; stdenv.mkDerivation {
   installPhase = ''
     cp -r build/jextract $out
     runHook postInstall
-
-    sed -e 's;ROOT=`dirname $0`;ROOT=`dirname $(readlink -f -- $0)`;g' \
-      -i $out/bin/jextract
   '' + lib.optionalString stdenv.isLinux ''
     patchelf --interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
       --set-rpath "${lib.makeLibraryPath [ zlib ]}:$out/runtime/lib" $out/runtime/bin/java
