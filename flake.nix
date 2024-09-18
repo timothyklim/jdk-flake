@@ -82,7 +82,7 @@
     };
 
     zulu23_macos_aarch64_zip = {
-      url = "https://cdn.azul.com/zulu/bin/zulu23.0.79-beta-jdk23.0.0-beta.36-macosx_aarch64.zip";
+      url = "https://cdn.azul.com/zulu/bin/zulu23.28.85-ca-jdk23.0.0-macosx_aarch64.tar.gz";
       flake = false;
     };
 
