@@ -21,8 +21,11 @@ jobs:
           do
             export strFileNameFSproj=$file
             echo $strFileNameFSproj
-            sed -i "s|https://repo1.maven.org/maven2|https://nexus.tawasal.ae/repository/maven-central|g"  $strFileNameFSproj
-            sed -i "s|https://repo.maven.apache.org/maven2|https://nexus.tawasal.ae/repository/maven-apache|g"  $strFileNameFSproj
+            #sed -i "s|https://repo1.maven.org/maven2|https://nexus.tawasal.ae/repository/maven-central|g"  $strFileNameFSproj
+            #sed -i "s|https://repo.maven.apache.org/maven2|https://nexus.tawasal.ae/repository/maven-apache|g"  $strFileNameFSproj
+            sed "s|https://repo1.maven.org/maven2|https://nexus.tawasal.ae/repository/maven-central|g"  $strFileNameFSproj | \
+            sed "s|https://repo.maven.apache.org/maven2|https://nexus.tawasal.ae/repository/maven-apache|g" > $strFileNameFSproj.new
+            mv $strFileNameFSproj.new $strFileNameFSproj
           done
 
     - name: Build nix flake
