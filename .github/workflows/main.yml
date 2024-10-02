@@ -7,8 +7,8 @@ jobs:
     strategy:
       matrix:
         runner: [nixos, macmini]
-    env:
-      PATH: /run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin
+    #env:
+    #  PATH: /run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin
     timeout-minutes: 30
     runs-on: ${{ matrix.runner }}
     steps:
