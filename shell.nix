@@ -2,7 +2,7 @@
 
 mkShell {
   name = "jdk-env";
-  nativeBuildInputs = [ jdk patchelf ];
+  nativeBuildInputs = [ jdk ];
   buildInputs = [
     # openjdk_17
     # openjdk_18
