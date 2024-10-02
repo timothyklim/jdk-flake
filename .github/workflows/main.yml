@@ -5,6 +5,7 @@ on:
 jobs:
   build_matrix:
     strategy:
+      fail-fast: false
       matrix:
         runner: [nixos, macmini]
     #env:
