@@ -7,11 +7,16 @@ let
   debugLevel = if debug then "fastdebug" else "release";
   nativeDebugSymbols = if debug then "internal" else if debugSymbols then "external" else "none";
   jvmFeatures = [ "zgc" ] ++ lib.optionals (!debug) [ "link-time-opt" ];
-  image = if isAarch then "linux-aarch64-server-${debugLevel}" else "linux-x86_64-server-${debugLevel}";
+  image = if stdenv.isDarwin then "macosx-aarch64-server-${debugLevel}" else if isAarch then "linux-aarch64-server-${debugLevel}" else "linux-x86_64-server-${debugLevel}";
   archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
   cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   linuxDeps = [ alsaLib ] ++ x11Libs;
+
+  darwinConfigureParams = if stdenv.isDarwin then "--with-xcode-path=${darwin.xcode_15_1} --with-extra-path=${darwin.xcode_15_1}/Contents/Developer/usr/bin --with-libjpeg=bundled --with-giflib=bundled --with-lcms=bundled" else "";
+  darwinDeps = [ patchelf darwin.xcode_15_1 darwin.bootstrap_cmds darwin.xattr ];
+  bootJdk = if stdenv.isDarwin then "${openjdk22.home}" else "${jdk.home}";
+
   self = with llvmPackages_18; libcxxStdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
@@ -19,11 +24,14 @@ let
     libs = [ libjpeg giflib libpng ];
     libsPath = lib.makeLibraryPath libs;
 
-    nativeBuildInputs = [ autoconf jdk pkg-config ] ++ nativeDeps;
+    nativeBuildInputs = [ autoconf jdk pkg-config ] ++
+      nativeDeps ++
+      lib.optionals stdenv.isDarwin darwinDeps;
     runtimeDependencies = map lib.getLib libs;
     buildInputs = [ libcxx bash cups file gnumake fontconfig freetype which zlib unzip zip lcms2 llvmPackages_18.lld ] ++
       libs ++
-      lib.optionals stdenv.isLinux linuxDeps;
+      lib.optionals stdenv.isLinux linuxDeps ++
+      lib.optionals stdenv.isDarwin darwinDeps;
 
     SOURCE_DATE_EPOCH = 315532802;
 
@@ -66,7 +74,7 @@ let
         --enable-headless-only \
         --enable-unlimited-crypto \
         --enable-reproducible-build \
-        --with-boot-jdk=${jdk.home} \
+        --with-boot-jdk=${bootJdk} \
         --with-debug-level=${debugLevel} \
         --with-extra-cflags='${cflags}' \
         --with-extra-cxxflags='${cflags}' \
@@ -83,6 +91,7 @@ let
         --with-version-opt=nixos \
         --with-version-pre= \
         --with-zlib=system \
+        ${darwinConfigureParams} \
       || cat config.log
     '';
 
