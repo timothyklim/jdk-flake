@@ -120,7 +120,7 @@
       with flake-utils.lib; with system; eachSystem [ x86_64-linux aarch64-linux aarch64-darwin ] (system:
       let
         sources = with builtins; (fromJSON (readFile ./flake.lock)).nodes;
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
         inherit (pkgs.stdenv.hostPlatform) isAarch;
 
         openjdk_21 = import ./build/openjdk.nix {
