@@ -81,8 +81,12 @@
       flake = false;
     };
 
-    zulu23_macos_aarch64_zip = {
-      url = "https://cdn.azul.com/zulu/bin/zulu23.28.85-ca-jdk23.0.0-macosx_aarch64.tar.gz";
+    zulu23_linux_x64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu23.30.13-ca-jdk23.0.1-linux_x64.tar.gz";
+      flake = false;
+    };
+    zulu23_macos_aarch64_tgz = {
+      url = "https://cdn.azul.com/zulu/bin/zulu23.30.13-ca-jdk23.0.1-macosx_aarch64.tar.gz";
       flake = false;
     };
 
@@ -114,7 +118,8 @@
     , zulu22_linux_aarch64_tgz
     , zulu22_linux_x64_tgz
     , zulu22_macos_aarch64_tgz
-    , zulu23_macos_aarch64_zip
+    , zulu23_linux_x64_tgz
+    , zulu23_macos_aarch64_tgz
       # , zing21_linux_tgz
     }:
       with flake-utils.lib; with system; eachSystem [ x86_64-linux aarch64-linux aarch64-darwin ] (system:
@@ -242,10 +247,15 @@
           version = "22.0.0";
         };
 
+        zulu_23_linux = import ./build/zulu.nix {
+          inherit pkgs;
+          src = if isAarch then zulu23_linux_aarch64_tgz else zulu23_linux_x64_tgz;
+          version = "23.0.1";
+        };
         zulu_23_macos = import ./build/zulu.nix {
           inherit pkgs;
-          src = zulu23_macos_aarch64_zip;
-          version = "23.0.0";
+          src = zulu23_macos_aarch64_tgz;
+          version = "23.0.1";
         };
 
         # zing_21 = import ./build/zing.nix {
@@ -256,7 +266,7 @@
 
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else pkgs.zulu21;
         jdk_22 = if pkgs.stdenv.isLinux then zulu_22_linux else zulu_22_macos;
-        jdk_23 = if pkgs.stdenv.isLinux then openjdk_23 else zulu_23_macos;
+        jdk_23 = if pkgs.stdenv.isLinux then zulu_23_linux else zulu_23_macos;
 
         jdk = openjdk_23;
 
