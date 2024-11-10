@@ -1,4 +1,4 @@
-{ pkgs, src, version, jre ? pkgs.jdk17 }:
+{ pkgs, src, version, jre ? pkgs.jdk21 }:
 
 with pkgs; stdenv.mkDerivation rec {
   inherit src version;

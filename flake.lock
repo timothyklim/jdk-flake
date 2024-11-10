@@ -53,11 +53,11 @@
     "jdk": {
       "flake": false,
       "locked": {
-        "lastModified": 1731193893,
-        "narHash": "sha256-KCPiiuSslQisDCRUfFpKZwldZ40XfE/XqMBsJtHzpwY=",
+        "lastModified": 1731236583,
+        "narHash": "sha256-rsp031SsgoUSgqtU7b5mbJonwrIlKUuSO+vDXAC+ji4=",
         "owner": "openjdk",
         "repo": "jdk",
-        "rev": "f400896822c2704d8e7c66afc1efa8a4fa91acb6",
+        "rev": "423e8e0999f53aa0bf95a7505a771dab3dd5c8d6",
         "type": "github"
       },
       "original": {
@@ -117,14 +117,14 @@
     "jmc_linux_tgz": {
       "flake": false,
       "locked": {
-        "lastModified": 1677614324,
-        "narHash": "sha256-kZZZJAWa65wx+H8EfqimJVz+B7A4x6VEdK7lZBMfRW0=",
+        "lastModified": 1716300481,
+        "narHash": "sha256-Fa5RAzs1QZENqZTdut1w4WoQuPx+zhZhNRTHwCyxRFw=",
         "type": "tarball",
-        "url": "https://download.java.net/java/GA/jmc8/05/binaries/jmc-8.3.1_linux-x64.tar.gz"
+        "url": "https://cdn.azul.com/zmc/bin/zmc9.0.0.15-ca-linux_x64.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://download.java.net/java/GA/jmc8/05/binaries/jmc-8.3.1_linux-x64.tar.gz"
+        "url": "https://cdn.azul.com/zmc/bin/zmc9.0.0.15-ca-linux_x64.tar.gz"
       }
     },
     "jtreg-src": {
@@ -196,14 +196,14 @@
     "visualvm_zip": {
       "flake": false,
       "locked": {
-        "lastModified": 1710754057,
-        "narHash": "sha256-yWSB8mqcOG7xd4/8YjPXzGvl7BgyOLdIoyAs69+/kv4=",
+        "lastModified": 1726134047,
+        "narHash": "sha256-CmbAYJzhzPIgUfo1M0JuwhNz6Bmymb0Fr1ERdmgQ95I=",
         "type": "tarball",
-        "url": "https://github.com/oracle/visualvm/releases/download/2.1.8/visualvm_218.zip"
+        "url": "https://github.com/oracle/visualvm/releases/download/2.1.10/visualvm_2110.zip"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/oracle/visualvm/releases/download/2.1.8/visualvm_218.zip"
+        "url": "https://github.com/oracle/visualvm/releases/download/2.1.10/visualvm_2110.zip"
       }
     },
     "zulu22_linux_aarch64_tgz": {

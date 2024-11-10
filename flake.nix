@@ -41,11 +41,11 @@
       flake = false;
     };
     jmc_linux_tgz = {
-      url = "https://download.java.net/java/GA/jmc8/05/binaries/jmc-8.3.1_linux-x64.tar.gz";
+      url = "https://cdn.azul.com/zmc/bin/zmc9.0.0.15-ca-linux_x64.tar.gz";
       flake = false;
     };
     visualvm_zip = {
-      url = "https://github.com/oracle/visualvm/releases/download/2.1.8/visualvm_218.zip";
+      url = "https://github.com/oracle/visualvm/releases/download/2.1.10/visualvm_2110.zip";
       flake = false;
     };
 
@@ -208,7 +208,7 @@
         jmc = import ./build/jmc.nix {
           inherit pkgs;
           src = jmc_linux_tgz;
-          version = "8.2.1";
+          version = "9.0.0";
         };
         jitwatch = import ./build/jitwatch.nix { inherit pkgs; };
         visualvm = import ./build/visualvm.nix {
