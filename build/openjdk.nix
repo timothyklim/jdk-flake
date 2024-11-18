@@ -17,7 +17,7 @@ let
   darwinDeps = [ patchelf darwin.xcode_15_1 darwin.bootstrap_cmds darwin.xattr ];
   bootJdk = if stdenv.isDarwin then "${openjdk22.home}" else "${jdk.home}";
 
-  self = with llvmPackages_18; libcxxStdenv.mkDerivation rec {
+  self = with llvmPackages_19; libcxxStdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
 
@@ -28,7 +28,7 @@ let
       nativeDeps ++
       lib.optionals stdenv.isDarwin darwinDeps;
     runtimeDependencies = map lib.getLib libs;
-    buildInputs = [ libcxx bash cups file gnumake fontconfig freetype which zlib unzip zip lcms2 llvmPackages_18.lld ] ++
+    buildInputs = [ libcxx bash cups file gnumake fontconfig freetype which zlib unzip zip lcms2 lld ] ++
       libs ++
       lib.optionals stdenv.isLinux linuxDeps ++
       lib.optionals stdenv.isDarwin darwinDeps;
