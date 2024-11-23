@@ -47,7 +47,7 @@ let
       libxslt
       libGL
       xorg.libXxf86vm
-      alsaLib
+      alsa-lib
       fontconfig
       freetype
       pango

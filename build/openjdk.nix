@@ -11,7 +11,7 @@ let
   archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
   cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
-  linuxDeps = [ alsaLib ] ++ x11Libs;
+  linuxDeps = [ alsa-lib ] ++ x11Libs;
 
   darwinConfigureParams = if stdenv.isDarwin then "--with-xcode-path=${darwin.xcode_15_1} --with-extra-path=${darwin.xcode_15_1}/Contents/Developer/usr/bin --with-libjpeg=bundled --with-giflib=bundled --with-lcms=bundled" else "";
   darwinDeps = [ patchelf darwin.xcode_15_1 darwin.bootstrap_cmds darwin.xattr ];
