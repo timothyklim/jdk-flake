@@ -15,7 +15,7 @@ let
 
   darwinConfigureParams = if stdenv.isDarwin then "--with-xcode-path=${darwin.xcode_15_1} --with-extra-path=${darwin.xcode_15_1}/Contents/Developer/usr/bin --with-libjpeg=bundled --with-giflib=bundled --with-lcms=bundled" else "";
   darwinDeps = [ patchelf darwin.xcode_15_1 darwin.bootstrap_cmds darwin.xattr ];
-  bootJdk = if stdenv.isDarwin then "${openjdk22.home}" else "${jdk.home}";
+  bootJdk = jdk.home;
 
   self = with llvmPackages_19; libcxxStdenv.mkDerivation rec {
     inherit src version;
