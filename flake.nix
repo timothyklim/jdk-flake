@@ -133,6 +133,10 @@
         pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
         inherit (pkgs.stdenv.hostPlatform) isAarch;
 
+        jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else pkgs.zulu21;
+        jdk_22 = if pkgs.stdenv.isLinux then zulu_22_linux else zulu_22_macos;
+        jdk_23 = if pkgs.stdenv.isLinux then zulu_23_linux else zulu_23_macos;
+
         openjdk_21 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk21;
@@ -289,10 +293,6 @@
         #   src = zing17_linux_tgz;
         #   version = "17.0.0";
         # };
-
-        jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else pkgs.zulu21;
-        jdk_22 = if pkgs.stdenv.isLinux then zulu_22_linux else zulu_22_macos;
-        jdk_23 = if pkgs.stdenv.isLinux then zulu_23_linux else zulu_23_macos;
 
         jdk = openjdk_23;
 
