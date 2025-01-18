@@ -9,7 +9,7 @@ let
   jvmFeatures = [ "zgc" ] ++ lib.optionals (!debug) [ "link-time-opt" ];
   image = if stdenv.isDarwin then "macosx-aarch64-server-${debugLevel}" else if isAarch then "linux-aarch64-server-${debugLevel}" else "linux-x86_64-server-${debugLevel}";
   archCflags = if isAarch then "-march=native -mtune=native" else "-march=westmere -mtune=haswell";
-  cflags = archCflags + " -O3 -funroll-loops -fomit-frame-pointer";
+  cflags = "${archCflags} -O3 -funroll-loops";
   x11Libs = with xorg; [ libX11 libXext libXrender libXtst libXt libXi libXrandr ];
   linuxDeps = [ alsa-lib ] ++ x11Libs;
 
@@ -39,12 +39,15 @@ let
       ./patches/disable_incubating_warn.patch
     ] ++ lib.optionals (lib.versionOlder version "21") [
       "${nixpkgs}/pkgs/development/compilers/openjdk/fix-java-home-jdk10.patch"
-    ] ++ lib.optionals (lib.versionAtLeast version "21") [
+    ] ++ lib.optionals (lib.versionAtLeast version "21" && lib.versionOlder "24" version) [
       ./patches/fix-java-home-jdk21.patch
-    ] ++ lib.optionals (lib.versionOlder "23" version) [
-      "${nixpkgs}/pkgs/development/compilers/openjdk/read-truststore-from-env-jdk10.patch"
-      "${nixpkgs}/pkgs/development/compilers/openjdk/currency-date-range-jdk10.patch"
-      "${nixpkgs}/pkgs/development/compilers/openjdk/increase-javadoc-heap-jdk13.patch"
+    ] ++ lib.optionals (lib.versionAtLeast version "24") [
+      ./patches/fix-java-home-jdk24.patch
+      ./patches/read-truststore-from-env-jdk24.patch
+    ] ++ lib.optionals (lib.versionOlder "23" version && lib.versionOlder "24" version) [
+      "${nixpkgs}/pkgs/development/compilers/openjdk/11/patches/read-truststore-from-env-jdk10.patch"
+      "${nixpkgs}/pkgs/development/compilers/openjdk/11/patches/currency-date-range-jdk10.patch"
+      "${nixpkgs}/pkgs/development/compilers/openjdk/17/patches/increase-javadoc-heap-jdk13.patch"
       # -Wformat etc. are stricter in newer gccs, per
       # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=79677
       # so grab the work-around from

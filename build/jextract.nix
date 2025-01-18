@@ -7,7 +7,7 @@ with pkgs; stdenv.mkDerivation {
 
   patches = [ ./patches/root-readlink.patch ];
 
-  nativeBuildInputs = [ cmake gradle_7 ];
+  nativeBuildInputs = [ cmake gradle_8 ];
   dontUseCmakeConfigure = true;
 
   buildPhase = ''
