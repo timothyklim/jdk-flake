@@ -188,9 +188,6 @@
         "jtreg-src": "jtreg-src",
         "nixpkgs": "nixpkgs",
         "visualvm_zip": "visualvm_zip",
-        "zulu22_linux_aarch64_tgz": "zulu22_linux_aarch64_tgz",
-        "zulu22_linux_x64_tgz": "zulu22_linux_x64_tgz",
-        "zulu22_macos_aarch64_tgz": "zulu22_macos_aarch64_tgz",
         "zulu23_linux_x64_tgz": "zulu23_linux_x64_tgz",
         "zulu23_macos_aarch64_tgz": "zulu23_macos_aarch64_tgz"
       }
@@ -221,45 +218,6 @@
       "original": {
         "type": "tarball",
         "url": "https://github.com/oracle/visualvm/releases/download/2.1.10/visualvm_2110.zip"
-      }
-    },
-    "zulu22_linux_aarch64_tgz": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712747058,
-        "narHash": "sha256-u86agDW5d5hE9SlwemYNEGod6dLuP3Q0ZzLroFexyjE=",
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-linux_aarch64.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-linux_aarch64.tar.gz"
-      }
-    },
-    "zulu22_linux_x64_tgz": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712740028,
-        "narHash": "sha256-DLco99cWGGunTOiEu3TL7xZvnc0LawVp4jnGunV1+ew=",
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-linux_x64.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-linux_x64.tar.gz"
-      }
-    },
-    "zulu22_macos_aarch64_tgz": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712749034,
-        "narHash": "sha256-XSI0Wp2J99GuZDsOiLn65WnH0LionP8WJ9e0ykqrqs0=",
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-macosx_aarch64.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zulu/bin/zulu22.30.13-ca-jdk22.0.1-macosx_aarch64.tar.gz"
       }
     },
     "zulu23_linux_x64_tgz": {
