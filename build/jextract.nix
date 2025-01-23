@@ -1,4 +1,4 @@
-{ pkgs, jdk_22, src }:
+{ pkgs, jdk, src }:
 
 with pkgs; stdenv.mkDerivation {
   inherit src;
@@ -12,7 +12,7 @@ with pkgs; stdenv.mkDerivation {
 
   buildPhase = ''
     export GRADLE_USER_HOME=$(mktemp -d)
-    gradle --no-daemon -Pjdk22_home=${jdk_22.home} -Pllvm_home=${llvmPackages_13.libclang.lib} build
+    gradle --no-daemon -Pjdk_home=${jdk.home} -Pllvm_home=${llvmPackages_13.libclang.lib} build
   '';
 
   installPhase = ''
