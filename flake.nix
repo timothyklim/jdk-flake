@@ -10,10 +10,6 @@
       url = "github:openjdk/jdk21u";
       flake = false;
     };
-    jdk23 = {
-      url = "github:openjdk/jdk23u";
-      flake = false;
-    };
     jdk24 = {
       url = "github:openjdk/jdk24u";
       flake = false;
@@ -72,21 +68,12 @@
     # };
 
     # Zulu
-    zulu23_linux_x64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu23.32.11-ca-jdk23.0.2-linux_x64.tar.gz";
-      flake = false;
-    };
-    zulu23_macos_aarch64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu23.32.11-ca-jdk23.0.2-macosx_aarch64.tar.gz";
-      flake = false;
-    };
-
     zulu24_linux_x64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu24.0.77-beta-jdk24.0.0-beta.34-linux_x64.tar.gz";
+      url = "https://cdn.azul.com/zulu/bin/zulu24.28.83-ca-jdk24.0.0-linux_x64.tar.gz";
       flake = false;
     };
     zulu24_macos_aarch64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu24.0.77-beta-jdk24.0.0-beta.34-macosx_aarch64.zip";
+      url = "https://cdn.azul.com/zulu/bin/zulu24.28.83-ca-jdk24.0.0-macosx_aarch64.tar.gz";
       flake = false;
     };
 
@@ -102,7 +89,6 @@
     , nixpkgs
     , flake-utils
     , jdk21
-    , jdk23
     , jdk24
     , jdk
       # , jdk-loom
@@ -116,8 +102,6 @@
     , jattach-src
       # , jprofiler_tgz
       # , yourkit_zip
-    , zulu23_linux_x64_tgz
-    , zulu23_macos_aarch64_tgz
     , zulu24_linux_x64_tgz
     , zulu24_macos_aarch64_tgz
       # , zing21_linux_tgz
@@ -149,45 +133,24 @@
           debug = true;
         };
 
-        openjdk_23 = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk23;
-          version = "23";
-          jdk = pkgs.zulu23;
-        };
-        openjdk_23_debug = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk23;
-          version = "23";
-          jdk = pkgs.zulu23;
-          debugSymbols = true;
-        };
-        openjdk_23_fastdebug = import ./build/openjdk.nix {
-          inherit pkgs nixpkgs;
-          src = jdk23;
-          version = "23";
-          jdk = pkgs.zulu23;
-          debug = true;
-        };
-
         openjdk_24 = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk24;
           version = "24";
-          jdk = zulu_23_linux;
+          jdk = pkgs.zulu23;
         };
         openjdk_24_debug = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk24;
           version = "24";
-          jdk = zulu_23_linux;
+          jdk = pkgs.zulu23;
           debugSymbols = true;
         };
         openjdk_24_fastdebug = import ./build/openjdk.nix {
           inherit pkgs nixpkgs;
           src = jdk24;
           version = "24";
-          jdk = zulu_23_linux;
+          jdk = pkgs.zulu23;
           debug = true;
         };
 
@@ -224,7 +187,7 @@
         };
         jextract = import ./build/jextract.nix {
           inherit pkgs;
-          jdk = jdk_23;
+          jdk = pkgs.zulu23;
           src = jextract-src;
         };
         jmc = import ./build/jmc.nix {
@@ -258,26 +221,15 @@
         #   src = yourkit_zip;
         # };
 
-        zulu_23_linux = import ./build/zulu.nix {
-          inherit pkgs;
-          src = zulu23_linux_x64_tgz;
-          version = "23.0.1";
-        };
-        zulu_23_macos = import ./build/zulu.nix {
-          inherit pkgs;
-          src = zulu23_macos_aarch64_tgz;
-          version = "23.0.1";
-        };
-
         zulu_24_linux = import ./build/zulu.nix {
           inherit pkgs;
           src = zulu24_linux_x64_tgz;
-          version = "24-ea+34";
+          version = "24+36";
         };
         zulu_24_macos = import ./build/zulu.nix {
           inherit pkgs;
           src = zulu24_macos_aarch64_tgz;
-          version = "24-ea+34";
+          version = "24+36";
         };
 
         # zing_21 = import ./build/zing.nix {
@@ -287,14 +239,12 @@
         # };
 
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else pkgs.zulu21;
-        jdk_23 = if pkgs.stdenv.isLinux then zulu_23_linux else zulu_23_macos;
         jdk_24 = if pkgs.stdenv.isLinux then openjdk_24 else zulu_24_macos;
 
-        jdk = openjdk_23;
+        jdk = jdk_24;
 
         derivation = {
           inherit openjdk_21 openjdk_21_debug openjdk_21_fastdebug
-            openjdk_23 openjdk_23_debug openjdk_23_fastdebug
             openjdk_24 openjdk_24_debug openjdk_24_fastdebug
             openjdk_latest
             # openjdk-loom openjdk-panama openjdk-valhalla
