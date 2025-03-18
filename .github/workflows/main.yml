@@ -28,10 +28,17 @@ jobs:
             mv $strFileNameFSproj.new $strFileNameFSproj
           done
 
-    - name: Build nix flake
+    - name: Build nix flake (NixOS)
+      if: matrix.runner == 'nixos'
       env:
         LD_LIBRARY_PATH: ''
-      run: nix build -L .#openjdk_23 .#openjdk_23_debug .#async-profiler .#jextract .#jattach
+      run: nix build -L .#openjdk_23 .#openjdk_23_debug #openjdk_24 .#openjdk_24_debug .#async-profiler .#jextract .#jattach
+
+    - name: Build nix flake (macOS)
+      if: matrix.runner == 'macmini'
+      env:
+        LD_LIBRARY_PATH: ''
+      run: nix build -L .#jdk_23 .#jdk_24 .#async-profiler .#jextract .#jattach
 
     - name: Create files for store
       env:
