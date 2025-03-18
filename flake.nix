@@ -73,11 +73,11 @@
 
     # Zulu
     zulu23_linux_x64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu23.30.13-ca-jdk23.0.1-linux_x64.tar.gz";
+      url = "https://cdn.azul.com/zulu/bin/zulu23.32.11-ca-jdk23.0.2-linux_x64.tar.gz";
       flake = false;
     };
     zulu23_macos_aarch64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu23.30.13-ca-jdk23.0.1-macosx_aarch64.tar.gz";
+      url = "https://cdn.azul.com/zulu/bin/zulu23.32.11-ca-jdk23.0.2-macosx_aarch64.tar.gz";
       flake = false;
     };
 
@@ -288,7 +288,7 @@
 
         jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else pkgs.zulu21;
         jdk_23 = if pkgs.stdenv.isLinux then zulu_23_linux else zulu_23_macos;
-        jdk_24 = if pkgs.stdenv.isLinux then zulu_24_linux else zulu_24_macos;
+        jdk_24 = if pkgs.stdenv.isLinux then openjdk_24 else zulu_24_macos;
 
         jdk = openjdk_23;
 
