@@ -251,7 +251,7 @@
             jtreg jextract jmc jitwatch visualvm
             async-profiler jattach
             # jprofiler yourkit
-            jdk_21 jdk_23 jdk_24
+            jdk_21 jdk_24
             # zing_21
             ;
         };
