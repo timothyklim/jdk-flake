@@ -84,6 +84,11 @@
     # };
   };
 
+  nixConfig = {
+    extra-trusted-public-keys = "nix-store.tawasal.ae:ZvppQTiNIqqt9y970LptbhrLOmqHWrIvrzkH9Qz2uJM=";
+    extra-substituters = "https://nix-store.tawasal.ae/store";
+  };
+
   outputs =
     { self
     , nixpkgs
