@@ -3,28 +3,19 @@
 with pkgs;
 
 let
-  libSuffix = if stdenv.isDarwin then "dylib" else "so";
+  ext = stdenv.hostPlatform.extensions.sharedLibrary;
   self = stdenv.mkDerivation rec {
     inherit src;
     name = "async-profiler";
 
     buildInputs = [ jdk ];
 
-    patchPhase = ''
-      patchShebangs .
-      substituteInPlace Makefile \
-        --replace '/bin/ls' "${coreutils}/bin/ls" \
-        --replace 'gcc' 'cc' \
-        --replace 'g++' 'c++' \
-        --replace '-static-libcc' '-static-libgcc'
-    '';
-
     installPhase = ''
-      cp -r build $out
-      ln -s $out/bin/asprof $out/bin/async-profiler
+      install -D build/bin/asprof "$out/bin/async-profiler"
+      install -D build/lib/libasyncProfiler${ext} "$out/lib/libasyncProfiler${ext}"
     '';
 
-    passthru.libasyncProfiler = "${self}/libasyncProfiler.${libSuffix}";
+    passthru.libasyncProfiler = "${self}/libasyncProfiler${ext}";
 
     enableParallelBuilding = true;
     dontStrip = true;
