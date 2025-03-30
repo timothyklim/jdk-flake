@@ -11,8 +11,8 @@ let
     buildInputs = [ jdk ];
 
     installPhase = ''
-      install -D build/bin/asprof "$out/bin/async-profiler"
-      install -D build/lib/libasyncProfiler${ext} "$out/lib/libasyncProfiler${ext}"
+      cp -r build $out
+      ln -s $out/bin/asprof $out/bin/async-profiler
     '';
 
     passthru.libasyncProfiler = "${self}/libasyncProfiler${ext}";
