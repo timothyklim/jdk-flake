@@ -1,4 +1,4 @@
-{ mkShell, gdb, jdk, ... }:
+{ mkShell, gdb, async-profiler, jdk, ... }:
 
 mkShell {
   name = "jdk-env";

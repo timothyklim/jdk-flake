@@ -81,6 +81,7 @@ let
         --with-debug-level=${debugLevel} \
         --with-extra-cflags='${cflags}' \
         --with-extra-cxxflags='${cflags}' \
+        --with-extra-ldflags='-stdlib=libc++' \
         --with-giflib=system \
         --with-jvm-features=${lib.concatStringsSep "," jvmFeatures} \
         --with-jvm-variants=server \
@@ -161,10 +162,7 @@ let
 
     disallowedReferences = [ jdk ];
 
-    passthru = {
-      architecture = "";
-      home = "${self}/lib/openjdk";
-    };
+    passthru.home = "${self}/lib/openjdk";
 
     dontStrip = true;
     preferLocalBuild = true;
