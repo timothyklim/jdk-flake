@@ -15,7 +15,7 @@ let
       ln -s $out/bin/asprof $out/bin/async-profiler
     '';
 
-    passthru.libasyncProfiler = "${self}/libasyncProfiler${ext}";
+    passthru.libasyncProfiler = "${self}/lib/libasyncProfiler${ext}";
 
     enableParallelBuilding = true;
     dontStrip = true;
