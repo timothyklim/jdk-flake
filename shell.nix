@@ -4,6 +4,7 @@ mkShell {
   name = "jdk-env";
   nativeBuildInputs = [ jdk ];
   buildInputs = [
+    async-profiler
     # openjdk_17
     # openjdk_18
     # openjdk-loom

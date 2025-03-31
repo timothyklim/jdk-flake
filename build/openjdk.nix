@@ -21,7 +21,7 @@ let
     inherit src version;
     pname = "openjdk";
 
-    libs = [ libjpeg giflib libpng ];
+    libs = [ libcxx libjpeg giflib libpng zlib ];
     libsPath = lib.makeLibraryPath libs;
 
     nativeBuildInputs = [ autoconf jdk pkg-config ] ++
@@ -89,7 +89,7 @@ let
         --with-libjpeg=system \
         --with-libpng=system \
         --with-native-debug-symbols=${nativeDebugSymbols} \
-        --with-stdc++lib=static \
+        --with-stdc++lib=dynamic \
         --with-toolchain-type=clang \
         --with-version-build=0 \
         --with-version-opt=nixos \
@@ -102,7 +102,7 @@ let
     NIX_CFLAGS_COMPILE = "-Wno-error";
 
     buildPhase = ''
-      export LD_LIBRARY_PATH="${lib.makeLibraryPath [ zlib ]}:$LD_LIBRARY_PATH"
+      export LD_LIBRARY_PATH="${libsPath}:$LD_LIBRARY_PATH"
       CONF=${image} make images || cat /build/source/build/${image}/make-support/failure-logs
     '';
 
