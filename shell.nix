@@ -12,4 +12,8 @@ mkShell {
     # zing_17
     # jdk_17
   ];
+
+  shellHook = ''
+    java -agentpath:${async-profiler.libasyncProfiler} -version
+  '';
 }

@@ -164,8 +164,11 @@ let
 
     passthru.home = "${self}/lib/openjdk";
 
+    versionCheckProgram = "$out/bin/java";
+
     dontStrip = true;
     preferLocalBuild = true;
+    separateDebugInfo = true;
   };
 in
 self
