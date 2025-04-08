@@ -57,16 +57,6 @@
       url = "github:jattach/jattach";
       flake = false;
     };
-
-    # Zulu
-    zulu24_linux_x64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu24.28.83-ca-jdk24.0.0-linux_x64.tar.gz";
-      flake = false;
-    };
-    zulu24_macos_aarch64_tgz = {
-      url = "https://cdn.azul.com/zulu/bin/zulu24.28.83-ca-jdk24.0.0-macosx_aarch64.tar.gz";
-      flake = false;
-    };
   };
 
   outputs =
@@ -85,13 +75,28 @@
     , visualvm_zip
     , async-profiler-src
     , jattach-src
-    , zulu24_linux_x64_tgz
-    , zulu24_macos_aarch64_tgz
     }:
       with flake-utils.lib; with system; eachSystem [ x86_64-linux aarch64-linux aarch64-darwin ]
         (system:
         let
           pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+          inherit (pkgs.stdenv.hostPlatform) isAarch;
+
+          sources = with pkgs; {
+            zulu_24 = rec {
+              version = "24.0.0";
+              x86_64-linux = fetchurl {
+                url = "https://cdn.azul.com/zulu/bin/zulu24.28.83-ca-jdk${version}-linux_x64.tar.gz";
+                # sha256 = lib.fakeSha256;
+                hash = "sha256-Kf6gF8A8ZFIhujEgjlENeuSPVzW6QWnVZcRst35/ZvI=";
+              };
+              aarch64-darwin = fetchurl {
+                url = "https://cdn.azul.com/zulu/bin/zulu24.28.83-ca-jdk${version}-macosx_aarch64.tar.gz";
+                # sha256 = lib.fakeSha256;
+                hash = "sha256-7yXLOJCK0RZ8V1vsexOGxGR9NAwi/pCl95BlO8E8nGU=";
+              };
+            };
+          };
 
           # jprofiler_tgz = {
           #   url = "https://download.ej-technologies.com/jprofiler/jprofiler_linux_14_0.tar.gz";
@@ -101,8 +106,6 @@
           #   url = "https://download.yourkit.com/yjp/2023.9/YourKit-JavaProfiler-2023.9-b107-arm64.zip";
           #   flake = false;
           # };
-
-          inherit (pkgs.stdenv.hostPlatform) isAarch;
 
           openjdk_21 = import ./build/openjdk.nix {
             inherit pkgs nixpkgs;
@@ -215,13 +218,13 @@
 
           zulu_24_linux = import ./build/zulu.nix {
             inherit pkgs;
-            src = zulu24_linux_x64_tgz;
-            version = "24+36";
+            inherit (sources.zulu_24) version;
+            src = sources.zulu_24.${system};
           };
           zulu_24_macos = import ./build/zulu.nix {
             inherit pkgs;
-            src = zulu24_macos_aarch64_tgz;
-            version = "24+36";
+            inherit (sources.zulu_24) version;
+            src = sources.zulu_24.${system};
           };
 
           jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else pkgs.zulu21;
@@ -248,6 +251,21 @@
         {
           packages = derivation;
           devShells.default = pkgs.callPackage ./shell.nix derivation;
+          checks.hashes = pkgs.runCommand "hashes" { } ''
+            mkdir -p $out
+
+            ${nixpkgs.lib.concatStringsSep "\n" (
+              builtins.concatLists (
+                nixpkgs.lib.mapAttrsToList (name: attr:
+                  nixpkgs.lib.mapAttrsToList (platform: src:
+                    if builtins.isAttrs src && src ? type && src.type == "derivation"
+                    then "echo '${name}.${platform} hash verified: ${src}' >> $out/success"
+                    else ""
+                  ) attr
+                ) sources
+              )
+            )}
+          '';
           formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
         }) // {
         nixosModules.default = {
