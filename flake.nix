@@ -40,14 +40,6 @@
       url = "github:openjdk/jextract";
       flake = false;
     };
-    jmc_linux_tgz = {
-      url = "https://cdn.azul.com/zmc/bin/zmc9.0.0.15-ca-linux_x64.tar.gz";
-      flake = false;
-    };
-    visualvm_zip = {
-      url = "https://github.com/oracle/visualvm/releases/download/2.1.10/visualvm_2110.zip";
-      flake = false;
-    };
 
     async-profiler-src = {
       url = "github:jvm-profiling-tools/async-profiler";
@@ -71,8 +63,6 @@
       # , jdk-valhalla
     , jtreg-src
     , jextract-src
-    , jmc_linux_tgz
-    , visualvm_zip
     , async-profiler-src
     , jattach-src
     }:
@@ -83,6 +73,24 @@
           inherit (pkgs.stdenv.hostPlatform) isAarch;
 
           sources = with pkgs; {
+            jmc = rec {
+              version = "9.1.0.25";
+              x86_64-linux = fetchurl {
+                url = "https://cdn.azul.com/zmc/bin/zmc${version}-ca-linux_x64.tar.gz";
+                # sha256 = lib.fakeSha256;
+                hash = "sha256-oUCFiN9Pb4Lkdwt7aO2/nojSMZNqWd4z+9lv2PzzKow=";
+              };
+            };
+
+            visualvm = rec {
+              version = "2.1.10";
+              default = fetchurl {
+                url = "https://github.com/oracle/visualvm/releases/download/${version}/visualvm_2110.zip";
+                # sha256 = lib.fakeSha256;
+                hash = "sha256-h4UK+emHPGkMu3YFZifnPfv9Hh2VJ5qQMXIqhaw22Zk=";
+              };
+            };
+
             zulu_24 = rec {
               version = "24.0.0";
               x86_64-linux = fetchurl {
@@ -187,14 +195,14 @@
           };
           jmc = import ./build/jmc.nix {
             inherit pkgs;
-            src = jmc_linux_tgz;
-            version = "9.0.0";
+            inherit (sources.jmc) version;
+            src = sources.jmc.${system};
           };
           jitwatch = import ./build/jitwatch.nix { inherit pkgs; };
           visualvm = import ./build/visualvm.nix {
             inherit pkgs;
-            src = visualvm_zip;
-            version = "2.1.4";
+            inherit (sources.visualvm) version;
+            src = sources.visualvm.default;
           };
 
           async-profiler = import ./build/async-profiler.nix {

@@ -114,19 +114,6 @@
         "type": "github"
       }
     },
-    "jmc_linux_tgz": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1716300481,
-        "narHash": "sha256-Fa5RAzs1QZENqZTdut1w4WoQuPx+zhZhNRTHwCyxRFw=",
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zmc/bin/zmc9.0.0.15-ca-linux_x64.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://cdn.azul.com/zmc/bin/zmc9.0.0.15-ca-linux_x64.tar.gz"
-      }
-    },
     "jtreg-src": {
       "flake": false,
       "locked": {
@@ -167,10 +154,8 @@
         "jdk21": "jdk21",
         "jdk24": "jdk24",
         "jextract-src": "jextract-src",
-        "jmc_linux_tgz": "jmc_linux_tgz",
         "jtreg-src": "jtreg-src",
-        "nixpkgs": "nixpkgs",
-        "visualvm_zip": "visualvm_zip"
+        "nixpkgs": "nixpkgs"
       }
     },
     "systems": {
@@ -186,19 +171,6 @@
         "owner": "nix-systems",
         "repo": "default",
         "type": "github"
-      }
-    },
-    "visualvm_zip": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1726134047,
-        "narHash": "sha256-CmbAYJzhzPIgUfo1M0JuwhNz6Bmymb0Fr1ERdmgQ95I=",
-        "type": "tarball",
-        "url": "https://github.com/oracle/visualvm/releases/download/2.1.10/visualvm_2110.zip"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/oracle/visualvm/releases/download/2.1.10/visualvm_2110.zip"
       }
     }
   },
