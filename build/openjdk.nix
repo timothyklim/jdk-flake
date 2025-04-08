@@ -17,18 +17,18 @@ let
   darwinDeps = [ patchelf darwin.xcode_15_1 darwin.bootstrap_cmds darwin.xattr ];
   bootJdk = jdk.home;
 
-  self = stdenv.mkDerivation rec {
+  self = with llvmPackages_19; libcxxStdenv.mkDerivation rec {
     inherit src version;
     pname = "openjdk";
 
-    libs = [ libjpeg giflib libpng zlib ];
+    libs = [ libcxx libjpeg giflib libpng zlib ];
     libsPath = lib.makeLibraryPath libs;
 
     nativeBuildInputs = [ autoconf jdk pkg-config ] ++
       nativeDeps ++
       lib.optionals stdenv.isDarwin darwinDeps;
     runtimeDependencies = map lib.getLib libs;
-    buildInputs = [ bash cups file gnumake fontconfig freetype which zlib unzip zip lcms2 lld ] ++
+    buildInputs = [ libcxx bash cups file gnumake fontconfig freetype which zlib unzip zip lcms2 lld ] ++
       libs ++
       lib.optionals stdenv.isLinux linuxDeps ++
       lib.optionals stdenv.isDarwin darwinDeps;
@@ -69,7 +69,7 @@ let
 
     # --with-jtreg
     configurePhase = ''
-      #export NIX_CFLAGS_COMPILE="-isystem ${lib.getDev libcxx}/include/c++/v1 $NIX_CFLAGS_COMPILE"
+      export NIX_CFLAGS_COMPILE="-isystem ${lib.getDev libcxx}/include/c++/v1 $NIX_CFLAGS_COMPILE"
 
       ./configure \
         --prefix=$out \
@@ -81,6 +81,7 @@ let
         --with-debug-level=${debugLevel} \
         --with-extra-cflags='${cflags}' \
         --with-extra-cxxflags='${cflags}' \
+        --with-extra-ldflags='-stdlib=libc++' \
         --with-giflib=system \
         --with-jvm-features=${lib.concatStringsSep "," jvmFeatures} \
         --with-jvm-variants=server \
@@ -89,7 +90,7 @@ let
         --with-libpng=system \
         --with-native-debug-symbols=${nativeDebugSymbols} \
         --with-stdc++lib=dynamic \
-        --with-toolchain-type=gcc \
+        --with-toolchain-type=clang \
         --with-version-build=0 \
         --with-version-opt=nixos \
         --with-version-pre= \
