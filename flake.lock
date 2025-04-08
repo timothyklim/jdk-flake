@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "async-profiler-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1744072079,
-        "narHash": "sha256-VaCSCScY+kFioKEVJkE8I2y3tnfjSk4TdxBK7q5lcvY=",
-        "owner": "jvm-profiling-tools",
-        "repo": "async-profiler",
-        "rev": "ebd889466b1542c8fd6b3c948b87e44ce97ab7a3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jvm-profiling-tools",
-        "repo": "async-profiler",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -82,22 +66,6 @@
         "type": "github"
       }
     },
-    "jextract-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1743692442,
-        "narHash": "sha256-4vvjQrS+n3wv4hiEoRBaTT76EPA4hc99Z6DR2dfagVQ=",
-        "owner": "openjdk",
-        "repo": "jextract",
-        "rev": "3fe6e4ea9480aa0489407ddd215cdf2a4c9f2430",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "repo": "jextract",
-        "type": "github"
-      }
-    },
     "jtreg-src": {
       "flake": false,
       "locked": {
@@ -131,12 +99,10 @@
     },
     "root": {
       "inputs": {
-        "async-profiler-src": "async-profiler-src",
         "flake-utils": "flake-utils",
         "jattach-src": "jattach-src",
         "jdk": "jdk",
         "jdk24": "jdk24",
-        "jextract-src": "jextract-src",
         "jtreg-src": "jtreg-src",
         "nixpkgs": "nixpkgs"
       }

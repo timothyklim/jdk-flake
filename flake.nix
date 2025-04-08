@@ -10,37 +10,16 @@
       url = "github:openjdk/jdk24u";
       flake = false;
     };
-
     jdk = {
       url = "github:openjdk/jdk";
       flake = false;
     };
-    # jdk-loom = {
-    #   url = "github:openjdk/loom/fibers";
-    #   flake = false;
-    # };
-    # jdk-panama = {
-    #   url = "github:openjdk/panama-foreign/foreign-jextract";
-    #   flake = false;
-    # };
-    # jdk-valhalla = {
-    #   url = "github:openjdk/valhalla/lworld";
-    #   flake = false;
-    # };
 
     jtreg-src = {
       url = "github:openjdk/jtreg";
       flake = false;
     };
-    jextract-src = {
-      url = "github:openjdk/jextract";
-      flake = false;
-    };
 
-    async-profiler-src = {
-      url = "github:jvm-profiling-tools/async-profiler";
-      flake = false;
-    };
     jattach-src = {
       url = "github:jattach/jattach";
       flake = false;
@@ -53,12 +32,7 @@
     , flake-utils
     , jdk24
     , jdk
-      # , jdk-loom
-      # , jdk-panama
-      # , jdk-valhalla
     , jtreg-src
-    , jextract-src
-    , async-profiler-src
     , jattach-src
     }:
       with flake-utils.lib; with system; eachSystem [ x86_64-linux aarch64-linux aarch64-darwin ]
@@ -68,6 +42,22 @@
           inherit (pkgs.stdenv.hostPlatform) isAarch;
 
           sources = with pkgs; {
+            async-profiler.default = fetchFromGitHub {
+              repo = "async-profiler";
+              owner = "jvm-profiling-tools";
+              rev = "6979a9eff23d24db4268f842b28f153831f1a9ee";
+              # sha256 = lib.fakeSha256;
+              hash = "sha256-dMKy6A0mbi/YI/MbkBAeoVDnMn+ZoKi8FDas2qcEdGU=";
+            };
+
+            jextract.default = fetchFromGitHub {
+              repo = "jextract";
+              owner = "openjdk";
+              rev = "3fe6e4ea9480aa0489407ddd215cdf2a4c9f2430";
+              # sha256 = lib.fakeSha256;
+              hash = "sha256-4vvjQrS+n3wv4hiEoRBaTT76EPA4hc99Z6DR2dfagVQ=";
+            };
+
             jmc = rec {
               version = "9.1.0.25";
               x86_64-linux = fetchurl {
@@ -150,34 +140,14 @@
             jdk = zulu_24;
           };
 
-          # openjdk-loom = import ./build/openjdk.nix {
-          #   inherit pkgs nixpkgs;
-          #   src = jdk-loom;
-          #   version = "20-loom";
-          #   jdk = openjdk_21;
-          # };
-          # openjdk-panama = import ./build/openjdk.nix {
-          #   inherit pkgs nixpkgs;
-          #   src = jdk-panama;
-          #   version = "20-panama";
-          #   nativeDeps = [ pkgs.llvmPackages.libclang ];
-          #   jdk = openjdk_21;
-          # };
-          # openjdk-valhalla = import ./build/openjdk.nix {
-          #   inherit pkgs nixpkgs;
-          #   src = jdk-valhalla;
-          #   version = "20-valhalla";
-          #   jdk = openjdk_21;
-          # };
-
           jtreg = import ./build/jtreg.nix {
             inherit pkgs;
             src = jtreg-src;
           };
           jextract = import ./build/jextract.nix {
             inherit pkgs;
-            jdk = pkgs.zulu23;
-            src = jextract-src;
+            jdk = zulu_24;
+            src = sources.jextract.default;
           };
           jmc = import ./build/jmc.nix {
             inherit pkgs;
@@ -193,8 +163,8 @@
 
           async-profiler = import ./build/async-profiler.nix {
             inherit pkgs;
-            jdk = pkgs.openjdk_headless;
-            src = async-profiler-src;
+            jdk = zulu_24;
+            src = sources.async-profiler.default;
           };
           jattach = import ./build/jattach.nix {
             inherit pkgs;
@@ -218,7 +188,6 @@
             inherit openjdk_24 openjdk_24_debug openjdk_24_fastdebug
               openjdk_latest
               zulu_24
-              # openjdk-loom openjdk-panama openjdk-valhalla
               jtreg jextract jmc jitwatch visualvm
               async-profiler jattach
               # jprofiler yourkit
@@ -254,7 +223,6 @@
           inherit (self.packages.${prev.system}) openjdk_24 openjdk_24_debug openjdk_24_fastdebug
             openjdk_latest
             zulu_24
-            # openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jmc jitwatch visualvm
             async-profiler jattach
             # jprofiler yourkit
