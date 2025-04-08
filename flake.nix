@@ -6,10 +6,6 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # OpenJDK variants
-    jdk21 = {
-      url = "github:openjdk/jdk21u";
-      flake = false;
-    };
     jdk24 = {
       url = "github:openjdk/jdk24u";
       flake = false;
@@ -55,7 +51,6 @@
     { self
     , nixpkgs
     , flake-utils
-    , jdk21
     , jdk24
     , jdk
       # , jdk-loom
@@ -115,45 +110,36 @@
           #   flake = false;
           # };
 
-          openjdk_21 = import ./build/openjdk.nix {
-            inherit pkgs nixpkgs;
-            src = jdk21;
-            version = "21";
-            jdk = pkgs.zulu21;
+          zulu_24_linux = import ./build/zulu.nix {
+            inherit pkgs;
+            inherit (sources.zulu_24) version;
+            src = sources.zulu_24.${system};
           };
-          openjdk_21_debug = import ./build/openjdk.nix {
-            inherit pkgs nixpkgs;
-            src = jdk21;
-            version = "21";
-            jdk = pkgs.zulu21;
-            debugSymbols = true;
+          zulu_24_macos = import ./build/zulu.nix {
+            inherit pkgs;
+            inherit (sources.zulu_24) version;
+            src = sources.zulu_24.${system};
           };
-          openjdk_21_fastdebug = import ./build/openjdk.nix {
-            inherit pkgs nixpkgs;
-            src = jdk21;
-            version = "21";
-            jdk = pkgs.zulu21;
-            debug = true;
-          };
+          zulu_24 = if pkgs.stdenv.isLinux then zulu_24_linux else zulu_24_macos;
 
           openjdk_24 = import ./build/openjdk.nix {
             inherit pkgs nixpkgs;
             src = jdk24;
             version = "24";
-            jdk = pkgs.zulu23;
+            jdk = zulu_24;
           };
           openjdk_24_debug = import ./build/openjdk.nix {
             inherit pkgs nixpkgs;
             src = jdk24;
             version = "24";
-            jdk = pkgs.zulu23;
+            jdk = zulu_24;
             debugSymbols = true;
           };
           openjdk_24_fastdebug = import ./build/openjdk.nix {
             inherit pkgs nixpkgs;
             src = jdk24;
             version = "24";
-            jdk = pkgs.zulu23;
+            jdk = zulu_24;
             debug = true;
           };
 
@@ -161,7 +147,7 @@
             inherit pkgs nixpkgs;
             src = jdk;
             version = "latest";
-            jdk = pkgs.zulu23;
+            jdk = zulu_24;
           };
 
           # openjdk-loom = import ./build/openjdk.nix {
@@ -224,34 +210,19 @@
           #   src = yourkit_zip;
           # };
 
-          zulu_24_linux = import ./build/zulu.nix {
-            inherit pkgs;
-            inherit (sources.zulu_24) version;
-            src = sources.zulu_24.${system};
-          };
-          zulu_24_macos = import ./build/zulu.nix {
-            inherit pkgs;
-            inherit (sources.zulu_24) version;
-            src = sources.zulu_24.${system};
-          };
-
-          jdk_21 = if pkgs.stdenv.isLinux then openjdk_21 else pkgs.zulu21;
           jdk_24 = if pkgs.stdenv.isLinux then openjdk_24 else zulu_24_macos;
-
-          zulu_24 = if pkgs.stdenv.isLinux then zulu_24_linux else zulu_24_macos;
 
           jdk = jdk_24;
 
           derivation = {
-            inherit openjdk_21 openjdk_21_debug openjdk_21_fastdebug
-              openjdk_24 openjdk_24_debug openjdk_24_fastdebug
+            inherit openjdk_24 openjdk_24_debug openjdk_24_fastdebug
               openjdk_latest
               zulu_24
               # openjdk-loom openjdk-panama openjdk-valhalla
               jtreg jextract jmc jitwatch visualvm
               async-profiler jattach
               # jprofiler yourkit
-              jdk_21 jdk_24 jdk
+              jdk_24 jdk
               ;
           };
         in
@@ -280,15 +251,14 @@
           nixpkgs.overlays = [ overlays.default ];
         };
         overlays.default = final: prev: {
-          inherit (self.packages.${prev.system}) openjdk_21 openjdk_21_debug openjdk_21_fastdebug
-            openjdk_24 openjdk_24_debug openjdk_24_fastdebug
+          inherit (self.packages.${prev.system}) openjdk_24 openjdk_24_debug openjdk_24_fastdebug
             openjdk_latest
             zulu_24
             # openjdk-loom openjdk-panama openjdk-valhalla
             jtreg jextract jmc jitwatch visualvm
             async-profiler jattach
             # jprofiler yourkit
-            jdk_21 jdk_24 jdk
+            jdk_24 jdk
             ;
         };
       };

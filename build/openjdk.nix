@@ -39,8 +39,6 @@ let
       ./patches/disable_incubating_warn.patch
     ] ++ lib.optionals (lib.versionOlder version "21") [
       "${nixpkgs}/pkgs/development/compilers/openjdk/fix-java-home-jdk10.patch"
-    ] ++ lib.optionals (lib.versionAtLeast version "21" && lib.versionOlder "24" version) [
-      ./patches/fix-java-home-jdk21.patch
     ] ++ lib.optionals (lib.versionAtLeast version "24") [
       ./patches/fix-java-home-jdk24.patch
       ./patches/read-truststore-from-env-jdk24.patch

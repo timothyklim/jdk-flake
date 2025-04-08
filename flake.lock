@@ -66,22 +66,6 @@
         "type": "github"
       }
     },
-    "jdk21": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1742404070,
-        "narHash": "sha256-O2lgnV+u/GpmDFrxWp2VjUEiJMNBi++vaB2m6iC7oW4=",
-        "owner": "openjdk",
-        "repo": "jdk21u",
-        "rev": "4d3a3c0ebf3f0936846d4ce08e03b9422a1d4d9e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "repo": "jdk21u",
-        "type": "github"
-      }
-    },
     "jdk24": {
       "flake": false,
       "locked": {
@@ -151,7 +135,6 @@
         "flake-utils": "flake-utils",
         "jattach-src": "jattach-src",
         "jdk": "jdk",
-        "jdk21": "jdk21",
         "jdk24": "jdk24",
         "jextract-src": "jextract-src",
         "jtreg-src": "jtreg-src",
