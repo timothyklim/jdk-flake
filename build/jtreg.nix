@@ -3,7 +3,7 @@
 with pkgs;
 
 let
-  jdk = jdk11_headless;
+  jdk = jdk_headless;
   deps = stdenv.mkDerivation {
     inherit src;
 
@@ -37,7 +37,7 @@ let
     outputHashMode = "recursive";
     outputHashAlgo = "sha256";
     # outputHash = lib.fakeSha256;
-    outputHash = "sha256-eURVZmnYiwzGo7J4w70OOI3Cx+K3KqxCr10DWhW1QAA=";
+    outputHash = "sha256-rySJwL34gOP+tuH43Ig43VFpAYW/Rt3syAhsJif0aXg=";
   };
 in
 stdenv.mkDerivation rec {

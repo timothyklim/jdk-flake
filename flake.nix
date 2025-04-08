@@ -4,37 +4,9 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.11";
     flake-utils.url = "github:numtide/flake-utils";
-
-    # OpenJDK variants
-    jdk24 = {
-      url = "github:openjdk/jdk24u";
-      flake = false;
-    };
-    jdk = {
-      url = "github:openjdk/jdk";
-      flake = false;
-    };
-
-    jtreg-src = {
-      url = "github:openjdk/jtreg";
-      flake = false;
-    };
-
-    jattach-src = {
-      url = "github:jattach/jattach";
-      flake = false;
-    };
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , flake-utils
-    , jdk24
-    , jdk
-    , jtreg-src
-    , jattach-src
-    }:
+  outputs = { self , nixpkgs , flake-utils }:
       with flake-utils.lib; with system; eachSystem [ x86_64-linux aarch64-linux aarch64-darwin ]
         (system:
         let
@@ -50,12 +22,36 @@
               hash = "sha256-dMKy6A0mbi/YI/MbkBAeoVDnMn+ZoKi8FDas2qcEdGU=";
             };
 
+            jdk24.default = fetchFromGitHub {
+              repo = "jdk24u";
+              owner = "openjdk";
+              rev = "c15293d9778dc153f95ff6bdd747dee844f260f1";
+              # sha256 = lib.fakeSha256;
+              hash = "sha256-qQIo8P4sQ7oSNntIGzxbJmsL9FftJmVNRnvOyVDkPv4=";
+            };
+
+            jattach.default = fetchFromGitHub {
+              repo = "jattach";
+              owner = "jattach";
+              rev = "4b0b0545418aa7b768df1832a572b2c53a4edd21";
+              # sha256 = lib.fakeSha256;
+              hash = "sha256-3eFoIfKJNXLg9WPhQBIsUjbIGdmmHFe9RqjYmTm8EwI=";
+            };
+
             jextract.default = fetchFromGitHub {
               repo = "jextract";
               owner = "openjdk";
               rev = "3fe6e4ea9480aa0489407ddd215cdf2a4c9f2430";
               # sha256 = lib.fakeSha256;
               hash = "sha256-4vvjQrS+n3wv4hiEoRBaTT76EPA4hc99Z6DR2dfagVQ=";
+            };
+
+            jtreg.default = fetchFromGitHub {
+              repo = "jtreg";
+              owner = "openjdk";
+              rev = "jtreg-7.5.1+1";
+              # sha256 = lib.fakeSha256;
+              hash = "sha256-1SGECdaAUvGQ5jK2eHV0WK+2Fw1BI08QO5yVs3XpiGU=";
             };
 
             jmc = rec {
@@ -114,35 +110,28 @@
 
           openjdk_24 = import ./build/openjdk.nix {
             inherit pkgs nixpkgs;
-            src = jdk24;
+            src = sources.jdk24.default;
             version = "24";
             jdk = zulu_24;
           };
           openjdk_24_debug = import ./build/openjdk.nix {
             inherit pkgs nixpkgs;
-            src = jdk24;
+            src = sources.jdk24.default;
             version = "24";
             jdk = zulu_24;
             debugSymbols = true;
           };
           openjdk_24_fastdebug = import ./build/openjdk.nix {
             inherit pkgs nixpkgs;
-            src = jdk24;
+            src = sources.jdk24.default;
             version = "24";
             jdk = zulu_24;
             debug = true;
           };
 
-          openjdk_latest = import ./build/openjdk.nix {
-            inherit pkgs nixpkgs;
-            src = jdk;
-            version = "latest";
-            jdk = zulu_24;
-          };
-
           jtreg = import ./build/jtreg.nix {
             inherit pkgs;
-            src = jtreg-src;
+            src = sources.jtreg.default;
           };
           jextract = import ./build/jextract.nix {
             inherit pkgs;
@@ -168,7 +157,7 @@
           };
           jattach = import ./build/jattach.nix {
             inherit pkgs;
-            src = jattach-src;
+            src = sources.jattach.default;
           };
 
           # jprofiler = import ./build/jprofiler.nix {
@@ -186,7 +175,6 @@
 
           derivation = {
             inherit openjdk_24 openjdk_24_debug openjdk_24_fastdebug
-              openjdk_latest
               zulu_24
               jtreg jextract jmc jitwatch visualvm
               async-profiler jattach
@@ -221,7 +209,6 @@
         };
         overlays.default = final: prev: {
           inherit (self.packages.${prev.system}) openjdk_24 openjdk_24_debug openjdk_24_fastdebug
-            openjdk_latest
             zulu_24
             jtreg jextract jmc jitwatch visualvm
             async-profiler jattach

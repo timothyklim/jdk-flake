@@ -18,70 +18,6 @@
         "type": "github"
       }
     },
-    "jattach-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1725568926,
-        "narHash": "sha256-3eFoIfKJNXLg9WPhQBIsUjbIGdmmHFe9RqjYmTm8EwI=",
-        "owner": "jattach",
-        "repo": "jattach",
-        "rev": "4b0b0545418aa7b768df1832a572b2c53a4edd21",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jattach",
-        "repo": "jattach",
-        "type": "github"
-      }
-    },
-    "jdk": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1744076249,
-        "narHash": "sha256-pxH6kyuDfqh8b8Xr35BzebtVJPSH1/RO4fz/DbuFaQI=",
-        "owner": "openjdk",
-        "repo": "jdk",
-        "rev": "80ff7b9c9406c7845ecb3bc40910e92ccdd23ff2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "repo": "jdk",
-        "type": "github"
-      }
-    },
-    "jdk24": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1743774207,
-        "narHash": "sha256-qQIo8P4sQ7oSNntIGzxbJmsL9FftJmVNRnvOyVDkPv4=",
-        "owner": "openjdk",
-        "repo": "jdk24u",
-        "rev": "c15293d9778dc153f95ff6bdd747dee844f260f1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "repo": "jdk24u",
-        "type": "github"
-      }
-    },
-    "jtreg-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1743754847,
-        "narHash": "sha256-HDq+sKYHQi2qlL8SRHYxyJEov4vUySiRRzPXyGN0CCI=",
-        "owner": "openjdk",
-        "repo": "jtreg",
-        "rev": "f4f2843c876dc974750eabc8875de08e56bd3852",
-        "type": "github"
-      },
-      "original": {
-        "owner": "openjdk",
-        "repo": "jtreg",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1743975612,
@@ -100,10 +36,6 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "jattach-src": "jattach-src",
-        "jdk": "jdk",
-        "jdk24": "jdk24",
-        "jtreg-src": "jtreg-src",
         "nixpkgs": "nixpkgs"
       }
     },
